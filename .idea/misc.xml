@@ -30,7 +30,29 @@
         <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/content_room.xml" value="0.1921875" />
         <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/item_assignment_dialog_list_layout.xml" value="0.1" />
         <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/room_activity.xml" value="0.1921875" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/badge_background.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_account.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_account_circle_white_24dp.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_account_circle_white_48px.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_add_circle.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_add_circle_white_24px.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_arrow_left.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_arrow_right.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_baseline_access.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_baseline_checkbox.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/notification_badge.xml" value="0.20833333333333334" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/participant_background.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/participant_selected_background.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/participant_stroke.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/radio_selector.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/rect_button.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/rect_button_outlined.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/rect_button_top_round.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/white_rect_border.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/white_rect_button.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_feedback.xml" value="0.1712962962962963" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/participant_background.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/participant_selected_background.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/activity_room_check.xml" value="0.1" />
       </map>
     </option>

@@ -143,11 +143,29 @@ interface ApiServices {
         @Query("rating") rating: String
     ): Response<String>
 
+
     @GET(ApiConstant.meetingfeedback)
-    suspend fun meetingFeedback(
+     fun meetingFeedback(
         @Query("person_name") person_name: String,
         @Query("booking_id") booking_id: String,
         @Query("rating") rating: String,
         @Query("person_id") person_id: String
     ): Response<String>
+
+    @GET(ApiConstant.publicmeetingfeedback)
+    fun guestFeedBack(
+        @Query("person_name") person_name: String,
+        @Query("room_name") room_name: String,
+        @Query("rating") rating: String
+    ): Call<Any?>
+
+    @GET(ApiConstant.publicmeetingfeedback)
+    fun feedBack(
+        @Query("person_name") person_name: String,
+        @Query("booking_id") booking_id: String,
+        @Query("rating") rating: String,
+        @Query("person_id") person_id: String
+    ): Call<Any?>
+
+
 }

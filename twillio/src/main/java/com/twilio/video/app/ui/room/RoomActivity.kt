@@ -127,7 +127,24 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         super.onCreate(savedInstanceState)
         binding = RoomActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.disconnect.setOnClickListener { disconnectButtonClick() }
+        binding.disconnect.setOnClickListener {
+            disconnectButtonClick()
+            try {
+                val myIntent = Intent(
+                    this,
+                    Class.forName("com.auresus.academy.view.feedback.FeedbackActivity")
+                )
+                myIntent.putExtra("roomName", roomName)
+                myIntent.putExtra("roomId", roomID)
+                myIntent.putExtra("studentName", studentName)
+                myIntent.putExtra("meetingCodeLocal", roomCode)
+                startActivity(myIntent)
+                finish()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
+            }
+
+        }
         binding.localVideo.setOnClickListener { toggleLocalVideo() }
         binding.localAudio.setOnClickListener { toggleLocalAudio() }
         binding.buttonJoinOnlineStudio.setOnClickListener {
@@ -405,20 +422,20 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             super.onBackPressed()
         } else {
             // super.onBackPressed()
-            roomViewModel.processInput(Disconnect)
-            try {
-                val myIntent = Intent(
-                    this,
-                    Class.forName("com.auresus.academy.view.feedback.FeedbackActivity")
-                )
-                myIntent.putExtra("roomName", roomName)
-                myIntent.putExtra("roomId", roomID)
-                myIntent.putExtra("studentName", studentName)
-                myIntent.putExtra("meetingCodeLocal", roomCode)
-                startActivity(myIntent)
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
-            }
+            /*   roomViewModel.processInput(Disconnect)
+               try {
+                   val myIntent = Intent(
+                       this,
+                       Class.forName("com.auresus.academy.view.feedback.FeedbackActivity")
+                   )
+                   myIntent.putExtra("roomName", roomName)
+                   myIntent.putExtra("roomId", roomID)
+                   myIntent.putExtra("studentName", studentName)
+                   myIntent.putExtra("meetingCodeLocal", roomCode)
+                   startActivity(myIntent)
+               } catch (e: ClassNotFoundException) {
+                   e.printStackTrace()
+               }*/
 
             // FeedbackActivity.open(this,roomName ,roomID,name,roomCode)
         }

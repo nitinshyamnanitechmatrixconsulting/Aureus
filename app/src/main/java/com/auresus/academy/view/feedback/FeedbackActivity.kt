@@ -3,8 +3,10 @@ package com.auresus.academy.view.feedback
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.auresus.academy.R
 import com.auresus.academy.databinding.ActivityFeedbackBinding
@@ -13,7 +15,9 @@ import com.auresus.academy.model.bean.requests.TeacherDateRequest
 import com.auresus.academy.model.bean.responses.GetAccessTokenResponse
 import com.auresus.academy.model.bean.responses.TeacherListResponse
 import com.auresus.academy.model.local.preference.PreferenceHelper
+import com.auresus.academy.model.remote.ApiConstant
 import com.auresus.academy.model.remote.ApiResponse
+import com.auresus.academy.model.remote.ApiServices
 import com.auresus.academy.utils.Connectivity
 import com.twilio.video.app.ui.room.RoomActivity
 import com.auresus.academy.view.base.BaseActivity
@@ -21,7 +25,14 @@ import com.auresus.academy.view.login.LoginAcitivty
 import com.auresus.academy.view.studenthome.HomeAcitivty
 import com.auresus.academy.view.studenthome.MakeUpViewModel
 import com.auresus.academy.view.teacherhome.TeacherHomeActivity
+import okhttp3.ResponseBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.security.AccessController.getContext
 
 
 class FeedbackActivity : BaseActivity() {
@@ -30,7 +41,7 @@ class FeedbackActivity : BaseActivity() {
     private var roomCode: String = ""
     private var roomName: String = ""
     private var studentName: String = ""
-    private var rating: String = "1"
+    private var rating: String = ""
     private val feedbackViewModel: FeedbackViewModel by viewModel()
     var context: Context? = null
 
@@ -53,23 +64,27 @@ class FeedbackActivity : BaseActivity() {
     private fun initClickListener() {
         binding.ivBack?.setOnClickListener {
             if (preferenceHelper != null) {
-                if (preferenceHelper.getUserType()==1) {
-                    getMeetingFeedback()
-                    var intent = Intent(this, HomeAcitivty::class.java)
-                    startActivity(intent)
-                } else if (preferenceHelper.getUserType()==2) {
-                    getMeetingFeedback()
-                    val intent = Intent(this, TeacherHomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }else {
-                    getPublicMeeting()
-                    val intent = Intent(this, LoginAcitivty::class.java)
-                    startActivity(intent)
-                    finish()
+                when {
+                    preferenceHelper.getUserType() == 1 -> {
+                        // getMeetingFeedback()
+                        var intent = Intent(this, HomeAcitivty::class.java)
+                        startActivity(intent)
+                    }
+                    preferenceHelper.getUserType() == 2 -> {
+                        //getMeetingFeedback()
+                        val intent = Intent(this, TeacherHomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    else -> {
+                        //getPublicMeeting()
+                        val intent = Intent(this, LoginAcitivty::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
                 }
             } else {
-                getPublicMeeting()
+                // getPublicMeeting()
                 val intent = Intent(this, LoginAcitivty::class.java)
                 startActivity(intent)
                 finish()
@@ -77,67 +92,200 @@ class FeedbackActivity : BaseActivity() {
         }
 
         binding.btnHome?.setOnClickListener {
-            if (preferenceHelper != null) {
-                if (preferenceHelper.getUserType()==1) {
-                    getMeetingFeedback()
-                    var intent = Intent(this, HomeAcitivty::class.java)
-                    startActivity(intent)
-                    finish()
-                } else if (preferenceHelper.getUserType()==2) {
-                    getMeetingFeedback()
-                    val intent = Intent(this, TeacherHomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }else{
-                    getPublicMeeting()
+            if (rating.isNullOrEmpty()) {
+                if (preferenceHelper != null) {
+                    when {
+                        preferenceHelper.getUserType() == 1 -> {
+                            // getMeetingFeedback()
+                            var intent = Intent(this, HomeAcitivty::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        preferenceHelper.getUserType() == 2 -> {
+                            // getMeetingFeedback()
+                            val intent = Intent(this, TeacherHomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else -> {
+                            // getPublicMeeting()
+                            val intent = Intent(this, LoginAcitivty::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                } else {
+                    //  getPublicMeeting()
                     val intent = Intent(this, LoginAcitivty::class.java)
                     startActivity(intent)
                     finish()
                 }
+
             } else {
-                getPublicMeeting()
-                val intent = Intent(this, LoginAcitivty::class.java)
-                startActivity(intent)
-                finish()
+                if (preferenceHelper != null) {
+                    when {
+                        preferenceHelper.getUserType() == 1 -> {
+                           // getMeetingFeedback()
+                            feedback(studentName,roomID ,rating, preferenceHelper[PreferenceHelper.PARENR_ID])
+                            var intent = Intent(this, HomeAcitivty::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        preferenceHelper.getUserType() == 2 -> {
+                           // getMeetingFeedback()
+                            feedback(studentName,roomID ,rating, preferenceHelper[PreferenceHelper.PARENR_ID])
+                            val intent = Intent(this, TeacherHomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else -> {
+                           // getPublicMeeting()
+                            guestFeedback(studentName,roomName,rating)
+                            val intent = Intent(this, LoginAcitivty::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                } else {
+                    //getPublicMeeting()
+                        guestFeedback(studentName,roomName,rating)
+                    val intent = Intent(this, LoginAcitivty::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
             }
         }
 
         binding.btnRejoin.setOnClickListener {
-            RoomActivity.open(
-                context!!,
-                roomName,
-                roomID,
-                studentName,
-                roomCode
-            )
-            if (preferenceHelper != null) {
-                if (preferenceHelper.getUserType()==1) {
-                    getMeetingFeedback()
-                } else if (preferenceHelper.getUserType()==2) {
-                    getMeetingFeedback()
-                } else {
-                    getPublicMeeting()
-                    val intent = Intent(this, LoginAcitivty::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+
+
+            if (rating.isNullOrEmpty()) {
+                RoomActivity.open(
+                    context!!,
+                    roomName,
+                    roomID,
+                    studentName,
+                    roomCode
+                )
             } else {
-                getPublicMeeting()
+                RoomActivity.open(
+                    context!!,
+                    roomName,
+                    roomID,
+                    studentName,
+                    roomCode
+                )
+                if (preferenceHelper != null) {
+                    if (preferenceHelper.getUserType() == 1) {
+                       // getMeetingFeedback()
+                        feedback(studentName,roomID ,rating, preferenceHelper[PreferenceHelper.PARENR_ID])
+                    } else if (preferenceHelper.getUserType() == 2) {
+                       // getMeetingFeedback()
+                        feedback(studentName,roomID ,rating, preferenceHelper[PreferenceHelper.PARENR_ID])
+                    } else {
+                      //  getPublicMeeting()
+                        guestFeedback(studentName,roomName,rating)
+                    }
+                } else {
+                    guestFeedback(studentName,roomName,rating)
+                   // getPublicMeeting()
+                }
             }
         }
+        binding.tv1.setOnClickListener {
+            rating = binding.tv1.text.toString()
+            binding.tv1.background = ContextCompat.getDrawable(context!!, R.drawable.rect_button);
+            binding.tv1.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            binding.tv2.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv2.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv3.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv3.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv4.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv4.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv5.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv5.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+        }
+        binding.tv2.setOnClickListener {
+            rating = binding.tv2.text.toString()
+            binding.tv1.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv1.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv2.background = ContextCompat.getDrawable(context!!, R.drawable.rect_button);
+            binding.tv2.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            binding.tv3.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv3.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv4.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv4.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv5.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv5.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
 
-        binding.tv1.setOnClickListener { rating = binding.tv1.text.toString() }
-        binding.tv2.setOnClickListener { rating = binding.tv2.text.toString() }
-        binding.tv3.setOnClickListener { rating = binding.tv3.text.toString() }
-        binding.tv4.setOnClickListener { rating = binding.tv4.text.toString() }
-        binding.tv5.setOnClickListener { rating = binding.tv5.text.toString() }
+        }
+        binding.tv3.setOnClickListener {
+            rating = binding.tv3.text.toString()
+            binding.tv1.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv1.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv2.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv2.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv3.background = ContextCompat.getDrawable(context!!, R.drawable.rect_button);
+            binding.tv3.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            binding.tv4.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv4.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv5.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv5.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+        }
+        binding.tv4.setOnClickListener {
+            rating = binding.tv4.text.toString()
+            binding.tv1.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv1.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv2.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv2.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv3.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv3.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv4.background = ContextCompat.getDrawable(context!!, R.drawable.rect_button);
+            binding.tv4.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+            binding.tv5.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv5.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+        }
+        binding.tv5.setOnClickListener {
+            rating = binding.tv5.text.toString()
+            binding.tv1.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv1.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv2.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv2.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv3.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv3.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv4.background =
+                ContextCompat.getDrawable(context!!, R.drawable.rating_background);
+            binding.tv4.setTextColor(ContextCompat.getColor(context!!, R.color.black_text))
+            binding.tv5.background = ContextCompat.getDrawable(context!!, R.drawable.rect_button);
+            binding.tv5.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+        }
 
 
     }
 
     override fun onStart() {
         super.onStart()
-       // checkIntentURI()
+        // checkIntentURI()
     }
 
     private fun checkIntentURI(): Boolean {
@@ -275,4 +423,60 @@ class FeedbackActivity : BaseActivity() {
         }
     }
 
+     fun feedback(
+        person_name: String,
+        booking_id: String,
+        rating: String,
+        person_id: String
+    ) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(ApiConstant.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val apiServices = retrofit.create(ApiServices::class.java)
+        val call = apiServices.feedBack(person_name, booking_id, rating,person_id)
+        call.enqueue(object : Callback<Any?> {
+            override fun onResponse(
+                call: Call<Any?>,
+                response: Response<Any?>){
+
+            }
+
+            override fun onFailure(call: Call<Any?>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+
+    }
+
+
+     fun guestFeedback(
+        person_name: String,
+        room_name: String,
+        rating: String
+    ) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(ApiConstant.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val apiServices = retrofit.create(ApiServices::class.java)
+        val call = apiServices?.guestFeedBack(person_name, room_name, rating)
+        call?.enqueue(object : Callback<Any?> {
+            override fun onResponse(
+                call: Call<Any?>,
+                response: Response<Any?>){
+                
+            }
+
+            override fun onFailure(call: Call<Any?>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+
+    }
+
 }
+
+
