@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10">
+
+        <TextView
+                android:id="@+id/studentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp10"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16"
+                tools:text="Aeron Aeron" />
+
+        <RelativeLayout
+                android:id="@+id/locationLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/studentName">
+
+            <TextView
+                    android:id="@+id/textLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_baseline_location"
+                    android:drawablePadding="@dimen/dp10"
+                    android:fontFamily="@font/lato_regular"
+                    android:gravity="center"
+                    android:text="@string/location"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_14" />
+
+            <Button
+                    android:id="@+id/btnOnline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:layout_toLeftOf="@+id/btnInCenter"
+                    android:background="@color/colorAccent"
+                    android:text="Online"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_10" />
+
+            <Button
+                    android:id="@+id/btnInCenter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:background="@color/colorAccent"
+                    android:text="Center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_10" />
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/instumentLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/locationLayout"
+                android:layout_marginTop="@dimen/dp10">
+
+            <TextView
+                    android:id="@+id/textInstrument"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/ic_baseline_music"
+                    android:drawablePadding="@dimen/dp10"
+                    android:fontFamily="@font/lato_regular"
+                    android:gravity="center"
+                    android:text="@string/insturement"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_14" />
+
+            <TextView
+                    android:id="@+id/pionaText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:layout_toRightOf="@id/textInstrument"
+                    android:drawableRight="@drawable/ic_keyboard_arrow_down"
+                    android:text="Piano" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/teacherLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/instumentLayout"
+                android:layout_marginTop="@dimen/dp10">
+
+            <TextView
+                    android:id="@+id/textTeacher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/ic_account"
+                    android:drawablePadding="@dimen/dp10"
+                    android:fontFamily="@font/lato_regular"
+                    android:gravity="center"
+                    android:text="@string/teacher"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_14" />
+
+            <TextView
+                    android:id="@+id/teacherText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:layout_toRightOf="@id/textTeacher"
+                    android:drawableRight="@drawable/ic_keyboard_arrow_down"
+                    android:text="Teacher" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/packageLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/teacherLayout"
+                android:layout_marginTop="@dimen/dp10">
+
+            <TextView
+                    android:id="@+id/textPackage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@drawable/ic_timer"
+                    android:drawablePadding="@dimen/dp10"
+                    android:fontFamily="@font/lato_regular"
+                    android:gravity="center"
+                    android:text="@string/textPackage"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_14" />
+
+            <TextView
+                    android:id="@+id/packageText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:layout_toRightOf="@id/textPackage"
+                    android:drawableRight="@drawable/ic_keyboard_arrow_down"
+                    android:text="Select a Package" />
+
+        </RelativeLayout>
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/packageLayout"
+                android:layout_marginTop="@dimen/dp10"
+                app:mcv_calendarMode="week"
+                app:mcv_selectionColor="#00F"
+                app:mcv_showOtherDates="all" />
+    </RelativeLayout>
+</layout>

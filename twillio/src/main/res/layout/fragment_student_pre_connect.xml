@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        tools:context=".ui.room.modal.StudentPreConnectFragment">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:paddingStart="@dimen/margin_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:padding="@dimen/margin_10"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/backButton"
+                android:src="@drawable/ic_arrow_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:tint="@color/black"></ImageView>
+
+            <ImageView
+                android:id="@+id/banner"
+                android:layout_width="@dimen/margin_200"
+                android:layout_height="@dimen/margin_100"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:src="@drawable/aureus_banner" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp72"
+            android:layout_below="@+id/toolbar"
+            android:layout_gravity="center"
+            android:id="@+id/waitingImage"
+            android:padding="@dimen/margin_10"
+            android:src="@drawable/ic_guest_image"
+            android:layout_width="@dimen/margin_250"
+            android:layout_height="@dimen/margin_200" />
+
+        <!-- TODO: Update blank fragment layout -->
+
+        <FrameLayout
+
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/bottomTextMessage"
+            android:id="@+id/connectProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:progressTint="@color/colorAccentApp"
+                android:id="@+id/joinProgressLoader"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:elevation="@dimen/margin_10"
+                android:visibility="visible" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/bottomTextMessage"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_24_sp"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/teacher_will_join_shortly" />
+
+    </RelativeLayout>
+</layout>

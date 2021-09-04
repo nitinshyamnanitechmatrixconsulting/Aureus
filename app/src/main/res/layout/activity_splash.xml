@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/splashView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/brandImage"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp200"
+                android:layout_marginStart="@dimen/dp30"
+                android:layout_marginTop="@dimen/dp50"
+                android:layout_marginEnd="@dimen/dp30"
+                android:src="@drawable/aureus_banner"
+                android:contentDescription="TODO" />
+
+            <ImageView
+                android:id="@+id/loadGif"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_alignParentBottom="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/login_image"
+                android:contentDescription="TODO" />
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/loader"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/dp30"
+            android:layout_height="@dimen/dp30"
+            android:layout_centerInParent="true"
+            android:elevation="@dimen/margin_10"
+            android:indeterminateTint="@color/md_blue_300"
+            android:visibility="gone" />
+    </RelativeLayout>
+</layout>

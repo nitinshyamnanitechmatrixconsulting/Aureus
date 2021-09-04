@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_120"
+            android:layout_marginStart="@dimen/dp30"
+            android:layout_marginTop="@dimen/margin_50"
+            android:layout_marginEnd="@dimen/dp30"
+            android:src="@drawable/aureus_banner"
+            android:contentDescription="TODO" />
+
+        <RelativeLayout
+            android:id="@+id/emailLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/bottomLayout"
+            android:layout_below="@id/logo"
+            android:layout_marginTop="@dimen/dp20"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/edittextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_marginEnd="@dimen/margin_30"
+                android:background="@null"
+                android:fontFamily="@font/lato_regular"
+                android:hint="@string/enter_your_email_address"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16" />
+
+            <View
+                android:id="@+id/emailViewLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/edittextEmail"
+                android:layout_marginStart="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_5"
+                android:layout_marginEnd="@dimen/margin_30"
+                android:background="@color/grey_text" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordEditTextLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/emailViewLine"
+                android:visibility="gone"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_30"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_marginEnd="@dimen/margin_30"
+                    android:background="@null"
+                    android:fontFamily="@font/lato_regular"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp16" />
+
+                <View
+                    android:id="@+id/passwordviewLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/edittextEmail"
+                    android:layout_marginStart="@dimen/margin_30"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginEnd="@dimen/margin_30"
+                    android:background="@color/grey_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/continueBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40"
+                android:layout_below="@id/passwordEditTextLayout"
+                android:layout_marginLeft="@dimen/dp30"
+                android:layout_marginTop="@dimen/dp30"
+                android:layout_marginRight="@dimen/dp30"
+                android:background="@drawable/round_button_grey"
+                android:fontFamily="@font/lato_bold"
+                android:gravity="center"
+                android:text="@string/continue_with_email"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/signinWithBiometric"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/continueBtn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp20"
+                android:fontFamily="@font/lato_regular"
+                android:text="@string/sign_in_with_biometrics"
+                android:textColor="@color/md_blue_900" />
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/bottomLayout"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/dp20">
+
+            <ImageView
+                android:id="@+id/loadGif"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/login_image"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:id="@+id/joinOnlineSession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_100"
+                android:fontFamily="@font/lato_regular"
+                android:text="@string/jpin_an_online_lesson"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/margin_100"
+                android:fontFamily="@font/lato_regular"
+                android:text="@string/forgot_password"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_16" />
+
+        </RelativeLayout>
+
+        <include
+                android:id="@+id/progressLoader"
+                layout="@layout/progress_loader"></include>
+    </RelativeLayout>
+</layout>

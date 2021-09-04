@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/video_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.twilio.video.app.ui.room.ParticipantPrimaryView
+            android:id="@+id/participantView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            app:identity="@string/you"
+            app:tviScaleType="balanced" />
+
+        <co.shrappz.stickydrag.StickyDragView
+            android:id="@+id/defaultLayoutView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.twilio.video.app.ui.room.ParticipantPrimaryView
+                android:id="@+id/primary_video"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:identity="@string/you"
+                app:tviScaleType="balanced" />
+
+            <FrameLayout
+                android:id="@+id/draggable_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.twilio.video.app.ui.room.ParticipantThumbView
+                    android:id="@+id/participantThumbView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top|start"
+                    android:layout_margin="8dp"
+                    android:scrollbars="horizontal"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+        </co.shrappz.stickydrag.StickyDragView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/local_audio1"
+            android:layout_width="@dimen/dimen_video_control_icon"
+            android:layout_height="@dimen/dimen_video_control_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/margin_10"
+            app:srcCompat="@drawable/micropfone_on" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/local_video1"
+            android:layout_width="@dimen/dimen_video_control_icon"
+            android:layout_height="@dimen/dimen_video_control_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_10"
+            app:srcCompat="@drawable/video_on" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>

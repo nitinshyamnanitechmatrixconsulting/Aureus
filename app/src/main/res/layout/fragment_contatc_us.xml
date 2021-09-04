@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:text="Describe your query"
+                    android:textSize="@dimen/text_12" />
+
+            <RelativeLayout
+                    android:id="@+id/selectType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp10">
+
+                <TextView
+                        android:id="@+id/selectTypeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="@string/select_request_type"
+                        android:textSize="@dimen/text_16" />
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_keyboard_arrow_down"
+                    app:tint="@color/black"
+                    android:contentDescription="TODO" />
+            </RelativeLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:text="Comment"
+                    android:textSize="@dimen/text_12" />
+
+            <EditText
+                    android:id="@+id/addComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_margin="@dimen/dp10"
+                    android:hint="Add you Comment"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/sp16" />
+        </LinearLayout>
+
+
+        <Button
+                android:id="@+id/nextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/md_yellow_700"
+                android:fontFamily="@font/lato_regular"
+                android:text="Submit Request"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_14" />
+
+        <include
+                android:id="@+id/progressLoader"
+                layout="@layout/progress_loader" />
+
+
+    </RelativeLayout>
+
+</layout>
+

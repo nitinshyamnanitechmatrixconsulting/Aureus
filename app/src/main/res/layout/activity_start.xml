@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_70"
+                android:layout_marginStart="@dimen/dp30"
+                android:layout_marginTop="@dimen/margin_60"
+                android:layout_marginEnd="@dimen/dp30"
+                android:src="@drawable/aureus_banner"
+            android:contentDescription="TODO" />
+
+        <TextView
+            android:id="@+id/edittextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/bottomLayout"
+            android:layout_below="@id/logo"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center"
+            android:text="@string/bring_music_to_life"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp16" />
+
+        <RelativeLayout
+                android:id="@+id/bottomLayout"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/dp20">
+
+            <ImageView
+                    android:id="@+id/loadGif"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/login_image"
+                android:contentDescription="TODO" />
+
+            <Button
+                android:id="@+id/loginInButton"
+                android:layout_width="@dimen/margin_200"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_100"
+                android:background="@drawable/white_rect_button"
+                android:text="@string/log_in"
+                android:textAllCaps="false" />
+
+            <TextView
+                    android:id="@+id/joinOnlineSession"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/loginInButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="@string/jpin_an_online_lesson"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_16" />
+
+            <TextView
+                    android:id="@+id/forgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/margin_50"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="@string/forgot_password"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_16" />
+
+        </RelativeLayout>
+
+        <include
+                android:id="@+id/progressLoader"
+                layout="@layout/progress_loader"></include>
+    </RelativeLayout>
+</layout>

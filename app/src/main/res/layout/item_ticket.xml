@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="contact"
+                type="com.auresus.academy.model.bean.responses.TicketList" />
+    </data>
+
+    <LinearLayout
+            android:id="@+id/studentItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_15">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:layout_weight="0.7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular"
+                        android:maxLines="1"
+                        android:text='@{ "Ticket - #" + " " + contact.caseId}'
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_14"
+                        tools:text="Name : Sahil Arora " />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular"
+                        android:maxLines="1"
+                        android:text='@{contact.subject}'
+                        android:textColor="@color/colorff4e4e56"
+                        android:textSize="@dimen/text_12"
+                        tools:text="Name : Sahil Arora " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/viewButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:gravity="center">
+
+                <LinearLayout
+                        android:padding="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:id="@+id/ticketTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginEnd="@dimen/margin_10"
+                            android:fontFamily="@font/lato_regular"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_14"
+                            tools:text=" 17th May" />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginEnd="@dimen/margin_10"
+                            android:fontFamily="@font/lato_regular"
+                            android:text='@{contact.status}'
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/text_12"
+                            tools:text="New" />
+                </LinearLayout>
+
+
+                <ImageView
+                        android:layout_width="@dimen/dp16"
+                        android:layout_height="@dimen/dp16"
+                        android:src="@drawable/ic_arrow_right"
+                    android:contentDescription="TODO">
+
+                </ImageView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"></View>
+    </LinearLayout>
+</layout>

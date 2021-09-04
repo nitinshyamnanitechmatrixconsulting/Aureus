@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/margin_5"
+        android:paddingBottom="@dimen/margin_5"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/carView"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:paddingStart="@dimen/margin_10"
+                android:paddingEnd="@dimen/margin_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/lessonInfoContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/margin_8">
+
+                        <RelativeLayout
+                            android:id="@+id/timeContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/lessonTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/lato_bold"
+                                android:textColor="@color/md_blue_400"
+                                android:textSize="@dimen/text_13"
+                                android:textStyle="bold"
+                                tools:text="Tue 11, Jan 2020 at 03:00 PM" />
+
+
+                            <ImageView
+                                android:id="@+id/timeIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_online"
+                                app:tint="@color/md_blue_a400"
+                                android:contentDescription="TODO" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/timeContainer"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/studentDescription"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_regular"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_11"
+                                tools:text="Charliee Lin - Online Piano Lesson (45 min) with Teacher Wei Perch " />
+
+                            <TextView
+                                android:id="@+id/lessonDescription"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_regular"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_11"
+                                android:visibility="gone"
+                                tools:text="" />
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</layout>

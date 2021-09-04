@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:cardElevation="@dimen/margin_3">
+
+
+        <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/dp10"
+                    android:padding="@dimen/dp10">
+
+                <ImageView
+                        android:id="@+id/backButton"
+                        android:layout_width="@dimen/margin_24"
+                        android:layout_height="@dimen/margin_24"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_action_left_arrow"
+                    app:tint="@color/black"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/lato_regular"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_18"
+                        tools:text="Invoice Number" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/toolbar"
+                android:background="@color/color_F4F5F6"
+                android:orientation="vertical">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp20">
+
+                <TextView
+                        android:id="@+id/invoiceNumberTv"
+                        style="@style/InvoiceDetailsStyle"
+                        android:fontFamily="@font/lato_bold"
+                        android:textSize="@dimen/text_18"
+                        android:textStyle="bold"
+                        tools:text="Inv No " />
+
+                <TextView
+                        android:id="@+id/viewPdf"
+                        style="@style/InvoiceDetailsStyle"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/view_pdf"
+                        android:textColor="@color/md_blue_400"
+                        android:textSize="@dimen/text_18"
+                        android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/dateIssueRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:background="@color/white">
+
+                <TextView
+                        style="@style/InvoiceDetailsStyle"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/date_issue"
+                        android:textStyle="bold" />
+
+                <TextView
+                        android:id="@+id/invoiceDate"
+                        style="@style/InvoiceDetailsStyle"
+                        android:layout_alignParentRight="true"
+                        tools:text="Inv No " />
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/invoiceStatusRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:background="@color/white">
+
+                <TextView
+                        style="@style/InvoiceDetailsStyle"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/invoice_status"
+                        android:textStyle="bold" />
+
+                <TextView
+                        android:id="@+id/invoiceStatus"
+                        style="@style/InvoiceDetailsStyle"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/md_green_400"
+                        tools:text="Inv No" />
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/totalAmtRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:background="@color/white">
+
+                <TextView
+                        style="@style/InvoiceDetailsStyle"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/total"
+                        android:textStyle="bold" />
+
+                <TextView
+                        android:id="@+id/totalAmt"
+                        style="@style/InvoiceDetailsStyle"
+                        android:layout_alignParentRight="true"
+                        tools:text="Inv No " />
+
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/balanceRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:background="@color/white">
+
+                <TextView
+                        style="@style/InvoiceDetailsStyle"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/balance_amount"
+                        android:textStyle="bold" />
+
+                <TextView
+                        android:id="@+id/balanceAmt"
+                        style="@style/InvoiceDetailsStyle"
+                        android:layout_alignParentRight="true"
+                        tools:text="Inv No " />
+
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_text" />
+            </RelativeLayout>
+
+            <TextView
+                    style="@style/InvoiceDetailsStyle"
+                    android:layout_marginTop="@dimen/margin_25"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/payment_details"
+                    android:textSize="@dimen/text_18" />
+
+            <RelativeLayout
+                    android:id="@+id/paymentDateRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:background="@color/white">
+
+                <TextView
+                        style="@style/InvoiceDetailsStyle"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/payment_date"
+                        android:textStyle="bold" />
+
+                <TextView
+                        android:id="@+id/paymentDate"
+                        style="@style/InvoiceDetailsStyle"
+                        android:layout_alignParentRight="true"
+                        tools:text="Inv No " />
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/paymentAmountRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:background="@color/white">
+
+                <TextView
+                        style="@style/InvoiceDetailsStyle"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/payment_amount"
+                        android:textStyle="bold" />
+
+                <TextView
+                        android:id="@+id/paymentAmount"
+                        style="@style/InvoiceDetailsStyle"
+                        android:layout_alignParentRight="true"
+                        tools:text="Inv No " />
+
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/paymentMethodRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:background="@color/white">
+
+                <TextView
+                        style="@style/InvoiceDetailsStyle"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/payment_method"
+                        android:textStyle="bold" />
+
+                <TextView
+                        android:id="@+id/paymentMethod"
+                        style="@style/InvoiceDetailsStyle"
+                        android:layout_alignParentRight="true"
+                        tools:text="Inv No " />
+
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_text" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <include
+                android:id="@+id/progressLoader"
+                layout="@layout/progress_loader" />
+    </RelativeLayout>
+</layout>

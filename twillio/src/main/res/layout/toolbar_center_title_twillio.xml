@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/color_353b3e"
+        android:layout_height="@dimen/dp56"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="@string/messages"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_18"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/margin_10"
+                android:src="@drawable/back_arrow"
+                app:tint="@color/white"></ImageView>
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

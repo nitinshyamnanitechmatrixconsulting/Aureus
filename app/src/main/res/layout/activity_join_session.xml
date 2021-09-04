@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/joinOnlineSessionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/banner"
+                android:layout_width="@dimen/margin_200"
+                android:layout_height="@dimen/margin_100"
+                android:src="@drawable/aureus_banner"
+                android:contentDescription="TODO" />
+
+            <RelativeLayout
+                android:id="@+id/videoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@+id/banner"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_weight="1">
+
+                <include
+                    android:id="@+id/videoContainer"
+                    layout="@layout/content_video" />
+
+                <LinearLayout
+                    android:id="@+id/videoControlLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/rect_button_top_round"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/margin_10"
+                    android:paddingBottom="@dimen/margin_10">
+
+                    <View
+                        android:id="@+id/dividerLine"
+                        android:layout_width="@dimen/margin_120"
+                        android:layout_height="2dp"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:background="@color/white" />
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin_20"
+                        android:id="@+id/controlLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/margin_20"
+
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/switchCameraActionFab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_switch_camera_white_24dp"
+                            android:visibility="gone"
+                            app:fabSize="mini"
+                            android:contentDescription="TODO" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/muteActionFab"
+                            android:layout_width="wrap_content"
+                            android:layout_marginStart="@dimen/margin_20"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_mic_white_24dp"
+                            app:fabSize="mini"
+                            android:contentDescription="TODO" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/localVideoActionFab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/margin_20"
+                            android:src="@drawable/ic_videocam_white_24dp"
+                            app:fabSize="mini"
+                            android:contentDescription="TODO" />
+
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/connectActionFab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/fab_margin"
+                            android:src="@drawable/ic_video_call_white_24dp"
+                            android:visibility="gone"
+                            app:fabSize="normal"
+                            android:contentDescription="TODO" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/actionLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginBottom="@dimen/margin_100"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvHostName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hi, Adrienne Ti"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_32" />
+
+                <Button
+                    android:id="@+id/buttonJoinOnlineStudio"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp48"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@drawable/rect_button"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/bottom_tab_join_lession"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+
+                <FrameLayout
+                    android:id="@+id/connectProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:visibility="gone">
+
+                    <ProgressBar
+                        android:id="@+id/loader"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:elevation="@dimen/margin_10"
+                        android:progressTint="@color/md_blue_300"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <include
+            android:id="@+id/progressLoader"
+            layout="@layout/progress_loader"></include>
+    </RelativeLayout>
+</layout>

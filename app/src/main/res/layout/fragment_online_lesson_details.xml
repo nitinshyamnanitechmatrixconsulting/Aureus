@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/detailLayout"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/margin_14"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_light"
+                android:text="@string/online_lesson_details_description"
+                android:textColor="@color/black_text" />
+
+            <Button
+                android:id="@+id/buttonJoinOnlineStudio"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp48"
+                android:layout_marginLeft="@dimen/margin_60"
+                android:layout_marginTop="@dimen/dp30"
+                android:layout_marginRight="@dimen/margin_60"
+                android:background="@drawable/rect_button"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/join_online_studio"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp48"
+                android:layout_marginLeft="@dimen/margin_50"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginRight="@dimen/margin_50">
+
+                <Button
+                    android:id="@+id/buttonLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rect_button_outlined"
+                    android:fontFamily="@font/lato_regular"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/margin_6"
+                    android:textAllCaps="false"
+                    android:textColor="@color/androidx_core_secondary_text_default_material_light" />
+
+                <Button
+                    android:id="@+id/buttonCopyLink"
+                    android:layout_width="@dimen/margin_100"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="@dimen/dp30"
+                    android:background="@drawable/rect_button_outlined_white_inside"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/copyLink"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textColorCommon" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/onlineMeetingCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_online_meeting_code" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

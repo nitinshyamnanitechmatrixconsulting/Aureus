@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="contact"
+                type="com.auresus.academy.model.bean.responses.NotificationList" />
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <RelativeLayout
+                android:id="@+id/notificationItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp16"
+                android:layout_marginRight="@dimen/dp16">
+
+            <TextView
+                    android:id="@+id/notificationTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_toLeftOf="@+id/dateContainer"
+                    android:fontFamily="@font/lato_bold"
+                    android:maxLines="1"
+                    android:text='@{contact.title}'
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_14"
+                    tools:text="Piano Lesson Cancelled" />
+
+            <TextView
+                    android:id="@+id/notificationDescrption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/notificationTitle"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_toLeftOf="@+id/dateContainer"
+                    android:fontFamily="@font/lato_regular"
+                    android:maxLines="1"
+                    android:text='@{contact.bodymsg}'
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_12"
+                    tools:text="Charlie Lin Piano has been cancelled" />
+
+            <LinearLayout
+                    android:id="@+id/dateContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/dateShort"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_14"
+                        tools:text="25 Nov" />
+
+                <TextView
+                        android:id="@+id/dateFull"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:fontFamily="@font/lato_regular"
+                        android:textSize="@dimen/text_12"
+                        tools:text="25 Nov 2020" />
+
+                <ImageView
+                        android:id="@+id/unreadIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:src="@drawable/red_circle"
+                        android:textColor="@android:color/holo_red_dark"
+                    app:tint="@android:color/holo_red_dark"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_0.5"
+                android:layout_marginTop="@dimen/dp16"
+                android:layout_marginBottom="@dimen/dp16"
+                android:background="@color/black" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_F4F5F6">
+
+        <RelativeLayout
+                android:id="@+id/bookingNotifcationRl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/dp10">
+
+            <CheckBox
+                    android:id="@+id/bookingCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_toRightOf="@id/bookingCheckBox"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Booking Notification"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_14" />
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_action_info"
+                app:tint="@color/black"
+                android:contentDescription="TODO" />
+
+        </RelativeLayout>
+
+        <TextView
+                android:id="@+id/bookingNotificationInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bookingNotifcationRl"
+                android:layout_marginLeft="@dimen/dp16"
+                android:fontFamily="@font/lato_regular"
+                android:lineSpacingExtra="@dimen/margin_3"
+                android:visibility="gone"
+                android:text="Choose this option to receive booking reminder notifications"
+                android:textColor="@color/colorff4e4e56"
+                android:textSize="@dimen/text_12" />
+
+        <RelativeLayout
+                android:id="@+id/billingNoficationRl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bookingNotificationInfo"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@color/white"
+                android:padding="@dimen/dp10">
+
+            <CheckBox
+                    android:id="@+id/billingCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_toRightOf="@id/billingCheckBox"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Billing Notification"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_14" />
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_action_info"
+                app:tint="@color/black"
+                android:contentDescription="TODO" />
+
+        </RelativeLayout>
+
+        <TextView
+                android:id="@+id/billingNotificationInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/billingNoficationRl"
+                android:layout_marginLeft="@dimen/dp16"
+                android:fontFamily="@font/lato_regular"
+                android:visibility="gone"
+                android:lineSpacingExtra="@dimen/margin_3"
+                android:text="Choose this option to receive bill generation notifications"
+                android:textColor="@color/colorff4e4e56"
+                android:textSize="@dimen/text_12" />
+
+        <include
+                android:id="@+id/progressLoader"
+                layout="@layout/progress_loader" />
+
+    </RelativeLayout>
+</layout>
+

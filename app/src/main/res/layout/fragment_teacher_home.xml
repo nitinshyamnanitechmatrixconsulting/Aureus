@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.studenthome.StudentHomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_F4F5F6"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/teacherHomeImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/teacherHomeImageHeight"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_scheduling"
+            android:contentDescription="TODO">
+
+        </ImageView>
+
+        <FrameLayout
+            android:layout_below="@+id/teacherHomeImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                 />
+
+            <TextView
+                android:visibility="gone"
+                android:textSize="@dimen/text_20"
+                android:textColor="@color/black_text"
+                android:text="@string/no_records_found"
+                android:layout_gravity="center"
+                android:id="@+id/tvNoData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+        </FrameLayout>
+
+    </RelativeLayout>
+</layout>

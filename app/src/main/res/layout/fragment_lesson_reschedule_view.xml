@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dp50">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp10"
+                        android:text="New Lesson Details"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp20" />
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/color_F4F5F6">
+
+                    <include
+                            android:id="@+id/progressLoader"
+                            layout="@layout/progress_loader" />
+
+                    <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dp10"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_18"
+                            tools:text="Aaron Aswani" />
+
+                    <Button
+                            android:id="@+id/btnSchedules"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/margin_30"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/dp10"
+                            android:background="@drawable/rect_button"
+                            android:fontFamily="@font/lato_regular"
+                            android:text="Schdules"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_14" />
+
+                    <LinearLayout
+                            android:id="@+id/studentEnrollInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/userName"
+                            android:layout_marginStart="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:background="@color/white"
+                            android:orientation="vertical">
+
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp10">
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_lesson"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Date"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/lessonDate"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_baseline_access"
+                                        app:tint="@color/black"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Time"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/lessonTime"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp10">
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_baseline_music"
+                                        app:tint="@color/black"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Lesson Type"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/lessonType"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_baseline_timelapse"
+                                        app:tint="@color/black"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Duration"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/lessonDuration"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp10">
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="@dimen/margin_24"
+                                        android:layout_height="@dimen/margin_24"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_person_icon"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Teacher"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/teacherName"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_baseline_location"
+                                        app:tint="@color/black"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Location"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/lessonLocation"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp10"
+                        android:text="Previous Lesson Details"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp20" />
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/md_grey_400">
+
+
+                    <TextView
+                            android:id="@+id/prevUserName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dp10"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_18"
+                            tools:text="Aaron Aswani" />
+
+                    <Button
+                            android:id="@+id/prevbtnSchedules"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/margin_30"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/dp10"
+                            android:background="@drawable/rect_button"
+                            android:fontFamily="@font/lato_regular"
+                            android:text="Schdules"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_14" />
+
+                    <LinearLayout
+                            android:id="@+id/prevstudentEnrollInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/prevUserName"
+                            android:layout_marginStart="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:orientation="vertical">
+
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp10">
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_lesson"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Date"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/prevlessonDate"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_baseline_access"
+                                        app:tint="@color/black"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Time"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/prevlessonTime"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp10">
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_baseline_music"
+                                        app:tint="@color/black"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Lesson Type"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/prevlessonType"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_baseline_timelapse"
+                                        app:tint="@color/black"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Duration"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/prevlessonDuration"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dp10">
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="@dimen/margin_24"
+                                        android:layout_height="@dimen/margin_24"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_person_icon"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Teacher"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/prevteacherName"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.5"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginRight="@dimen/dp10"
+                                        android:src="@drawable/ic_baseline_location"
+                                        app:tint="@color/black"
+                                    android:contentDescription="TODO" />
+
+                                <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:text="Location"
+                                            android:textSize="@dimen/text_14" />
+
+                                    <TextView
+                                            android:id="@+id/prevlessonLocation"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/text_14"
+                                            tools:text="Charlie Lin" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal">
+
+                <Button
+                        android:id="@+id/cancelSession"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@color/white"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="Cancel"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_14" />
+
+                <Button
+                        android:id="@+id/reschdeuleSession"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@color/md_yellow_700"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="Confirm"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</layout>
+

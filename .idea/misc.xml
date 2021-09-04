@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/badge_background.xml" value="0.20833333333333334" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/edit_text_cursor.xml" value="0.20833333333333334" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/item_divider.xml" value="0.20833333333333334" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_home.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_join_lesson.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_join_online_session.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_join_session.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_login.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_splash.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_teacher_home.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/app_bar_join_lesson.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/app_bar_main.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/content_main.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_account.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_billing_details.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_contatc_us.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_enrollment_change.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_enrollment_change_request.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_enrollment_details.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_home.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_join_lesson.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_lesson_details.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/progress_loader.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/assignment_dialog_list_view.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/content_room.xml" value="0.1921875" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/item_assignment_dialog_list_layout.xml" value="0.1" />
+        <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/room_activity.xml" value="0.1921875" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/notification_badge.xml" value="0.20833333333333334" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/activity_room_check.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>

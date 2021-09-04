@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/slideImageView"
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:contentDescription="TODO">
+        </ImageView>
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/margin_14"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_90">
+
+            <LinearLayout
+                android:layout_toStartOf="@+id/viewButton"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:maxLines="1"
+                    android:id="@+id/titleTextView"
+                    android:textSize="@dimen/sp16"
+                    android:layout_marginEnd="@dimen/margin_15"
+                    android:text="@string/bottom_tab_ticket"
+                    android:textColor="@color/black_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:layout_below="@+id/titleTextView"
+                    android:id="@+id/descriptionTextView"
+                    android:maxLines="2"
+                    android:text="@string/bottom_tab_ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_15"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/viewButton"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="View"
+
+                android:background="@color/colorAccent"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_40">
+            </Button>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

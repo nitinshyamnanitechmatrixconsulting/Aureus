@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/teacherHomeImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/teacherHomeImageHeight"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_guest_image"
+                    android:visibility="visible"
+                    android:contentDescription="TODO"></ImageView>
+
+                <EditText
+                    android:id="@+id/editTextBookingId"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_60"
+                    android:layout_marginStart="@dimen/margin_80"
+                    android:layout_marginEnd="@dimen/margin_80"
+                    android:gravity="center"
+                    android:hint="@string/booking_id"
+                    android:textSize="@dimen/text_18" />
+
+                <EditText
+                    android:id="@+id/editTextOnlineMarketingCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_60"
+                    android:layout_marginStart="@dimen/margin_80"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginEnd="@dimen/margin_80"
+                    android:gravity="center"
+                    android:hint="@string/online_marketing_code"
+                    android:textSize="@dimen/text_18" />
+
+                <EditText
+                    android:id="@+id/editTextName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_60"
+                    android:layout_marginStart="@dimen/margin_80"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginEnd="@dimen/margin_80"
+                    android:layout_marginBottom="@dimen/margin_20"
+                    android:gravity="center"
+                    android:hint="@string/name"
+                    android:textSize="@dimen/text_18" />
+
+                <Button
+                    android:id="@+id/continueBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_70"
+                    android:layout_marginLeft="@dimen/dp30"
+                    android:layout_marginRight="@dimen/dp30"
+                    android:layout_marginBottom="@dimen/margin_20"
+                    android:background="@drawable/round_button"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/jpin_online_lesson"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/loader"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
+                android:layout_centerInParent="true"
+                android:elevation="@dimen/margin_10"
+                android:indeterminateTint="@color/md_blue_300"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </ScrollView>
+</layout>

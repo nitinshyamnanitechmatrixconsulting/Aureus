@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/dialog_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dialogTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center_horizontal"
+                android:text="Alert"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:text="Title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dialogBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_16"
+                tools:text="Message Body" />
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dialogButtonCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/margin_20"
+                    android:text="Cancle"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/sp16" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dialogButtonok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/margin_20"
+                    android:text="Ok"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/sp16" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_F4F5F6"
+                    android:orientation="vertical">
+
+                <TextView
+                        style="@style/styleProfileText"
+                        android:text="First Name" />
+
+                <FrameLayout style="@style/styleProfileContainer">
+
+                    <EditText
+                            android:id="@+id/studentFirstName"
+                            style="@style/styleProfileValueText"
+                            tools:text="Emliy" />
+                </FrameLayout>
+
+                <View
+                        android:id="@+id/firstNameView"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:background="@color/grey_text" />
+
+                <TextView
+                        style="@style/styleProfileText"
+                        android:text="Last Name" />
+
+                <FrameLayout style="@style/styleProfileContainer">
+
+                    <EditText
+                            android:id="@+id/studentLastName"
+                            style="@style/styleProfileValueText"
+                            tools:text="Chua - Test Account" />
+                </FrameLayout>
+
+                <View
+                        android:id="@+id/lastNameView"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/margin_0.5"
+                        android:background="@color/grey_text" />
+
+                <TextView
+                        style="@style/styleProfileText"
+                        android:text="Gender" />
+
+                <FrameLayout style="@style/styleProfileContainer">
+
+                    <TextView
+                            android:id="@+id/studentGender"
+                            style="@style/styleProfileValueText"
+                            tools:text="Female" />
+
+                    <ImageView
+                            android:id="@+id/genderSpinnerIv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:background="@drawable/ic_keyboard_arrow_down"
+                        android:contentDescription="TODO" />
+
+
+                </FrameLayout>
+
+                <TextView
+                        style="@style/styleProfileText"
+                        android:text="School" />
+
+                <FrameLayout style="@style/styleProfileContainer">
+
+                    <TextView
+                            android:id="@+id/studentSchool"
+                            style="@style/styleProfileValueText"
+                            tools:text="Emliy" />
+
+                    <ImageView
+                            android:id="@+id/schoolSpinnerIv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:background="@drawable/ic_keyboard_arrow_down"
+                        android:contentDescription="TODO" />
+                </FrameLayout>
+
+                <TextView
+                        style="@style/styleProfileText"
+                        android:text="Date of Birth" />
+
+                <FrameLayout style="@style/styleProfileContainer">
+
+                    <TextView
+                            android:id="@+id/studentDOB"
+                            style="@style/styleProfileValueText"
+                            tools:text="Emliy" />
+
+                </FrameLayout>
+
+
+                <TextView
+                        android:id="@+id/textEnrollment"
+                        style="@style/styleProfileText"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="Enrollments"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_18" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/enrollemntRv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <Button
+                android:id="@+id/editPersonalDetails"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40"
+                android:layout_alignParentBottom="true"
+                android:background="@color/md_amber_700"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/edit_student_details"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16" />
+
+        <View
+                android:id="@+id/vMasker"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#e0000000"
+                android:visibility="gone" />
+    </RelativeLayout>
+
+</layout>

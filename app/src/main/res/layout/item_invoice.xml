@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="contact"
+                type="com.auresus.academy.model.bean.responses.InvoiceList" />
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <RelativeLayout
+                android:id="@+id/notificationItem"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_50">
+
+            <ImageView
+                    android:id="@+id/invoiceInmageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp10"
+                    android:layout_marginEnd="@dimen/dp20"
+                    android:src="@drawable/ic_action_invocie"
+                android:contentDescription="TODO" />
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/dateContainer"
+                    android:layout_toRightOf="@id/invoiceInmageView">
+
+                <TextView
+                        android:id="@+id/notificationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:maxLines="1"
+                        android:text='@{contact.invoiceNumber}'
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_14"
+                        tools:text="Piano Lesson Cancelled" />
+
+                <TextView
+                        android:id="@+id/invoiceStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_toRightOf="@id/notificationTitle"
+                        android:fontFamily="@font/lato_bold"
+                        android:text='@{contact.status}'
+                        android:textColor="@color/md_green_400"
+                        android:textSize="@dimen/text_14"
+                        tools:text="Paid" />
+
+                <TextView
+                        android:id="@+id/notificationDescrption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/notificationTitle"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:fontFamily="@font/lato_regular"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_12"
+                        tools:text="Charlie Lin Piano has been cancelled" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:id="@+id/dateContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/lato_regular"
+                        android:gravity="center"
+                        android:text="View"
+                        android:textSize="@dimen/text_16" />
+
+                <ImageView
+                        android:id="@+id/nextIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:src="@drawable/ic_action_next"
+                    android:contentDescription="TODO" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_0.5"
+                android:layout_marginTop="@dimen/dp16"
+                android:layout_marginBottom="@dimen/dp16"
+                android:background="@color/black" />
+
+    </LinearLayout>
+</layout>

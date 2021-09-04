@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_353b3e"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/margin_20"
+        android:paddingBottom="@dimen/margin_20">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/margin_30"
+            android:gravity="center"
+            android:text="For more information on how we can support you, visit our help centre to learn more."
+            android:textColor="@color/lobbyColorAccent"
+            tools:ignore="HardcodedText" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp50"
+            android:layout_marginTop="@dimen/margin_10"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/ivLink"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/help_centre"
+                tools:ignore="ContentDescription" />
+
+
+            <TextView
+                android:id="@+id/visiting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_10"
+                android:maxLines="1"
+                android:text="@string/visit_helpline"
+                android:textColor="@color/colorAccentApp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp50"
+            android:layout_marginTop="@dimen/margin_10"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/ivJoiningCode"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:src="@drawable/contact_support_email"
+                tools:ignore="ContentDescription" />
+
+
+            <TextView
+                android:id="@+id/contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_10"
+                android:maxLines="5"
+                android:text="@string/contact_support_email"
+                android:textColor="@color/colorAccentApp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

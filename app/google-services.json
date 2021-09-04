@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "75799320116",
+    "firebase_url": "https://login-a2e8c.firebaseio.com",
+    "project_id": "login-a2e8c",
+    "storage_bucket": "login-a2e8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75799320116:android:3cfd99f89c690cec54dc61",
+        "android_client_info": {
+          "package_name": "com.aureus.academynew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75799320116-8p74rchbh1k6rsrdt4qtbcp45kupf4t4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaeD8eK6tP_1oRLKuArQ94xuKhGhgRkQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75799320116-8p74rchbh1k6rsrdt4qtbcp45kupf4t4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75799320116:android:85aae082795d049254dc61",
+        "android_client_info": {
+          "package_name": "techahead.com.flutter_login_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75799320116-8p74rchbh1k6rsrdt4qtbcp45kupf4t4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaeD8eK6tP_1oRLKuArQ94xuKhGhgRkQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75799320116-8p74rchbh1k6rsrdt4qtbcp45kupf4t4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

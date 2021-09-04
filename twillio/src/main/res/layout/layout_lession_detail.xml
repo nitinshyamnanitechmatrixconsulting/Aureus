@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:background="@color/color_353b3e"
+        android:paddingStart="@dimen/margin_45"
+        android:paddingEnd="@dimen/margin_45"
+        android:paddingTop="@dimen/margin_20"
+        android:paddingBottom="@dimen/margin_20"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:background="@color/color_353b3e"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivLink"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/joining_link"
+                tools:ignore="ContentDescription" />
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/ivLink"
+                android:layout_marginStart="@dimen/dp10"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="@string/joining_link"
+                    android:textColor="@color/lobbyColorAccent"
+                    android:id="@+id/roomLinkLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:linksClickable="false"
+                    android:autoLink="web"
+                    android:textColorLink="@color/colorAccentApp"
+                    tools:text="https://aureusacademy-meeting.herokuapp.com/?room_name=Test-BID-1984990"
+                    android:textColor="@color/lobbyColorAccent"
+                    android:id="@+id/roomLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivJoiningCode"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/joining_code"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp10"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_toEndOf="@+id/ivJoiningCode"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/joining_code"
+                    android:textColor="@color/lobbyColorAccent"/>
+
+                <TextView
+                    android:id="@+id/tvJoiningCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="5"
+                    android:text="1984990"
+                    android:textColor="@color/colorAccentApp"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+        </RelativeLayout>
+        <Button
+            android:id="@+id/buttonShareLinkInfo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/margin_45"
+            android:layout_marginEnd="@dimen/margin_45"
+            android:backgroundTint="@color/colorAccentApp"
+            android:layout_marginTop="@dimen/margin_45"
+            android:background="@drawable/rect_button_corner_round"
+            android:text="@string/share_link_info"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</layout>

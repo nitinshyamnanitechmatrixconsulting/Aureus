@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/dialog_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dialogTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp16"
+                android:text="@string/enter_verification_code"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_20"
+                android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dialogBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp16"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_16"
+                tools:text="Message Body" />
+
+
+        <EditText
+                android:id="@+id/entetOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginRight="@dimen/dp10"
+                android:hint="Enter Otp"
+                android:inputType="number"
+                android:maxLength="4"
+                android:textSize="@dimen/text_14" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/resendOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="Resend Otp"
+                android:textSize="@dimen/text_14" />
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
+                android:gravity="right">
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dialogButtonCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/margin_20"
+                    android:text="Cancel"
+                    android:textColor="@color/md_blue_400"
+                    android:textSize="@dimen/sp16" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dialogButtonSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/margin_20"
+                    android:text="Submit"
+                    android:textColor="@color/md_blue_400"
+                    android:textSize="@dimen/sp16" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

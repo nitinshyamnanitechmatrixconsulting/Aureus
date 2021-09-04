@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipe="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_45">
+
+        <com.daimajia.swipe.SwipeLayout
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            swipe:leftEdgeSwipeOffset="0dp"
+            swipe:rightEdgeSwipeOffset="0dp">
+
+            <LinearLayout
+                android:id="@+id/deleteButton"
+                android:layout_width="@dimen/margin_70"
+                android:layout_height="@dimen/margin_45"
+                android:background="@color/red"
+                android:gravity="center"
+                android:tag="Bottom3"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/trash"
+                    android:layout_width="@dimen/margin_15"
+                    android:layout_height="15dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_delete_outline_24"
+                    swipe:tint="@color/white" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="5dp"
+                    android:padding="4dp">
+
+                    <ImageView
+                        android:id="@+id/ivFileType"
+                        android:layout_width="@dimen/margin_15"
+                        android:layout_height="@dimen/margin_15" />
+
+                    <TextView
+                        android:textColor="@color/white"
+                        android:layout_marginStart="@dimen/margin_14"
+                        android:text="@string/online_lesson_details"
+                        android:textSize="10sp"
+                        android:id="@+id/tvFileName"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:tag="Hover"/>
+                    <TextView
+                        android:layout_marginEnd="@dimen/margin_30"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="@dimen/margin_14"
+                        android:text="0.5 MB"
+                        android:textSize="10sp"
+                        android:id="@+id/tvFileSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:tag="Hover"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </com.daimajia.swipe.SwipeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@color/black" />
+    </LinearLayout>
+
+</layout>

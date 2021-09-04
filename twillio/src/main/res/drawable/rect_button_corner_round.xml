@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/notification_material_background_media_default_color" />
+    <corners
+        android:bottomLeftRadius="@dimen/margin_50"
+        android:bottomRightRadius="@dimen/margin_50"
+        android:topLeftRadius="@dimen/margin_50"
+        android:topRightRadius="@dimen/margin_50" />
+</shape>

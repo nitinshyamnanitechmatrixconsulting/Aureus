@@ -1,0 +1,75 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+    </style>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="HeaderStyle">
+        <item name="android:id">@id/header</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/header_height</item>
+        <item name="android:background">@color/white</item>
+        <item name="shv_expandedColor">@color/md_teal_300</item>
+        <item name="shv_collapsedColor">@color/md_teal_500</item>
+    </style>
+
+    <style name="lessonDetailTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/lato_regular</item>
+    </style>
+
+
+
+
+
+    <style name="InvoiceDetailsStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_14</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">@dimen/dp16</item>
+        <item name="android:layout_marginRight">@dimen/dp16</item>
+    </style>
+
+    <style name="styleProfileText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/lato_regular</item>
+        <item name="android:textSize">@dimen/text_14</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginLeft">@dimen/dp10</item>
+        <item name="android:layout_marginTop">@dimen/dp10</item>
+    </style>
+
+    <style name="styleProfileValueText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/lato_regular</item>
+        <item name="android:textSize">@dimen/text_16</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">@dimen/margin_5</item>
+        <item name="android:background">@null</item>
+
+    </style>
+
+    <style name="styleProfileContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_5</item>
+        <item name="android:padding">@dimen/dp10</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+</resources>

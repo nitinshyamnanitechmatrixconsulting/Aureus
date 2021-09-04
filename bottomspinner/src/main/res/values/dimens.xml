@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="pickerview_topbar_height">44dp</dimen>
+    <!--paddingLeft -->
+    <dimen name="pickerview_topbar_paddingleft">10dp</dimen>
+    <!--paddingRight -->
+    <dimen name="pickerview_topbar_paddingright">20dp</dimen>
+    <dimen name="pickerview_topbar_btn_textsize">14sp</dimen>
+    <dimen name="pickerview_topbar_title_textsize">16sp</dimen>
+    <dimen name="pickerview_textsize">10sp</dimen>
+</resources>

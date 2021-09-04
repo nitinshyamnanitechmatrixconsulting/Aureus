@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp20">
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_back"
+                app:tint="@color/black"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/jpin_an_online_lesson"
+                android:textSize="@dimen/text_20" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/joinOnlineSessionImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_200"
+                        android:src="@drawable/join_online_session"
+                        android:contentDescription="TODO" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/joinOnlineSessionImage"
+                        android:layout_marginTop="@dimen/margin_30"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/editTextBookingId"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_60"
+                            android:layout_marginStart="@dimen/margin_80"
+                            android:layout_marginEnd="@dimen/margin_80"
+                            android:gravity="center"
+                            android:hint="@string/booking_id"
+                            android:textSize="@dimen/text_18" />
+
+
+                        <EditText
+                            android:id="@+id/editTextonlineMeetingCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_60"
+                            android:layout_marginStart="@dimen/margin_80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginEnd="@dimen/margin_80"
+                            android:gravity="center"
+                            android:hint="@string/online_marketing_code"
+                            android:textSize="@dimen/text_18" />
+
+
+                        <EditText
+                            android:id="@+id/editTextName"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/margin_60"
+                            android:layout_marginStart="@dimen/margin_80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginEnd="@dimen/margin_80"
+                            android:layout_marginBottom="@dimen/margin_20"
+                            android:gravity="center"
+                            android:hint="@string/name"
+                            android:textSize="@dimen/text_18" />
+
+
+                        <Button
+                            android:id="@+id/joinSession"
+                            android:layout_width="@dimen/margin_200"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp20"
+                            android:background="@drawable/round_button"
+                            android:text="@string/jpin_an_online_lesson"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
+
+
+                    </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <ProgressBar
+                    android:id="@+id/loader"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="@dimen/dp30"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_centerInParent="true"
+                    android:elevation="@dimen/margin_10"
+                    android:indeterminateTint="@color/md_blue_300"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

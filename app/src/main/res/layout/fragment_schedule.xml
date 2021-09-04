@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/textAllStudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp10"
+                android:fontFamily="@font/lato_regular"
+                android:text="All Students"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_14" />
+
+        <ImageView
+                android:id="@+id/dropDownAllStudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dp10"
+                android:src="@drawable/ic_keyboard_arrow_down"
+                app:tint="@color/black"
+            android:contentDescription="TODO" />
+
+        <LinearLayout
+                android:id="@+id/timeContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textAllStudent"
+                android:orientation="horizontal">
+
+            <RelativeLayout
+                    android:id="@+id/startTimeContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/white_rect_border">
+
+                <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginTop="-8dp"
+                        android:background="@color/white"
+                        android:padding="@dimen/margin_5">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_regular"
+                            android:text="@string/start_date"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_14" />
+                </FrameLayout>
+
+                <TextView
+                        android:id="@+id/startDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="@dimen/dp10"
+                        android:textSize="@dimen/text_16"
+                        tools:text="01/07/2021" />
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:src="@drawable/ic_lesson"
+                    android:contentDescription="TODO" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/endTimeContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/white_rect_border">
+
+                <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginTop="-8dp"
+                        android:background="@color/white"
+                        android:padding="@dimen/margin_5">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_regular"
+                            android:text="@string/end_date"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_14" />
+                </FrameLayout>
+
+                <TextView
+                        android:id="@+id/endDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="@dimen/dp10"
+                        android:textSize="@dimen/text_16"
+                        tools:text="01/07/2021" />
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:src="@drawable/ic_lesson"
+                    android:contentDescription="TODO" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/statusContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/timeContainer"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/textAllStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp10"
+                    android:layout_weight="0.5"
+                    android:drawableRight="@drawable/ic_keyboard_arrow_down"
+                    android:text="All Status"
+                    android:textSize="@dimen/text_16" />
+
+            <TextView
+                    android:id="@+id/textAllTyes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp10"
+                    android:layout_weight="0.5"
+                    android:drawableRight="@drawable/ic_keyboard_arrow_down"
+                    android:text="All Types"
+                    android:textSize="@dimen/text_16" />
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/clearAll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statusContainer"
+                android:layout_margin="@dimen/margin_5"
+                android:background="@color/colorAccent"
+                android:text="Clear All"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/scheduleRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/clearAll"
+            android:padding="@dimen/dp8" />
+
+    </RelativeLayout>
+</layout>

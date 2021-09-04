@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarJoinLesson"
+            layout="@layout/toolbar_center_title_left_back" />
+        <androidx.core.widget.NestedScrollView
+            android:scrollbars="none"
+            android:fitsSystemWindows="true"
+            android:fillViewport="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_marginStart="@dimen/margin_30"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin_top_margin_lesson"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivStudent"
+                                android:layout_width="@dimen/margin_24"
+                                android:layout_height="@dimen/margin_24"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_account"
+                                app:tint="@color/black_text"
+                                android:contentDescription="TODO" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:layout_toEndOf="@+id/ivStudent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="@string/student_" />
+
+                                <TextView
+                                    android:maxLines="2"
+                                    android:textColor="@color/textColorCommon"
+                                    android:id="@+id/tvStudentName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="Student" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/margin_top_margin_lesson"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="left|top"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivLessonType"
+                                android:layout_width="@dimen/margin_24"
+                                app:tint="@color/black_text"
+                                android:layout_height="@dimen/margin_24"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_music"
+                                android:contentDescription="TODO" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:layout_toEndOf="@+id/ivLessonType"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="@string/lesson_type" />
+
+                                <TextView
+                                    android:id="@+id/tvLessonType"
+                                    android:maxLines="2"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="Piano" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/margin_top_margin_lesson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ivTeacher"
+                                app:tint="@color/black_text"
+                                android:layout_width="@dimen/margin_24"
+                                android:layout_height="@dimen/margin_24"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_person"
+                                android:contentDescription="TODO" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:layout_toEndOf="@+id/ivTeacher"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="@string/teacher" />
+
+                                <TextView
+                                    android:textColor="@color/textColorCommon"
+                                    android:id="@+id/tvTeacherName"
+                                    android:maxLines="2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="Adrienne Ti" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/margin_top_margin_lesson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                app:tint="@color/black_text"
+                                android:id="@+id/ivStatus"
+                                android:layout_width="@dimen/margin_24"
+                                android:layout_height="@dimen/margin_24"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_status"
+                                android:contentDescription="TODO" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:layout_toEndOf="@+id/ivStatus"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Status" />
+
+                                <TextView
+                                    android:id="@+id/tvStatus"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_width="wrap_content"
+                                    android:maxLines="2"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="Pending" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginStart="@dimen/margin_30"
+                        android:layout_marginTop="@dimen/margin_top_margin_lesson"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true">
+
+                            <ImageView
+                                app:tint="@color/black_text"
+                                android:id="@+id/ivDate"
+                                android:layout_width="@dimen/margin_24"
+                                android:layout_height="@dimen/margin_24"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_schedule"
+                                android:contentDescription="TODO" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@+id/ivDate"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="@string/date" />
+
+                                <TextView
+                                    android:maxLines="2"
+                                    android:id="@+id/tvDate"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="19 Jun" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/margin_top_margin_lesson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true">
+
+                            <ImageView
+                                android:id="@+id/ivTime"
+                                app:tint="@color/black_text"
+                                android:layout_width="@dimen/margin_24"
+                                android:layout_height="@dimen/margin_24"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_timer"
+                                android:contentDescription="TODO" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@+id/ivTime"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="@string/time" />
+
+                                <TextView
+                                    android:maxLines="2"
+                                    android:id="@+id/tvTime"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="10:00 AM" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/margin_top_margin_lesson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true">
+
+                            <ImageView
+                                android:id="@+id/ivDuration"
+                                app:tint="@color/black_text"
+                                android:layout_width="@dimen/margin_24"
+                                android:layout_height="@dimen/margin_24"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_timelapse"
+                                android:contentDescription="TODO" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@+id/ivDuration"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="@string/duration" />
+
+                                <TextView
+                                    android:textColor="@color/textColorCommon"
+                                    android:maxLines="2"
+                                    android:id="@+id/tvDuration"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="45" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/margin_top_margin_lesson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true">
+
+                            <ImageView
+                                android:id="@+id/ivLocation"
+                                app:tint="@color/black_text"
+                                android:layout_width="@dimen/margin_24"
+                                android:layout_height="@dimen/margin_24"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_account"
+                                android:contentDescription="TODO" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="@dimen/dp10"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@+id/ivLocation"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textColor="@color/textColorCommon"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:text="Location" />
+
+                                <TextView
+                                    android:id="@+id/tvLocation"
+                                    android:textColor="@color/textColorCommon"
+                                    android:maxLines="2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lato_bold"
+                                    android:text="Online" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="28dp"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/onlineLayoutContainer"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:tabIndicatorColor="@color/colorAccent"
+                            app:tabTextAppearance="@style/lessonDetailTabTextAppearance"
+                            app:tabTextColor="@color/black_text"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:background="@color/colorPrimary"
+                          >
+                        </com.google.android.material.tabs.TabLayout>
+
+                        <androidx.viewpager.widget.ViewPager
+                            android:background="@color/white"
+                            android:layout_marginTop="@dimen/margin_24"
+                            android:id="@+id/viewPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/tabLayout"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/inCenterLayoutContainer"
+                        android:visibility="gone"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/incenterTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="@string/jpin_an_online_lesson"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_18"
+                            android:textStyle="bold" />
+                        <FrameLayout
+                            android:id="@+id/fragmentContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </FrameLayout>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </LinearLayout>
+
+</layout>

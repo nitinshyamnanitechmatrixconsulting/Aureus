@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/referImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/refer_friend"
+                android:contentDescription="TODO" />
+
+            <TextView
+                    android:id="@+id/referText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/referImage"
+                    android:layout_margin="@dimen/dp8"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Refer your friend"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp20" />
+
+            <TextView
+                    android:id="@+id/referInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/referText"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="@string/referInfo"
+                    android:textSize="@dimen/text_14" />
+
+            <RelativeLayout
+                    android:id="@+id/referLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp48"
+                    android:layout_below="@id/referInfo"
+                    android:layout_marginLeft="@dimen/margin_50"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginRight="@dimen/margin_50">
+
+                <Button
+                        android:id="@+id/buttonLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_rect_border"
+                        android:fontFamily="@font/lato_regular"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/margin_6"
+                        android:textAllCaps="false"
+                        android:textColor="@color/androidx_core_secondary_text_default_material_light" />
+
+                <Button
+                        android:id="@+id/buttonCopyLink"
+                        android:layout_width="@dimen/margin_100"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginLeft="@dimen/dp30"
+                        android:background="@drawable/rect_button"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/copyLink"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+            </RelativeLayout>
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/dp10"
+                    android:text="or"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp16" />
+
+            <Button
+                    android:id="@+id/shareBtn"
+                    android:layout_width="@dimen/margin_250"
+                    android:layout_height="@dimen/margin_50"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:background="@drawable/rect_button"
+                    android:gravity="center"
+                    android:text="Share your refer link"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+            <TextView
+                    android:id="@+id/viewYourDashboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp10"
+                    android:drawableRight="@drawable/ic_action_next"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Your Reward Dashboard"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_18" />
+
+            <LinearLayout
+                    android:id="@+id/rewardInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Your Rewards Dashboard"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp16" />
+
+                <TextView
+                        android:id="@+id/frirendCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp16" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="friends referred"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_12" />
+
+                <Button
+                        android:id="@+id/showReferDetails"
+                        android:layout_width="@dimen/margin_150"
+                        android:layout_height="@dimen/margin_40"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/rect_button"
+                        android:gravity="center"
+                        android:text="Show refer details"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+            </LinearLayout>
+
+            <TextView
+                    android:id="@+id/referTerms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp10"
+                    android:drawableRight="@drawable/ic_action_next"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Refer Terms and Conditions"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_18" />
+        </LinearLayout>
+
+        <include
+                android:id="@+id/progressLoader"
+                layout="@layout/progress_loader" />
+    </RelativeLayout>
+
+</layout>

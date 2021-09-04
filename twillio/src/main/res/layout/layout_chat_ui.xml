@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:paddingTop="@dimen/margin_20"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <co.intentservice.chatui.ChatView
+            android:id="@+id/chat_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbarJoinLesson"
+            app:backgroundColor="@color/color_353b3e"
+            app:backgroundRcv="@color/color_353b3e"
+            app:backgroundSend="@color/color_353b3e"
+            app:bubbleBackgroundRcv="@color/colorAccentApp"
+            app:bubbleBackgroundSend="@color/white" />
+
+        <include
+            android:id="@+id/toolbarJoinLesson"
+            layout="@layout/toolbar_center_title_twillio" />
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender" >
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="school" >
+        <item>5 Steps Academy</item>
+        <item>Admiratily Primary School</item>
+        <item>Admiratily Secondary School</item>
+        <item>Ai  Tong School</item>
+    </string-array>
+
+    <string-array name="requestType" >
+        <item>Billing</item>
+        <item>Bug/Defect</item>
+        <item>Change Enrollment</item>
+        <item>LessonAd-Hoc</item>
+        <item>Lesson Cancel</item>
+        <item>Lesson Make-up</item>
+        <item>Lesson Reschedule</item>
+        <item>Other Enrollment Request</item>
+        <item>Update Personal Details</item>
+        <item>Update Student Details</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="requestTypeContact" >
+        <item>Lesson Reschedule</item>
+        <item>Lesson Cancel</item>
+        <item>Lesson Make-up</item>
+    </string-array>
+
+    <string-array name="statusList" >
+        <item>All Status</item>
+        <item>Completed</item>
+        <item>Cancelled</item>
+        <item>Scheduled</item>
+        <item>Blocked</item>
+        <item>No Show</item>
+    </string-array>
+
+    <string-array name="typeList" >
+        <item>All Types</item>
+        <item>Trial</item>
+        <item>Regular</item>
+        <item>Make-up</item>
+        <item>Ad-hoc</item>
+    </string-array>
+
+</resources>

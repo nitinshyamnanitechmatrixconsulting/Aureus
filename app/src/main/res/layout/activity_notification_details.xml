@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/md_amber_400"
+                android:elevation="@dimen/dp10"
+                android:padding="@dimen/dp10">
+
+            <ImageView
+                    android:id="@+id/backButton"
+                    android:layout_width="@dimen/margin_24"
+                    android:layout_height="@dimen/margin_24"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:src="@drawable/ic_action_left_arrow"
+                app:tint="@color/black"
+                android:contentDescription="TODO" />
+
+
+            <ImageView
+                    android:id="@+id/deleteNotificaions"
+                    android:layout_width="@dimen/margin_24"
+                    android:layout_height="@dimen/margin_24"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:src="@drawable/ic_action_delete_icon"
+                app:tint="@color/black"
+                android:contentDescription="TODO" />
+        </RelativeLayout>
+
+        <FrameLayout
+                android:id="@+id/appLogo"
+                android:layout_width="@dimen/margin_120"
+                android:layout_height="@dimen/margin_120"
+                android:layout_below="@id/toolbar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-50dp"
+                android:background="@drawable/white_rect_button"
+                android:elevation="@dimen/dp10">
+
+            <ImageView
+                    android:layout_width="@dimen/margin_80"
+                    android:layout_height="@dimen/margin_80"
+                    android:layout_gravity="center"
+                    android:src="@drawable/notification_screen_logo"
+                android:contentDescription="TODO" />
+        </FrameLayout>
+
+
+        <TextView
+                android:id="@+id/notificationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/appLogo"
+                android:layout_marginLeft="@dimen/dp30"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginRight="@dimen/dp30"
+                android:fontFamily="@font/lato_regular"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_22"
+                tools:text="Ticker #00146645 has been updated" />
+
+        <TextView
+                android:id="@+id/notificationDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notificationTitle"
+                android:layout_marginLeft="@dimen/dp30"
+                android:layout_marginTop="@dimen/dp10"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="@dimen/text_16"
+                tools:text="29 March, 2020" />
+
+        <TextView
+                android:id="@+id/notificationDescrption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notificationDate"
+                android:layout_marginLeft="@dimen/margin_35"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp30"
+                android:fontFamily="@font/lato_regular"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/text_16"
+                tools:text="29 March, 2020" />
+
+        <include
+                android:id="@+id/progressLoader"
+                layout="@layout/progress_loader" />
+    </RelativeLayout>
+</layout>

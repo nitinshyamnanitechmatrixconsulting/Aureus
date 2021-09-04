@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="contact"
+                type="com.auresus.academy.model.bean.Student" />
+    </data>
+
+    <LinearLayout
+            android:id="@+id/studentItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_15">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text='@{ contact.firstName + " " + contact.lastName}'
+                        android:textColor="@color/colorff4e4e56"
+                        android:textSize="16sp"
+                        tools:text="Name : Sahil Arora " />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/viewButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp16"
+                    android:gravity="center">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_10"
+                        android:text="@string/view"
+                        android:textSize="16sp">
+
+                </TextView>
+
+                <ImageView
+                        android:layout_width="@dimen/dp16"
+                        android:layout_height="@dimen/dp16"
+                        android:src="@drawable/ic_arrow_right"
+                    android:contentDescription="TODO">
+
+                </ImageView>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:background="@color/black"></View>
+    </LinearLayout>
+</layout>

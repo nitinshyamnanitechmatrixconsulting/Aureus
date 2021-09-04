@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <TextView
+                android:id="@+id/textBilling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp20"
+                android:text="Card on File"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_22"
+                android:textStyle="bold" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textBilling"
+                android:layout_marginTop="@dimen/dp10"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+            <RelativeLayout
+                    android:id="@+id/billingInfoRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp10">
+
+                <ImageView
+                        android:id="@+id/visaIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp30"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/cardDate"
+                        android:src="@drawable/visa"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                        android:id="@+id/cardNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Card Type"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_18"
+                        tools:text="x3453" />
+
+                <TextView
+
+                        android:id="@+id/cardDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_18"
+                        tools:text="x3453" />
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_text" />
+
+
+            <RelativeLayout
+                    android:id="@+id/invoiceRl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp10">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Expiry Date"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_18" />
+
+                <TextView
+                        android:id="@+id/expiryDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_18"
+                        tools:text="x3453" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

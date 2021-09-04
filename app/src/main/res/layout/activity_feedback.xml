@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.auresus.academy.view.feedback.FeedbackActivity">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_10"
+                    android:src="@drawable/ic_arrow_left"
+                    app:tint="@color/black"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Online Lession"
+                    android:textColor="@color/black" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="@dimen/dp_40"
+                android:src="@drawable/aureus_banner"
+                android:contentDescription="TODO" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_20"
+                android:gravity="center"
+                android:text="Your Online Lession has ended"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_margin="@dimen/margin_5"
+                    android:background="@drawable/rating_background"
+                    android:gravity="center"
+                    android:text="1" />
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginStart="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginEnd="@dimen/margin_5"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:layout_toRightOf="@+id/tv1"
+                    android:background="@drawable/rating_background"
+                    android:gravity="center"
+                    android:text="2" />
+
+                <TextView
+                    android:id="@+id/tv3"
+
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_toRightOf="@+id/tv2"
+                    android:background="@drawable/rating_background"
+                    android:gravity="center"
+                    android:text="3" />
+
+                <TextView
+                    android:id="@+id/tv4"
+
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginStart="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginEnd="@dimen/margin_5"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:layout_toRightOf="@+id/tv3"
+                    android:background="@drawable/rating_background"
+                    android:gravity="center"
+                    android:text="4" />
+
+                <TextView
+                    android:id="@+id/tv5"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_toRightOf="@+id/tv4"
+                    android:background="@drawable/rating_background"
+                    android:gravity="center"
+                    android:text="5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv1"
+                    android:text="Very Bad"
+                    android:textSize="@dimen/margin_10"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv5"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_toRightOf="@+id/tv4"
+                    android:text="Very Good"
+                    android:textSize="@dimen/margin_10"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_20"
+                android:gravity="center"
+                android:text="Rate the Audio &amp; Video Quality \n of Your Lession"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRejoin"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_40"
+                android:background="@drawable/rating_background"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/margin_10"
+                android:text="Rejoin Lession"
+                android:textAllCaps="false" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnHome"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_20"
+                android:background="@drawable/back_home"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/margin_10"
+                android:text="Back to Home"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </RelativeLayout>
+</layout>

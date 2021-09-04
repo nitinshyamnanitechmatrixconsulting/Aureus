@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.room.RoomActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_14"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="@dimen/margin_200"
+            android:layout_height="@dimen/margin_100"
+            android:layout_gravity="center"
+            android:src="@drawable/aureus_banner" />
+
+        <include
+            android:id="@+id/room"
+            layout="@layout/content_room" />
+
+        <LinearLayout
+            android:id="@+id/actionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/margin_100"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlThumbView"
+                android:layout_width="@dimen/dp50"
+                android:layout_height="@dimen/dp50"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="@color/colorAccentApp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvHostName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="A"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/margin_20"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/buttonJoinOnlineStudio"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp48"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/rect_button"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/margin_20"
+                android:text="@string/bottom_tab_join_lession"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
+            <FrameLayout
+                android:id="@+id/connectProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/joinProgressLoader"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:visibility="visible" />
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/videoControlLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rect_button_top_round"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/margin_20"
+        android:paddingBottom="@dimen/margin_10"
+        android:visibility="visible">
+
+        <View
+            android:id="@+id/dividerLine"
+            android:layout_width="@dimen/margin_120"
+            android:layout_height="2dp"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/controlLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/disconnect"
+                android:layout_width="@dimen/dimen_video_control_icon"
+                android:layout_height="@dimen/dimen_video_control_icon"
+                android:visibility="visible"
+                app:srcCompat="@drawable/end_call" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/local_audio"
+                android:layout_width="@dimen/dimen_video_control_icon"
+                android:layout_height="@dimen/dimen_video_control_icon"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginLeft="@dimen/margin_20"
+                app:srcCompat="@drawable/micropfone_on" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/local_video"
+                android:layout_width="@dimen/dimen_video_control_icon"
+                android:layout_height="@dimen/dimen_video_control_icon"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginLeft="@dimen/margin_20"
+                app:srcCompat="@drawable/video_on" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/switchCameraActionFab"
+                android:layout_width="@dimen/dimen_video_control_icon"
+                android:layout_height="@dimen/dimen_video_control_icon"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_20"
+                android:visibility="visible"
+                app:srcCompat="@drawable/flip_camera_default" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/meetingOption"
+                android:layout_width="@dimen/dimen_video_control_icon"
+                android:layout_height="@dimen/dimen_video_control_icon"
+                android:layout_marginStart="@dimen/margin_20"
+                android:visibility="visible"
+                app:srcCompat="@drawable/more_option" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</RelativeLayout>

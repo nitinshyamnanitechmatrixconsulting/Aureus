@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/textDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:text="Describe your query"
+                    android:textSize="@dimen/text_14" />
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:text="Comment"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:textSize="@dimen/text_14" />
+
+            <EditText
+                    android:id="@+id/addComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp20"
+                    android:background="@null"
+                    android:hint="Add you Comment"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/sp16" />
+        </LinearLayout>
+
+
+        <Button
+                android:id="@+id/nextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/md_yellow_700"
+                android:fontFamily="@font/lato_regular"
+                android:text="Submit Request"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_14" />
+
+        <include
+                android:id="@+id/progressLoader"
+                layout="@layout/progress_loader" />
+
+
+    </RelativeLayout>
+
+</layout>
+

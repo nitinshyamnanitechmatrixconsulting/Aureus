@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_F4F5F6"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/changeEnrollmentMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp10"
+                    android:fontFamily="@font/lato_regular"
+                    android:textSize="@dimen/text_12"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+            <TextView
+                    android:id="@+id/textSelectEnrollment"
+                    android:layout_width="wrap_content"
+                    android:text="Change of Enrollment Options"
+                    android:layout_below="@+id/changeEnrollmentMsg"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp10"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/lato_bold"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_18" />
+
+            <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_below="@+id/textSelectEnrollment"
+                    android:background="@color/white"
+                    android:paddingLeft="@dimen/margin_20">
+
+                <RadioButton
+                        android:id="@+id/updateEnrollmentPackage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp10"
+                        android:text="Update Enrollment Package" />
+
+                <RadioButton
+                        android:id="@+id/changeEnrollmentPackage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp10"
+                        android:text="Change Enrollment Package" />
+
+                <RadioButton
+                        android:id="@+id/changeEnrollmentTeacher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp10"
+                        android:text="Change Enrollment Teacher" />
+
+                <RadioButton
+                        android:layout_width="match_parent"
+                        android:id="@+id/changeLessonTime"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp10"
+                        android:text="Change Regular Lesson Day/Time" />
+
+                <RadioButton
+                        android:id="@+id/otherEnrollmentPackage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp10"
+                        android:text="Other Enrollment Request" />
+            </RadioGroup>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+
+                <Button
+                        android:id="@+id/backButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@color/white"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="Back"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/text_14" />
+
+                <Button
+                        android:id="@+id/nextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@color/md_yellow_700"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="Next"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</layout>
+
