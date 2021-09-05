@@ -51,9 +51,13 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/white_rect_border.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/white_rect_button.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_feedback.xml" value="0.1712962962962963" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/ic_mic_off_gray_24px.xml" value="0.17592592592592593" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/participant_background.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/participant_selected_background.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/activity_room_check.xml" value="0.1" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/content_room.xml" value="0.1921875" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/fragment_participant_list.xml" value="0.18923076923076923" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/participant_bottom_view.xml" value="0.1921875" />
       </map>
     </option>
   </component>

@@ -189,7 +189,6 @@
                             android:layout_margin="6dp"
                             android:contentDescription="@string/audio_toggle"
                             android:tint="@color/white"
-                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:srcCompat="@drawable/ic_mic_off_gray_24px" />
