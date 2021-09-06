@@ -4,16 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.auresus.academy.R
 import com.auresus.academy.databinding.ActivityFeedbackBinding
 import com.auresus.academy.model.bean.requests.PublicMeetingFeedbackRequest
-import com.auresus.academy.model.bean.requests.TeacherDateRequest
-import com.auresus.academy.model.bean.responses.GetAccessTokenResponse
-import com.auresus.academy.model.bean.responses.TeacherListResponse
 import com.auresus.academy.model.local.preference.PreferenceHelper
 import com.auresus.academy.model.remote.ApiConstant
 import com.auresus.academy.model.remote.ApiResponse
@@ -23,16 +18,13 @@ import com.twilio.video.app.ui.room.RoomActivity
 import com.auresus.academy.view.base.BaseActivity
 import com.auresus.academy.view.login.LoginAcitivty
 import com.auresus.academy.view.studenthome.HomeAcitivty
-import com.auresus.academy.view.studenthome.MakeUpViewModel
 import com.auresus.academy.view.teacherhome.TeacherHomeActivity
-import okhttp3.ResponseBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.security.AccessController.getContext
 
 
 class FeedbackActivity : BaseActivity() {
@@ -450,7 +442,7 @@ class FeedbackActivity : BaseActivity() {
         person_id: String
     ) {
         val retrofit = Retrofit.Builder()
-            .baseUrl(ApiConstant.BASE_URL)
+            .baseUrl(ApiConstant.DEV_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val apiServices = retrofit.create(ApiServices::class.java)
@@ -461,12 +453,14 @@ class FeedbackActivity : BaseActivity() {
                 response: Response<Any?>
             ) {
                 if (response != null && response.isSuccessful) {
+/*
                     Toast.makeText(
                         context,
                         response.toString(),
                         Toast.LENGTH_LONG
                     )
                         .show()
+*/
 
                 }
 
@@ -494,7 +488,7 @@ class FeedbackActivity : BaseActivity() {
         rating: String
     ) {
         val retrofit = Retrofit.Builder()
-            .baseUrl(ApiConstant.BASE_URL)
+            .baseUrl(ApiConstant.DEV_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val apiServices = retrofit.create(ApiServices::class.java)
@@ -505,12 +499,14 @@ class FeedbackActivity : BaseActivity() {
                 response: Response<Any?>
             ) {
                 if (response != null && response.isSuccessful) {
+/*
                     Toast.makeText(
                         context,
                         response.toString(),
                         Toast.LENGTH_LONG
                     )
                         .show()
+*/
 
                 }
             }

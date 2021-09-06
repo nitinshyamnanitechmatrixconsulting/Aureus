@@ -187,7 +187,7 @@ class TeacherHomeActivity : BaseActivity() {
     private fun initClickListener() {
         logout.setOnClickListener {
             ProceedLoginAcitivty.open(this)
-            //preferenceHelper.clearData()
+            preferenceHelper.clearData()
            // LoginAcitivty.open(this);
         }
         bottom_navigation.setOnTabSelectedListener { position, wasSelected ->

@@ -767,6 +767,7 @@ class HomeAcitivty : BaseActivity() {
         when (response.status) {
             ApiResponse.Status.SUCCESS -> {
                 preferenceHelper.setUserLoggedIn(false)
+                preferenceHelper.clearData()
                 moveToLoginScreen()
             }
             ApiResponse.Status.ERROR -> {

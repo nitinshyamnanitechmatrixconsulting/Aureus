@@ -159,7 +159,7 @@ interface ApiServices {
         @Query("rating") rating: String
     ): Call<Any?>
 
-    @GET(ApiConstant.publicmeetingfeedback)
+    @GET(ApiConstant.meetingfeedback)
     fun feedBack(
         @Query("person_name") person_name: String,
         @Query("booking_id") booking_id: String,
