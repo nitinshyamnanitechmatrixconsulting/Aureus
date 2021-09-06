@@ -125,22 +125,32 @@ class FeedbackActivity : BaseActivity() {
                 if (preferenceHelper != null) {
                     when {
                         preferenceHelper.getUserType() == 1 -> {
-                           // getMeetingFeedback()
-                            feedback(studentName,roomID ,rating, preferenceHelper[PreferenceHelper.PARENR_ID])
+                            // getMeetingFeedback()
+                            feedback(
+                                studentName,
+                                roomID,
+                                rating,
+                                preferenceHelper[PreferenceHelper.PARENR_ID]
+                            )
                             var intent = Intent(this, HomeAcitivty::class.java)
                             startActivity(intent)
                             finish()
                         }
                         preferenceHelper.getUserType() == 2 -> {
-                           // getMeetingFeedback()
-                            feedback(studentName,roomID ,rating, preferenceHelper[PreferenceHelper.PARENR_ID])
+                            // getMeetingFeedback()
+                            feedback(
+                                studentName,
+                                roomID,
+                                rating,
+                                preferenceHelper[PreferenceHelper.PARENR_ID]
+                            )
                             val intent = Intent(this, TeacherHomeActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
                         else -> {
-                           // getPublicMeeting()
-                            guestFeedback(studentName,roomName,rating)
+                            // getPublicMeeting()
+                            guestFeedback(studentName, roomName, rating)
                             val intent = Intent(this, LoginAcitivty::class.java)
                             startActivity(intent)
                             finish()
@@ -148,7 +158,7 @@ class FeedbackActivity : BaseActivity() {
                     }
                 } else {
                     //getPublicMeeting()
-                        guestFeedback(studentName,roomName,rating)
+                    guestFeedback(studentName, roomName, rating)
                     val intent = Intent(this, LoginAcitivty::class.java)
                     startActivity(intent)
                     finish()
@@ -178,18 +188,28 @@ class FeedbackActivity : BaseActivity() {
                 )
                 if (preferenceHelper != null) {
                     if (preferenceHelper.getUserType() == 1) {
-                       // getMeetingFeedback()
-                        feedback(studentName,roomID ,rating, preferenceHelper[PreferenceHelper.PARENR_ID])
+                        // getMeetingFeedback()
+                        feedback(
+                            studentName,
+                            roomID,
+                            rating,
+                            preferenceHelper[PreferenceHelper.PARENR_ID]
+                        )
                     } else if (preferenceHelper.getUserType() == 2) {
-                       // getMeetingFeedback()
-                        feedback(studentName,roomID ,rating, preferenceHelper[PreferenceHelper.PARENR_ID])
+                        // getMeetingFeedback()
+                        feedback(
+                            studentName,
+                            roomID,
+                            rating,
+                            preferenceHelper[PreferenceHelper.PARENR_ID]
+                        )
                     } else {
-                      //  getPublicMeeting()
-                        guestFeedback(studentName,roomName,rating)
+                        //  getPublicMeeting()
+                        guestFeedback(studentName, roomName, rating)
                     }
                 } else {
-                    guestFeedback(studentName,roomName,rating)
-                   // getPublicMeeting()
+                    guestFeedback(studentName, roomName, rating)
+                    // getPublicMeeting()
                 }
             }
         }
@@ -423,7 +443,7 @@ class FeedbackActivity : BaseActivity() {
         }
     }
 
-     fun feedback(
+    fun feedback(
         person_name: String,
         booking_id: String,
         rating: String,
@@ -434,16 +454,33 @@ class FeedbackActivity : BaseActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val apiServices = retrofit.create(ApiServices::class.java)
-        val call = apiServices.feedBack(person_name, booking_id, rating,person_id)
+        val call = apiServices.feedBack(person_name, booking_id, rating, person_id)
         call.enqueue(object : Callback<Any?> {
             override fun onResponse(
                 call: Call<Any?>,
-                response: Response<Any?>){
+                response: Response<Any?>
+            ) {
+                if (response != null && response.isSuccessful) {
+                    Toast.makeText(
+                        context,
+                        response.toString(),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+
+                }
 
             }
 
             override fun onFailure(call: Call<Any?>, t: Throwable) {
                 t.printStackTrace()
+                Toast.makeText(
+                    context,
+                    "Some thing went wrong",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
+
             }
 
         })
@@ -451,7 +488,7 @@ class FeedbackActivity : BaseActivity() {
     }
 
 
-     fun guestFeedback(
+    fun guestFeedback(
         person_name: String,
         room_name: String,
         rating: String
@@ -465,12 +502,28 @@ class FeedbackActivity : BaseActivity() {
         call?.enqueue(object : Callback<Any?> {
             override fun onResponse(
                 call: Call<Any?>,
-                response: Response<Any?>){
-                
+                response: Response<Any?>
+            ) {
+                if (response != null && response.isSuccessful) {
+                    Toast.makeText(
+                        context,
+                        response.toString(),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+
+                }
             }
 
             override fun onFailure(call: Call<Any?>, t: Throwable) {
                 t.printStackTrace()
+                Toast.makeText(
+                    context,
+                    "Some thing went wrong",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
+
             }
 
         })
