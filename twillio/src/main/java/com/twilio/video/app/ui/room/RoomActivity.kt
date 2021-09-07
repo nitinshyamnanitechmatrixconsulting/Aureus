@@ -662,7 +662,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     fun bind(participantViewState: ParticipantViewState, viewEventAction: (RoomViewEvent) -> Unit) {
         Timber.d("bind ParticipantViewHolder with data item: %s", participantViewState)
         Timber.d("thumb: %s", binding.room.participantThumbView)
-        val localParticipantIdentity = getString(R.string.you)
+      //  val localParticipantIdentity = getString(R.string.you)
+        val localParticipantIdentity = studentName
 
         binding.room.participantThumbView.run {
             participantViewState.sid?.let { sid ->
@@ -851,7 +852,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     private fun renderPrimaryView(primaryParticipant: ParticipantViewState) {
         primaryParticipant.run {
             primaryParticipantController.renderAsPrimary(
-                if (isLocalParticipant) getString(R.string.you) else identity,
+                if (isLocalParticipant) studentName else identity,
                 screenTrack,
                 videoTrack,
                 isMuted,
@@ -865,7 +866,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     private fun renderDominantView(primaryParticipant: ParticipantViewState) {
         primaryParticipant.run {
             primaryParticipantController.renderAsPrimary(
-                if (isLocalParticipant) getString(R.string.you) else identity,
+                if (isLocalParticipant) studentName else identity,
                 screenTrack,
                 videoTrack,
                 isMuted,
