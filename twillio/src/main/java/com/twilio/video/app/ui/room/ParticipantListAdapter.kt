@@ -15,7 +15,9 @@ internal class ParticipantListAdapter :
     private val mutableViewHolderEvents = MutableLiveData<RoomViewEvent>()
     val viewHolderEvents: LiveData<RoomViewEvent> = mutableViewHolderEvents
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BottomParticipantViewHolder =BottomParticipantViewHolder(ParticipantBottomThumbView(parent.context))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BottomParticipantViewHolder =BottomParticipantViewHolder(
+        ParticipantBottomThumbView(parent.context)
+    )
 
 
     override fun onBindViewHolder(holder: BottomParticipantViewHolder, position: Int) =

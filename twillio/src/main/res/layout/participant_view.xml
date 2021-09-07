@@ -79,7 +79,7 @@
         android:id="@+id/selected_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccentApp">
+        android:background="@color/color_353b3e">
 
         <TextView
             android:id="@+id/tvShortName"

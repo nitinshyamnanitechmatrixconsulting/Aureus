@@ -23,7 +23,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import androidx.annotation.Nullable;
+
 import androidx.core.content.ContextCompat;
 import com.twilio.video.app.R;
 import com.twilio.video.app.databinding.ParticipantViewBinding;

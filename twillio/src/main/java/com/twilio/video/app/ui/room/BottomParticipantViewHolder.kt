@@ -17,10 +17,14 @@ import com.twilio.video.app.sdk.VideoTrackViewState
 import com.twilio.video.app.ui.room.RoomViewEvent.PinParticipant
 import timber.log.Timber
 
-internal class BottomParticipantViewHolder(private val thumb: ParticipantBottomThumbView) :
-        RecyclerView.ViewHolder(thumb) {
+internal class BottomParticipantViewHolder(
+    private val thumb: ParticipantBottomThumbView
 
-    private val localParticipantIdentity = thumb.context.getString(R.string.you)
+) :
+    RecyclerView.ViewHolder(thumb) {
+
+     private val localParticipantIdentity = thumb.context.getString(R.string.you)
+  //  private val localParticipantIdentity = roomViewModel.name
 
     fun bind(participantViewState: ParticipantViewState, viewEventAction: (RoomViewEvent) -> Unit) {
         Timber.d("bind ParticipantViewHolder with data item: %s", participantViewState)
@@ -54,7 +58,7 @@ internal class BottomParticipantViewHolder(private val thumb: ParticipantBottomT
                 removeRender(videoTrack, this)
                 videoTrack = newVideoTrack
                 videoTrack?.let { videoTrack ->
-                     setVideoState(videoTrackViewState)
+                    setVideoState(videoTrackViewState)
                     if (videoTrack.isEnabled) videoTrack.addSink(this)
                 } ?: setState(ParticipantView.State.NO_VIDEO)
             } else {
@@ -68,7 +72,7 @@ internal class BottomParticipantViewHolder(private val thumb: ParticipantBottomT
             setState(ParticipantView.State.SWITCHED_OFF)
         } else {
             videoTrackViewState?.videoTrack?.let { setState(ParticipantView.State.VIDEO) }
-                    ?: setState(ParticipantView.State.NO_VIDEO)
+                ?: setState(ParticipantView.State.NO_VIDEO)
         }
     }
 

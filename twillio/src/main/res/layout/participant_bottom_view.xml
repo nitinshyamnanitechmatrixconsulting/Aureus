@@ -194,6 +194,7 @@
                             app:srcCompat="@drawable/ic_mic_off_gray_24px" />
 
                         <ImageView
+                            android:tint="#f3c010"
                             android:id="@+id/network_quality"
                             android:layout_width="24dp"
                             android:layout_height="24dp"

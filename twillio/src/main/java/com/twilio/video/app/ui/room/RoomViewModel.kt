@@ -91,7 +91,7 @@ class RoomViewModel(
     initialViewState: RoomViewState = RoomViewState(participantManager.primaryParticipant)
 ) : AndroidDataFlow(defaultState = initialViewState) {
 
-    private var name: String? = null
+    internal var name: String? = null
     internal var roomName: String? = null
     internal var roomId: String? = null
     internal var roomCode: String? = null

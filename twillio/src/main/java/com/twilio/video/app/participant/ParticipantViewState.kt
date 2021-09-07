@@ -35,6 +35,6 @@ fun buildParticipantViewState(participant: Participant): ParticipantViewState {
             participant.identity,
             videoTrack?.let { VideoTrackViewState(it) },
             networkQualityLevel = participant.networkQualityLevel,
-            isMuted = participant.audioTracks.firstOrNull() == null
+            isMuted = participant.audioTracks.firstOrNull() != null
     )
 }
