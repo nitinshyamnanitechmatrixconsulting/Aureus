@@ -31,15 +31,14 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:visibility="gone"
                         android:id="@+id/backButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:padding="@dimen/margin_10"
-                        android:src="@drawable/ic_arrow_left"
-                        app:tint="@color/black"></ImageView>
+                        android:src="@drawable/back_arrow"
+                        app:tint="@color/black" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -72,6 +71,7 @@
 
         </RelativeLayout>
         <WebView
+            android:layout_marginHorizontal="@dimen/margin_20"
             android:id="@+id/simpleWebView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

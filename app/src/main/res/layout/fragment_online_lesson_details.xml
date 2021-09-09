@@ -3,9 +3,9 @@
 
     <RelativeLayout
         android:id="@+id/detailLayout"
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,14 +67,25 @@
             </RelativeLayout>
 
             <TextView
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/onlineMeetingCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10"
                 android:fontFamily="@font/lato_bold"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_online_meeting_code" />
+
+            <TextView
+                android:id="@+id/onlineMeetingId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_10"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/text_size_online_meeting_code" />
+
         </LinearLayout>
     </RelativeLayout>
 </layout>

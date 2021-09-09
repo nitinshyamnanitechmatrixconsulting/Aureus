@@ -18,6 +18,7 @@ import com.twilio.video.app.databinding.LayoutMeetingOptionBinding
 import com.twilio.video.app.ui.room.*
 import com.twilio.video.app.ui.room.ParticipantAdapter
 import java.text.SimpleDateFormat
+import kotlin.math.roundToInt
 
 class LessionInfoSheetFragment(val activity: Activity, meettingOptionHandler: MeettingOptionHandler, val roomViewModel: RoomViewModel) : SuperBottomSheetFragment() {
 
@@ -69,5 +70,7 @@ class LessionInfoSheetFragment(val activity: Activity, meettingOptionHandler: Me
 
     override fun getStatusBarColor() = Color.RED
 
+    override fun getExpandedHeight() =activity.resources.getDimension(R.dimen.margin_500).roundToInt()
 
+    override fun getPeekHeight()= activity.resources.getDimension(R.dimen.margin_500).roundToInt()
 }

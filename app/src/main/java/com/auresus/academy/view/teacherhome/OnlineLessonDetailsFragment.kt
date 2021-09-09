@@ -52,11 +52,17 @@ class OnlineLessonDetailsFragment : BaseFragment() {
             onlineMeetingCode.text =
                 String.format("Online Meeting Code: %s", booking?.Online_Lesson_Passcode__c)
         }
+        val uri = Uri.parse(booking?.Online_Lesson_URL__c)
+        val roomName = uri.getQueryParameter("room_name")
+        booking?.Online_Lesson_Passcode__c?.let {
+            onlineMeetingId.text =
+                String.format("Online Meeting Id: %s", roomName)
+        }
         buttonLink.text = booking?.Online_Lesson_URL__c
         buttonCopyLink.setOnClickListener {
             ShareCompat.IntentBuilder.from(activity as FragmentActivity)
                 .setType("text/plain")
-                .setText(booking?.Online_Lesson_URL__c)
+                .setText(booking?.Online_Lesson_URL__c+"&password="+booking?.Online_Lesson_Passcode__c)
                 .startChooser();
         }
         view.buttonJoinOnlineStudio.setOnClickListener {

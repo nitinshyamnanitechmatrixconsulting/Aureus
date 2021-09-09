@@ -38,6 +38,7 @@ import com.twilio.video.VideoScaleType;
 import com.twilio.video.VideoTextureView;
 import com.twilio.video.VideoTrack;
 import com.twilio.video.app.R;
+import com.twilio.video.app.helper.ShortName;
 import com.twilio.video.app.helper.StringHelper;
 
 import java.lang.annotation.Retention;

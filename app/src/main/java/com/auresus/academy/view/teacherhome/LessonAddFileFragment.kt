@@ -29,6 +29,7 @@ import com.auresus.academy.view_model.BaseViewModel
 import com.auresus.academy.view_model.DashboardViewModel
 import com.daimajia.swipe.util.Attributes
 import kotlinx.android.synthetic.main.fragment_lesson_files.*
+import kotlinx.android.synthetic.main.toolbar_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -123,6 +124,7 @@ class LessonAddFileFragment : BaseFragment() {
         booking = arguments?.get(EXTRA_TEACHER_BOOKING) as TeacherBooking
         val isOnline = booking?.Lesson_Type__c == "Online"
         if (!isOnline) view.findViewById<LinearLayout>(R.id.toolbar).visibility = View.GONE
+        backButton.visibility = View.GONE
         setAttachmentListAObserver()
         initWebView()
         callAttachmentList()
@@ -267,7 +269,7 @@ class LessonAddFileFragment : BaseFragment() {
     }
 
     private fun handleUploadComplete() {
-       callAttachmentList()
+        callAttachmentList()
     }
 
     private fun isConsentFormUrl(url: String?): Boolean {

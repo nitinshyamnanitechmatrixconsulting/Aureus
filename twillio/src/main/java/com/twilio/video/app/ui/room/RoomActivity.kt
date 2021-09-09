@@ -465,6 +465,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         roomViewModel.roomName = roomName
         roomViewModel.roomId = roomID
         roomViewModel.roomCode = roomCode
+        roomViewModel.name = displayName
         return true
     }
 

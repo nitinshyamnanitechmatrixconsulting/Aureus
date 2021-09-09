@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import com.twilio.video.app.R;
 import com.twilio.video.app.databinding.ParticipantBottomViewBinding;
 import com.twilio.video.app.databinding.ParticipantViewBinding;
+import com.twilio.video.app.helper.ShortName;
 import com.twilio.video.app.helper.StringHelper;
 
 public class ParticipantBottomThumbView extends ParticipantView {
@@ -58,6 +59,7 @@ public class ParticipantBottomThumbView extends ParticipantView {
     @Override
     public void setIdentity(String identity) {
         binding.identityTextView.setText(identity);
+      //  binding.tvShortName.setText(ShortName.getShortString(identity));
     }
 
     private void init(Context context) {

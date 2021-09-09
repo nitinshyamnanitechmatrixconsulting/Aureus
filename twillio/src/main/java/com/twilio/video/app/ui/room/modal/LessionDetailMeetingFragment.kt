@@ -11,6 +11,7 @@ import androidx.core.app.ShareCompat
 import androidx.fragment.app.FragmentActivity
 import com.twilio.video.app.R
 import com.twilio.video.app.ui.room.RoomViewModel
+import kotlin.math.roundToInt
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,7 +60,7 @@ class LessionDetailMeetingFragment(val roomViewModel: RoomViewModel) : Fragment(
             if (activity != null && (!(activity as FragmentActivity).isFinishing)) {
                 ShareCompat.IntentBuilder.from(activity as FragmentActivity)
                     .setType("text/plain")
-                    .setText(link)
+                    .setText(link+"&password="+roomId)
                     .startChooser();
             }
         }
@@ -79,4 +80,5 @@ class LessionDetailMeetingFragment(val roomViewModel: RoomViewModel) : Fragment(
         fun newInstance(roomViewModel: RoomViewModel) =
             LessionDetailMeetingFragment(roomViewModel)
     }
+
 }
