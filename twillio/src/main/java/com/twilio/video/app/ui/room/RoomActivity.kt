@@ -957,6 +957,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 intent.putExtra(INTENT_EXTRA_ROOM_ID, roomId)
                 intent.putExtra(INTENT_EXTRA_STUDENT_NAME, studentName)
                 intent.putExtra(INTENT_EXTRA_ROOM_CODE, meetingCodeLocal)
+
                 startActivity(intent)
             }
         }

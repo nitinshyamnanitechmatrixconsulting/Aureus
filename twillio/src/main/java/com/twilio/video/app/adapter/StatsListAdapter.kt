@@ -31,6 +31,8 @@ import com.twilio.video.app.databinding.StatsViewBinding
 import com.twilio.video.app.model.StatsListItem
 import com.twilio.video.app.sdk.RoomStats
 
+
+
 class StatsListAdapter(private val context: Context) : RecyclerView.Adapter<StatsListAdapter.ViewHolder>() {
 
     private val statsListItems = ArrayList<StatsListItem>()

@@ -26,6 +26,7 @@ import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
@@ -39,6 +40,7 @@ import com.gdacciaro.iOSDialog.iOSDialog
 import com.gdacciaro.iOSDialog.iOSDialogBuilder
 import com.gdacciaro.iOSDialog.iOSDialogClickListener
 import com.github.javiersantos.bottomdialogs.BottomDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.twilio.audioswitch.AudioDevice
@@ -907,6 +909,8 @@ class RoomCheckActivity : BaseActivity() , MeettingOptionHandler {
             .show()
     }
 
+
+
     companion object {
         private const val PERMISSIONS_REQUEST_CODE = 100
         private const val MEDIA_PROJECTION_REQUEST_CODE = 101
@@ -922,6 +926,12 @@ class RoomCheckActivity : BaseActivity() , MeettingOptionHandler {
             intent.data = appLink
             context.startActivity(intent)
         }
+
+
+
+
+
+
 
 
         fun open(

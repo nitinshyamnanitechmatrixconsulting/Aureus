@@ -209,4 +209,6 @@
     <string name="teacher_will_join_shortly">Teacher will join shortly</string>
     <string name="share_link_info">Share Link Info</string>
     <string name="help">Help</string>
+    <string name="typemessage">Send a message here</string>
+
 </resources>

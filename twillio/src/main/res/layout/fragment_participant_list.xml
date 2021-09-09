@@ -10,14 +10,19 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_center_title_twillio"></include>
+            layout="@layout/toolbar_center_title_twillio">
+
+        </include>
 
         <androidx.recyclerview.widget.RecyclerView
+
             android:id="@+id/participantList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="top|start"
-            android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
+            android:scrollbars="vertical">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 </layout>
