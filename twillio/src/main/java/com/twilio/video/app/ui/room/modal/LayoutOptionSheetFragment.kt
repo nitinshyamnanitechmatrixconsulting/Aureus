@@ -13,7 +13,11 @@ import com.twilio.video.app.databinding.FragmentLayoutOptionBinding
 import com.twilio.video.app.ui.room.RoomViewModel
 import kotlin.math.roundToInt
 
-class LayoutOptionSheetFragment(val activity: Activity, val meetingOptionHandler: MeettingOptionHandler, val roomViewModel: RoomViewModel) : SuperBottomSheetFragment() {
+class LayoutOptionSheetFragment(
+    val activity: Activity,
+    val meetingOptionHandler: MeettingOptionHandler,
+    val roomViewModel: RoomViewModel
+) : SuperBottomSheetFragment() {
 
     private lateinit var binding: FragmentLayoutOptionBinding
 
@@ -23,7 +27,11 @@ class LayoutOptionSheetFragment(val activity: Activity, val meetingOptionHandler
         const val DEFAULT = 2
 
         @JvmStatic
-        fun openMeetingOption(activity: FragmentActivity, meetingOptionHandler: MeettingOptionHandler, roomViewModel: RoomViewModel) {
+        fun openMeetingOption(
+            activity: FragmentActivity,
+            meetingOptionHandler: MeettingOptionHandler,
+            roomViewModel: RoomViewModel
+        ) {
             if (instance == null) {
                 instance = LayoutOptionSheetFragment(activity, meetingOptionHandler, roomViewModel)
             }
@@ -31,7 +39,11 @@ class LayoutOptionSheetFragment(val activity: Activity, val meetingOptionHandler
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentLayoutOptionBinding.inflate(inflater)
         return binding.root
@@ -41,9 +53,14 @@ class LayoutOptionSheetFragment(val activity: Activity, val meetingOptionHandler
         super.onViewCreated(view, savedInstanceState)
         binding.layoutOptionDefault.setOnClickListener {
             meetingOptionHandler.switchLayout(DEFAULT)
+            dismiss()
         }
         binding.layoutOptionSplit.setOnClickListener {
             meetingOptionHandler.switchLayout(SPLIT)
+            dismiss()
+        }
+        binding.backButton.setOnClickListener {
+            dismiss()
         }
 
     }
@@ -53,11 +70,12 @@ class LayoutOptionSheetFragment(val activity: Activity, val meetingOptionHandler
 
     override fun getStatusBarColor() = Color.RED
 
-    override fun getBackgroundColor()=activity.resources.getColor(R.color.color_353b3e)
+    override fun getBackgroundColor() = activity.resources.getColor(R.color.color_353b3e)
 
-    override fun getExpandedHeight() =activity.resources.getDimension(R.dimen.margin_200).roundToInt()
+    override fun getExpandedHeight() =
+        activity.resources.getDimension(R.dimen.margin_200).roundToInt()
 
-    override fun getPeekHeight()= activity.resources.getDimension(R.dimen.margin_200).roundToInt()
+    override fun getPeekHeight() = activity.resources.getDimension(R.dimen.margin_200).roundToInt()
 
 
 }

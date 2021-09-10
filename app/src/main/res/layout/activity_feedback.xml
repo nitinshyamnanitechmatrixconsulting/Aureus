@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Online Lession"
+                    android:text="Online Lesson"
                     android:textColor="@color/black" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -50,7 +50,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_20"
                 android:gravity="center"
-                android:text="Your Online Lession has ended"
+                android:text="Your Online Lesson has ended"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -147,7 +147,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_20"
                 android:gravity="center"
-                android:text="Rate the Audio &amp; Video Quality \n of Your Lession"
+                android:text="Rate the Audio &amp; Video Quality \n of Your Lesson"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -161,7 +161,7 @@
                 android:background="@drawable/rating_background"
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/margin_10"
-                android:text="Rejoin Lession"
+                android:text="Rejoin Lesson"
                 android:textAllCaps="false" />
 
             <androidx.appcompat.widget.AppCompatButton

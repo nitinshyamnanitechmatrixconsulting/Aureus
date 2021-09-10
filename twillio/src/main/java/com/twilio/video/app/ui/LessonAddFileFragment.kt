@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -32,6 +33,7 @@ import java.io.InputStream
 
 class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment() {
     private var recycler_view: RecyclerView?=null
+    private var backButton: ImageView?=null
     private var simpleWebView: WebView?=null
     private val OPEN_DOCUMENT_REQUEST_CODE = 2
     private var mUploadMessage: ValueCallback<Uri>? = null
@@ -130,12 +132,20 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
     fun onViewsInitialized() {
         simpleWebView = view?.findViewById<WebView>(R.id.simpleWebView)
         recycler_view = view?.findViewById<RecyclerView>(R.id.recycler_view)
+        backButton = view?.findViewById<ImageView>(R.id.backButton)
         setRecyclerView()
         room_id = arguments?.get(EXTRA_ROOM_ID) as String
         room_name = arguments?.get(EXTRA_ROOM_NAME) as String
         setAttachmentListAObserver()
         initWebView()
         callAttachmentList()
+
+       backButton!!.setOnClickListener(View.OnClickListener { view ->
+
+            getActivity()?.onBackPressed()
+            // Do some work here
+        })
+
     }
 
     private fun callAttachmentList() {

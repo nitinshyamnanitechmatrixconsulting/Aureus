@@ -861,6 +861,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             )
             binding.room.primaryVideo.showIdentityBadge(!primaryParticipant.isLocalParticipant)
             binding.room.primaryVideo.setOnClickListener { onSlideViewButtonClick(binding.room.primaryVideo) }
+            //binding.room.participantThumbView.setOnClickListener { onSlideViewButtonClick(binding.room.primaryVideo) }
         }
     }
 
