@@ -55,7 +55,6 @@
             android:id="@+id/video_identity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/participantBackground"
             android:padding="4dp"
             android:textColor="@android:color/white"
             android:textSize="14sp"
@@ -80,16 +79,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_353b3e">
-
-        <TextView
-            android:id="@+id/tvShortName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:gravity="center"
+            android:id="@+id/rlThumbView"
+            android:layout_width="@dimen/dp60"
+            android:layout_height="@dimen/dp60"
             android:layout_centerInParent="true"
-            android:text="B"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dp_40"
-            android:textStyle="bold" />
+            android:background="@drawable/roundbutton"
+            android:backgroundTint="@color/colorAccentApp">
+
+            <TextView
+                android:id="@+id/tvShortName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B"
+                android:textColor="@color/white"
+                android:textSize="@dimen/margin_30"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
 
         <!--<ImageView
             android:id="@+id/stub"
@@ -120,7 +129,7 @@
         android:layout_margin="6dp"
         android:contentDescription="@string/audio_toggle"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_thumbnail_no_audio"
+        app:srcCompat="@drawable/ic_mic_off_gray_24px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -131,7 +140,7 @@
         android:layout_marginBottom="6dp"
         android:contentDescription="@string/room_screen_pin_icon_description"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_pin"
+        app:srcCompat="@drawable/pin_participant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -145,6 +154,7 @@
         android:contentDescription="@string/settings_screen_enable_network_quality_level_description"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/colorAccentApp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

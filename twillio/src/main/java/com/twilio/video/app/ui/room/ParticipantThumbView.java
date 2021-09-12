@@ -78,9 +78,9 @@ public class ParticipantThumbView extends ParticipantView {
         binding.participantTrackSwitchOffBackground.setVisibility(isSwitchOffViewVisible(state));
         binding.participantTrackSwitchOffIcon.setVisibility(isSwitchOffViewVisible(state));
 
-        int resId = R.drawable.participant_background;
+        int resId = R.drawable.local_thumb_view;
         if (state == State.SELECTED) {
-            resId = R.drawable.participant_selected_background;
+            resId = R.drawable.local_thumb_view;
         }
         selectedLayout.setBackground(ContextCompat.getDrawable(getContext(), resId));
     }

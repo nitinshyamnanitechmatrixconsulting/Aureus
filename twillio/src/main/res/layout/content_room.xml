@@ -9,6 +9,7 @@
     android:clickable="true"
     android:focusableInTouchMode="true"
     android:keepScreenOn="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.LinearLayoutCompat

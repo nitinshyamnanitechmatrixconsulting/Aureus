@@ -26,6 +26,7 @@
     <style name="lessonDetailTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
         <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 

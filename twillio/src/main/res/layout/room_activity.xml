@@ -10,11 +10,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_14"
         android:background="@color/white"
         android:orientation="vertical">
 
         <ImageView
+            android:layout_marginTop="@dimen/margin_14"
             android:id="@+id/banner"
             android:layout_width="@dimen/margin_200"
             android:layout_height="@dimen/margin_100"

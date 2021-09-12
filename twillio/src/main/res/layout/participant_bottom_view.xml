@@ -120,7 +120,6 @@
                                 android:id="@+id/video_identity"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/participantBackground"
                                 android:ellipsize="end"
                                 android:maxLines="1"
                                 android:padding="4dp"
@@ -153,7 +152,7 @@
                                 android:layout_centerInParent="true"
                                 android:text="B"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/dp_40"
+                                android:textSize="@dimen/margin_30"
                                 android:textStyle="bold" />
 
                             <!--
@@ -194,12 +193,12 @@
                             app:srcCompat="@drawable/ic_mic_off_gray_24px" />
 
                         <ImageView
-                            android:tint="#f3c010"
                             android:id="@+id/network_quality"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_margin="6dp"
                             android:contentDescription="@string/settings_screen_enable_network_quality_level_description"
+                            android:tint="#f3c010"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

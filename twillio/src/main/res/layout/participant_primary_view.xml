@@ -16,8 +16,8 @@
 
         <RelativeLayout
             android:id="@+id/rlThumbView"
-            android:layout_width="107dp"
-            android:layout_height="107dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_centerInParent="true"
             android:background="@drawable/roundbutton"
             android:backgroundTint="@color/colorAccentApp">
@@ -29,7 +29,7 @@
                 android:layout_centerInParent="true"
                 android:text="A"
                 android:textColor="@color/white"
-                android:textSize="@dimen/dp50"
+                android:textSize="@dimen/dp40"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -78,7 +78,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="100dp"
-            android:background="@drawable/badge_background"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
