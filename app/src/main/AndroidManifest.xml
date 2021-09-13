@@ -74,11 +74,11 @@
             android:screenOrientation="portrait" >
             <intent-filter android:autoVerify="true">
                 <data
-                    android:host="aureusacademy-meeting.herokuapp.com"
+                    android:host="aureusacademy"
                     android:scheme="http" />
 
                 <data
-                    android:host="aureusacademy-meeting.herokuapp.com"
+                    android:host="aureusacademy"
                     android:scheme="https" />
 
                 <data

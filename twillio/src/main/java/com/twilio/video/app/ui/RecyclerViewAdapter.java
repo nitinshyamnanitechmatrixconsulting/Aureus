@@ -15,9 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.twilio.video.app.R;
+import com.twilio.video.app.helper.ApiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapter.SimpleViewHolder> {
@@ -50,12 +58,14 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mItemManger.removeShownLayouts(viewHolder.swipeLayout);
+                deleteAttachment(viewHolder,position,item.getFileID());
+
+               /* mItemManger.removeShownLayouts(viewHolder.swipeLayout);
                 mDataset.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, mDataset.size());
                 mItemManger.closeAllItems();
-                Toast.makeText(view.getContext(), "Deleted " + viewHolder.textViewFileName.getText().toString() + "!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Deleted " + viewHolder.textViewFileName.getText().toString() + "!", Toast.LENGTH_SHORT).show();*/
             }
         });
         viewHolder.ivFileType.setImageResource(R.drawable.ic_file_present);
@@ -98,6 +108,35 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
                 }
             });
         }
+    }
+    void deleteAttachment(SimpleViewHolder viewHolder,int position,String attachmentId) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://full-aureusgroup.cs117.force.com/services/apexrest/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                // add other factories here, if needed.
+                .build();
+
+        ApiHelper apiHelper=retrofit.create(ApiHelper.class);
+        Call<ResponseBody> call =apiHelper.deleteAttachment(attachmentId);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    mItemManger.removeShownLayouts(viewHolder.swipeLayout);
+                    mDataset.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, mDataset.size());
+                    mItemManger.closeAllItems();
+                    Toast.makeText(mContext, "Deleted " + viewHolder.textViewFileName.getText().toString() + "!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(mContext, "something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
 }

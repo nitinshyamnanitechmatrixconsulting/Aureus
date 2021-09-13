@@ -44,8 +44,13 @@ class JoinOnlineClassAcitivty : BaseActivity() {
         setMeetingServiceObserver()
         val deeplink = intent.data
         if (deeplink != null) {
-            link = (deeplink.toString().split("=")[1]).toString()
-            binding.editTextBookingId.setText(link)
+            val uri = Uri.parse(deeplink.toString())
+            val id = uri.getQueryParameter("room_name")
+            val password = uri.getQueryParameter("password")
+           // link = (deeplink.toString().split("=")[1]).toString()
+            binding.editTextBookingId.setText(id)
+            binding.editTextonlineMeetingCode.setText(password)
+
             //Toast.makeText(this,link,Toast.LENGTH_LONG).show()
         }
     }

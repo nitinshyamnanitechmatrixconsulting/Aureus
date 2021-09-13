@@ -385,4 +385,5 @@ class StudentLessonAddFileFragment : BaseFragment() {
         object ErrorOpeningFile : OpenFileResult()
         object DifferentResult : OpenFileResult()
     }
+
 }
