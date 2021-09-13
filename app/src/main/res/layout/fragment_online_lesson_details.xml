@@ -24,9 +24,9 @@
             <Button
                 android:id="@+id/buttonJoinOnlineStudio"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp48"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginLeft="@dimen/margin_60"
-                android:layout_marginTop="@dimen/dp30"
+                android:layout_marginTop="@dimen/dp20"
                 android:layout_marginRight="@dimen/margin_60"
                 android:background="@drawable/rect_button"
                 android:fontFamily="@font/lato_bold"
@@ -36,7 +36,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp48"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginLeft="@dimen/margin_50"
                 android:layout_marginTop="@dimen/dp10"
                 android:layout_marginRight="@dimen/margin_50">
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/lato_bold"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_online_meeting_code" />
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/lato_bold"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_online_meeting_code" />

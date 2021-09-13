@@ -5,6 +5,7 @@
     android:layout_width="96dp"
     android:layout_height="148dp"
     android:layout_marginLeft="4dp"
+    android:layout_marginTop="@dimen/margin_15"
     android:layout_marginRight="4dp">
 
     <!-- RemoteParticipant layout with video track -->

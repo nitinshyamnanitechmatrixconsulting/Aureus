@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.auresus.academy.R;
@@ -59,9 +60,13 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
             }
         });
         viewHolder.ivFileType.setImageResource(R.drawable.ic_file_present);
+        viewHolder.ivFileType.setColorFilter(ContextCompat.getColor(mContext, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
         viewHolder.textViewFileName.setText(item.getFileName());
         viewHolder.textViewFileSize.setText(item.getFileSize());
         mItemManger.bindView(viewHolder.itemView, position);
+        viewHolder.textViewFileName.setTextColor(mContext.getResources().getColor(R.color.black));
+        viewHolder.textViewFileSize.setTextColor(mContext.getResources().getColor(R.color.black));
+
     }
 
     @Override

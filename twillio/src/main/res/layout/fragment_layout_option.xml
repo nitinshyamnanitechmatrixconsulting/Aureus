@@ -71,8 +71,8 @@
                 android:textSize="@dimen/text_18" />
 
             <ImageView
-                android:layout_width="@dimen/margin_20"
-                android:layout_height="@dimen/margin_20"
+                android:layout_width="@dimen/dp40"
+                android:layout_height="@dimen/dp40"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/default_screen" />
@@ -104,8 +104,8 @@
                 android:textSize="@dimen/text_18" />
 
             <ImageView
-                android:layout_width="@dimen/margin_20"
-                android:layout_height="@dimen/margin_20"
+                android:layout_width="@dimen/dp40"
+                android:layout_height="@dimen/dp40"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/split_screen" />

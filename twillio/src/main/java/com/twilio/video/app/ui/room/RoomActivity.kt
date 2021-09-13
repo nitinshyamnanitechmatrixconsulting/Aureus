@@ -35,12 +35,15 @@ import android.media.projection.MediaProjectionManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.lifecycle.*
@@ -511,6 +514,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 binding.room.llBottom.visibility = View.GONE
                 roomName = roomViewState.title
                 toolbarTitle = roomName
+
             }
         }
         // binding.room.llBottom.visibility = View.VISIBLE
@@ -532,6 +536,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         binding.disconnect.visibility = disconnectButtonState
         setTitle(toolbarTitle)
         binding.tvHostName.text = StringHelper.getShortString(studentName)
+
+
     }
 
 
@@ -663,7 +669,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     fun bind(participantViewState: ParticipantViewState, viewEventAction: (RoomViewEvent) -> Unit) {
         Timber.d("bind ParticipantViewHolder with data item: %s", participantViewState)
         Timber.d("thumb: %s", binding.room.participantThumbView)
-      //  val localParticipantIdentity = getString(R.string.you)
+        //  val localParticipantIdentity = getString(R.string.you)
         val localParticipantIdentity = studentName
 
         binding.room.participantThumbView.run {
@@ -800,6 +806,27 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 binding.switchCameraActionFab.visibility = View.VISIBLE
                 toggleAudioDevice(true)
                 isConnected = true
+                val someHandler = Handler(Looper.getMainLooper())
+                someHandler.postDelayed(object : Runnable {
+                    override fun run() {
+                        if (isUp){
+                            val animate = TranslateAnimation(
+                                0.toFloat(),  // fromXDelta
+                                0.toFloat(),  // toXDelta
+                                0.toFloat(),  // fromYDelta
+                                0.toFloat()
+                            ) // toYDelta
+                            animate.setDuration(500)
+                            animate.setFillAfter(true)
+                            binding.videoControlLayout.startAnimation(animate)
+                        }
+                           // binding.videoControlLayout.visibility = View.INVISIBLE
+
+                        // slideDown(binding.videoControlLayout)
+                        //  binding.videoControlLayout.visibility = View.GONE
+                        someHandler.postDelayed(this, 5000)
+                    }
+                }, 5000)
             }
             Disconnected -> {
                 binding.meetingOption.visibility = View.GONE

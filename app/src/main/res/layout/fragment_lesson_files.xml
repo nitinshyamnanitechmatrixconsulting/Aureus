@@ -38,10 +38,11 @@
 
         </RelativeLayout>
         <WebView
+            android:layout_marginHorizontal="@dimen/_20sdp"
             android:id="@+id/simpleWebView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginEnd="@dimen/margin_24"
             android:layout_marginStart="@dimen/margin_24"

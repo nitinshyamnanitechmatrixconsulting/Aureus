@@ -73,9 +73,9 @@ class LayoutOptionSheetFragment(
     override fun getBackgroundColor() = activity.resources.getColor(R.color.color_353b3e)
 
     override fun getExpandedHeight() =
-        activity.resources.getDimension(R.dimen.margin_200).roundToInt()
+        activity.resources.getDimension(R.dimen.margin_300).roundToInt()
 
-    override fun getPeekHeight() = activity.resources.getDimension(R.dimen.margin_200).roundToInt()
+    override fun getPeekHeight() = activity.resources.getDimension(R.dimen.margin_300).roundToInt()
 
 
 }

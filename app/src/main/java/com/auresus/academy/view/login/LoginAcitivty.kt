@@ -18,6 +18,7 @@ import com.auresus.academy.model.remote.ApiResponse
 import com.auresus.academy.utils.Connectivity
 import com.auresus.academy.utils.DialogUtils
 import com.auresus.academy.utils.UserType
+import com.auresus.academy.utils.isVisible
 import com.auresus.academy.utils.validations.ValidationResult
 import com.auresus.academy.view.base.BaseActivity
 import com.auresus.academy.view.forgotpassword.ForgotAcitivty
@@ -51,6 +52,7 @@ class LoginAcitivty : BaseActivity() {
         progressLoader.isVisible = response.status == ApiResponse.Status.LOADING
         when (response.status) {
             ApiResponse.Status.SUCCESS -> {
+               progressLoader.isVisible(false)
                 preferenceHelper.setUserLoggedIn(true)
                 val password = binding.passwordEditText.text.toString()
                 val email = binding.edittextEmail.text.toString()
@@ -59,6 +61,7 @@ class LoginAcitivty : BaseActivity() {
                 setLoginData(response.data)
             }
             ApiResponse.Status.ERROR -> {
+                progressLoader.isVisible(false)
                 if (response.error?.code == 500)
                     Toast.makeText(this, response.error?.message, Toast.LENGTH_LONG).show()
                 else
@@ -133,10 +136,13 @@ class LoginAcitivty : BaseActivity() {
                 if (TextUtils.isEmpty(s)) {
 
                 } else {
-                    if (!validate.validateEmail(s.toString()))
-                        binding.continueBtn.setBackgroundResource(R.drawable.round_button)
-                    else
+                    if (!validate.validateEmail(s.toString())) {
                         binding.continueBtn.setBackgroundResource(R.drawable.round_button_grey)
+                        binding.continueBtn.isClickable = false
+                    } else {
+                        binding.continueBtn.setBackgroundResource(R.drawable.round_button)
+                        binding.continueBtn.isClickable = true
+                    }
                 }
             }
 
