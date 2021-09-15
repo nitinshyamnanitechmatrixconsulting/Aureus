@@ -20,6 +20,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -58,9 +59,13 @@ public class ParticipantBottomThumbView extends ParticipantView {
 
     @Override
     public void setIdentity(String identity) {
-        binding.identityTextView.setText(identity);
-        String shorname=identity.charAt(0)+"";
-        binding.tvShortName.setText(shorname);
+        try {
+            Log.e("identity", identity + "...");
+            binding.identityTextView.setText(identity);
+            binding.tvShortName.setText(identity.substring(0, 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void init(Context context) {

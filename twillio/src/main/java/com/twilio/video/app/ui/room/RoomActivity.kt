@@ -396,12 +396,12 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
     override fun handleOpenShowParticipants() {
         if (!isFinishing) {
-          //  ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
-            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel,displayName!!)
+            //  ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
+            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel, displayName!!)
         }
     }
 
-     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MEDIA_PROJECTION_REQUEST_CODE) {
             if (resultCode != RESULT_OK) {
@@ -538,7 +538,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         binding.disconnect.visibility = disconnectButtonState
         setTitle(toolbarTitle)
         binding.tvHostName.text = StringHelper.getShortString(studentName)
-
 
     }
 
@@ -724,6 +723,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         if (!isConnected) return
         if (isUp) {
             slideDown(binding.videoControlLayout)
+            visibilty()
         } else {
             slideUp(binding.videoControlLayout)
         }
@@ -972,24 +972,13 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             }
         }
     }
-    fun visibilty(){
+
+    fun visibilty() {
         val someHandler = Handler(Looper.getMainLooper())
         someHandler.postDelayed(object : Runnable {
             override fun run() {
-                if (isUp){
-                    val animate = TranslateAnimation(
-                        0.toFloat(),  // fromXDelta
-                        0.toFloat(),  // toXDelta
-                        0.toFloat(),  // fromYDelta
-                        0.toFloat()
-                    ) // toYDelta
-                    animate.setDuration(500)
-                    animate.setFillAfter(true)
-                    binding.videoControlLayout.startAnimation(animate)
-                }
-                // binding.videoControlLayout.visibility = View.INVISIBLE
-
-                // slideDown(binding.videoControlLayout)
+               // binding.videoControlLayout.visibility = View.INVISIBLE
+                slideDown(binding.videoControlLayout)
                 //  binding.videoControlLayout.visibility = View.GONE
                 someHandler.postDelayed(this, 5000)
             }
