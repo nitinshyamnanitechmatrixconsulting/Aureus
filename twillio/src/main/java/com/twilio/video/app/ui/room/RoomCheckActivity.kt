@@ -376,7 +376,7 @@ class RoomCheckActivity : BaseActivity() , MeettingOptionHandler {
 
     override fun handleOpenShowParticipants() {
         if (!isFinishing)
-            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
+            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel,displayName!!)
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

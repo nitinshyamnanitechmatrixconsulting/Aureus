@@ -59,7 +59,8 @@ public class ParticipantBottomThumbView extends ParticipantView {
     @Override
     public void setIdentity(String identity) {
         binding.identityTextView.setText(identity);
-      //  binding.tvShortName.setText(ShortName.getShortString(identity));
+        String shorname=identity.charAt(0)+"";
+        binding.tvShortName.setText(shorname);
     }
 
     private void init(Context context) {

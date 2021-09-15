@@ -18,13 +18,15 @@ import com.twilio.video.app.ui.room.RoomViewEvent.PinParticipant
 import timber.log.Timber
 
 internal class BottomParticipantViewHolder(
-    private val thumb: ParticipantBottomThumbView
+    private val thumb: ParticipantBottomThumbView,
+    private val displayName: String
 
 ) :
     RecyclerView.ViewHolder(thumb) {
 
-     private val localParticipantIdentity = thumb.context.getString(R.string.you)
-  //  private val localParticipantIdentity = roomViewModel.name
+//    private val localParticipantIdentity = thumb.context.getString(R.string.you)
+    private val localParticipantIdentity = displayName
+    //  private val localParticipantIdentity = roomViewModel.name
 
     fun bind(participantViewState: ParticipantViewState, viewEventAction: (RoomViewEvent) -> Unit) {
         Timber.d("bind ParticipantViewHolder with data item: %s", participantViewState)

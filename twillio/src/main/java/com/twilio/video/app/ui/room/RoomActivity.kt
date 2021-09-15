@@ -395,11 +395,13 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     }
 
     override fun handleOpenShowParticipants() {
-        if (!isFinishing)
-            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
+        if (!isFinishing) {
+          //  ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
+            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel,displayName!!)
+        }
     }
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MEDIA_PROJECTION_REQUEST_CODE) {
             if (resultCode != RESULT_OK) {
@@ -806,27 +808,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 binding.switchCameraActionFab.visibility = View.VISIBLE
                 toggleAudioDevice(true)
                 isConnected = true
-                val someHandler = Handler(Looper.getMainLooper())
-                someHandler.postDelayed(object : Runnable {
-                    override fun run() {
-                        if (isUp){
-                            val animate = TranslateAnimation(
-                                0.toFloat(),  // fromXDelta
-                                0.toFloat(),  // toXDelta
-                                0.toFloat(),  // fromYDelta
-                                0.toFloat()
-                            ) // toYDelta
-                            animate.setDuration(500)
-                            animate.setFillAfter(true)
-                            binding.videoControlLayout.startAnimation(animate)
-                        }
-                           // binding.videoControlLayout.visibility = View.INVISIBLE
 
-                        // slideDown(binding.videoControlLayout)
-                        //  binding.videoControlLayout.visibility = View.GONE
-                        someHandler.postDelayed(this, 5000)
-                    }
-                }, 5000)
             }
             Disconnected -> {
                 binding.meetingOption.visibility = View.GONE
@@ -989,6 +971,29 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 startActivity(intent)
             }
         }
+    }
+    fun visibilty(){
+        val someHandler = Handler(Looper.getMainLooper())
+        someHandler.postDelayed(object : Runnable {
+            override fun run() {
+                if (isUp){
+                    val animate = TranslateAnimation(
+                        0.toFloat(),  // fromXDelta
+                        0.toFloat(),  // toXDelta
+                        0.toFloat(),  // fromYDelta
+                        0.toFloat()
+                    ) // toYDelta
+                    animate.setDuration(500)
+                    animate.setFillAfter(true)
+                    binding.videoControlLayout.startAnimation(animate)
+                }
+                // binding.videoControlLayout.visibility = View.INVISIBLE
+
+                // slideDown(binding.videoControlLayout)
+                //  binding.videoControlLayout.visibility = View.GONE
+                someHandler.postDelayed(this, 5000)
+            }
+        }, 5000)
     }
 
 

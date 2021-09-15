@@ -341,7 +341,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
     }
 
     override fun handleOpenShowParticipants() {
-        ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
+        ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel,displayName!!)
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
