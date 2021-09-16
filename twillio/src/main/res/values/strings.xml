@@ -190,6 +190,8 @@
     <string name="bottom_tab_join_lession">Join Lesson</string>
     <string name="deny">Deny</string>
     <string name="admit">Admit</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="aureus">Aureaus</string>
     <string name="acceptedFiles">Accepted</string>
     <string name="internal_server_error">Internal Server Error</string>

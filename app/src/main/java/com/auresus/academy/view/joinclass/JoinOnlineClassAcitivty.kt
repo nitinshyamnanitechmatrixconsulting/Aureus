@@ -1,7 +1,10 @@
 package com.auresus.academy.view.joinclass
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.ViewDataBinding
@@ -13,6 +16,7 @@ import com.auresus.academy.model.bean.responses.MeetingServiceResponse
 import com.auresus.academy.model.remote.ApiResponse
 import com.auresus.academy.view.base.BaseActivity
 import com.auresus.academy.view_model.DashboardViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.twilio.video.app.ui.room.RoomActivity
 import kotlinx.android.synthetic.main.fragment_join_lesson.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,7 +27,7 @@ class JoinOnlineClassAcitivty : BaseActivity() {
     private lateinit var binding: ActivityJoinOnlineSessionBinding
     private val dashboardViewModel: DashboardViewModel by viewModel()
 
-    var link :String? = ""
+    var link: String? = ""
 
     companion object {
         fun open(currActivity: BaseActivity) {
@@ -46,7 +50,7 @@ class JoinOnlineClassAcitivty : BaseActivity() {
             val uri = Uri.parse(deeplink.toString())
             val id = uri.getQueryParameter("room_name")
             val password = uri.getQueryParameter("password")
-           // link = (deeplink.toString().split("=")[1]).toString()
+            // link = (deeplink.toString().split("=")[1]).toString()
             binding.editTextBookingId.setText(id)
             binding.editTextonlineMeetingCode.setText(password)
 
@@ -112,6 +116,7 @@ class JoinOnlineClassAcitivty : BaseActivity() {
                     val uri = Uri.parse(it)
                     val roomName = uri.getQueryParameter("room_name")
                     roomName?.let {
+                        onSNACK(binding.rlMain)
                         RoomActivity.open(
                             this as BaseActivity,
                             roomName,
@@ -135,4 +140,18 @@ class JoinOnlineClassAcitivty : BaseActivity() {
         Toast.makeText(this, getString(R.string.something_went_wrong), Toast.LENGTH_LONG).show()
     }
 
+    fun onSNACK(view: View) {
+        //Snackbar(view)
+        val snackbar = Snackbar.make(
+            view, "Your request has been to the teacher",
+            Snackbar.LENGTH_LONG
+        )
+        val snackbarView = snackbar.view
+        snackbarView.setBackgroundColor(Color.GREEN)
+        val textView =
+            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.setTextColor(Color.WHITE)
+        textView.textSize = 28f
+        snackbar.show()
+    }
 }

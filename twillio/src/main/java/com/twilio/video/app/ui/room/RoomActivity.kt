@@ -135,13 +135,18 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 openDisconnectAllDialog()
             } else {
                 disconnectButtonClick()
-
             }
         }
         binding.localVideo.setOnClickListener { toggleLocalVideo() }
         binding.localAudio.setOnClickListener { toggleLocalAudio() }
         binding.buttonJoinOnlineStudio.setOnClickListener {
-            connect()
+            if (type.equals("3")) {
+                val sendJoinRoomRequest = MessageCommand.sendJoinRoomRequest(displayName!!)
+                roomViewModel.processInput(SendMessage(sendJoinRoomRequest))
+                connect()
+            } else {
+                connect()
+            }
         }
         binding.meetingOption.setOnClickListener { openMeetingOption() }
         binding.room.localAudio1.setOnClickListener { toggleLocalAudio() }
@@ -228,19 +233,20 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     private fun openDisconnectAllDialog() {
         iOSDialogBuilder(this@RoomActivity)
             .setTitle(getString(R.string.aureus))
-            .setSubtitle("Are you want to disconnect call ?")
+            .setSubtitle("Are you sure you want to disconnect all ?")
             .setBoldPositiveLabel(true)
             .setCancelable(true)
-            .setPositiveListener(getString(R.string.admit), object : iOSDialogClickListener {
+            .setPositiveListener(getString(R.string.yes), object : iOSDialogClickListener {
                 override fun onClick(dialog: iOSDialog) {
                     dialog.run {
-                        val admitMessage = MessageCommand.removeAll()
-                        roomViewModel.processInput(SendMessage(admitMessage))
+                        val removeAllMessage = MessageCommand.removeAll()
+                        roomViewModel.processInput(SendMessage(removeAllMessage))
                         dismiss()
+                        disconnectButtonClick()
                     }
                 }
             })
-            .setNegativeListener(getString(R.string.deny),
+            .setNegativeListener(getString(R.string.no),
                 object : iOSDialogClickListener {
                     override fun onClick(dialog: iOSDialog) {
                         dialog.run {
@@ -483,7 +489,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         roomID = intent.getStringExtra(INTENT_EXTRA_ROOM_ID) ?: ""
         studentName = intent.getStringExtra(INTENT_EXTRA_STUDENT_NAME) ?: ""
         roomCode = intent.getStringExtra(INTENT_EXTRA_ROOM_CODE) ?: ""
-        roomCode = intent.getStringExtra(TYPE) ?: ""
+        type = intent.getStringExtra(TYPE) ?: ""
         displayName = studentName
         roomViewModel.setIdentity(displayName)
         roomViewModel.roomName = roomName
@@ -593,7 +599,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                     splitMessage.let {
                         if (it.size > 1) {
                             val sender = it[1]
-                            openGuestAdmitDenyDialog(sender)
+                            if (type.equals(1))
+                                openGuestAdmitDenyDialog(sender)
                         }
                     }
                 }
@@ -1006,7 +1013,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 intent.putExtra(INTENT_EXTRA_STUDENT_NAME, studentName)
                 intent.putExtra(INTENT_EXTRA_ROOM_CODE, meetingCodeLocal)
                 intent.putExtra(TYPE, type)
-
                 startActivity(intent)
             }
         }
