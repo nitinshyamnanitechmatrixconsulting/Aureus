@@ -2,7 +2,6 @@ package com.auresus.academy.view.joinclass
 
 import android.content.Intent
 import android.net.Uri
-import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.ViewDataBinding
@@ -107,6 +106,7 @@ class JoinOnlineClassAcitivty : BaseActivity() {
             val name = binding.editTextName.text.toString()
             val meetingCodeLocal = binding.editTextonlineMeetingCode.text.toString()
             val meetingCodeRemote = it.Online_Lesson_Passcode__c
+            val type = "3"
             if (meetingCodeLocal == meetingCodeRemote) {
                 it.Online_Lesson_URL__c?.let {
                     val uri = Uri.parse(it)
@@ -117,7 +117,8 @@ class JoinOnlineClassAcitivty : BaseActivity() {
                             roomName,
                             rooomId,
                             name,
-                            meetingCodeLocal
+                            meetingCodeLocal,
+                            type
                         )
                     }
                 }

@@ -43,7 +43,6 @@ import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.lifecycle.*
@@ -92,6 +91,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     private var participantCount: Int = 0
     private var isUp: Boolean = false
     private var roomID: String = ""
+    private var type: String = ""
     private var roomCode: String = ""
     private lateinit var participantAdapter: ParticipantAdapter
     private var bottomDialog: BottomDialog? = null
@@ -131,22 +131,12 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         binding = RoomActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.disconnect.setOnClickListener {
-            disconnectButtonClick()
-            try {
-                val myIntent = Intent(
-                    this,
-                    Class.forName("com.auresus.academy.view.feedback.FeedbackActivity")
-                )
-                myIntent.putExtra("roomName", roomName)
-                myIntent.putExtra("roomId", roomID)
-                myIntent.putExtra("studentName", studentName)
-                myIntent.putExtra("meetingCodeLocal", roomCode)
-                startActivity(myIntent)
-                finish()
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
-            }
+            if (type.equals("1")) {
+                openDisconnectAllDialog()
+            } else {
+                disconnectButtonClick()
 
+            }
         }
         binding.localVideo.setOnClickListener { toggleLocalVideo() }
         binding.localAudio.setOnClickListener { toggleLocalAudio() }
@@ -228,6 +218,34 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         dialog.run {
                             val denyMessage = MessageCommand.sendDenyJoinRoom()
                             roomViewModel.processInput(SendMessage(denyMessage))
+                            dismiss()
+                        }
+                    }
+                })
+            .build().show()
+    }
+
+    private fun openDisconnectAllDialog() {
+        iOSDialogBuilder(this@RoomActivity)
+            .setTitle(getString(R.string.aureus))
+            .setSubtitle("Are you want to disconnect call ?")
+            .setBoldPositiveLabel(true)
+            .setCancelable(true)
+            .setPositiveListener(getString(R.string.admit), object : iOSDialogClickListener {
+                override fun onClick(dialog: iOSDialog) {
+                    dialog.run {
+                        val admitMessage = MessageCommand.removeAll()
+                        roomViewModel.processInput(SendMessage(admitMessage))
+                        dismiss()
+                    }
+                }
+            })
+            .setNegativeListener(getString(R.string.deny),
+                object : iOSDialogClickListener {
+                    override fun onClick(dialog: iOSDialog) {
+                        dialog.run {
+                            // val denyMessage = MessageCommand.sendDenyJoinRoom()
+                            // roomViewModel.processInput(SendMessage(denyMessage))
                             dismiss()
                         }
                     }
@@ -465,11 +483,13 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         roomID = intent.getStringExtra(INTENT_EXTRA_ROOM_ID) ?: ""
         studentName = intent.getStringExtra(INTENT_EXTRA_STUDENT_NAME) ?: ""
         roomCode = intent.getStringExtra(INTENT_EXTRA_ROOM_CODE) ?: ""
+        roomCode = intent.getStringExtra(TYPE) ?: ""
         displayName = studentName
         roomViewModel.setIdentity(displayName)
         roomViewModel.roomName = roomName
         roomViewModel.roomId = roomID
         roomViewModel.roomCode = roomCode
+        roomViewModel.type = type
         roomViewModel.name = displayName
         return true
     }
@@ -477,6 +497,22 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
     private fun disconnectButtonClick() {
         roomViewModel.processInput(Disconnect)
+        try {
+            val myIntent = Intent(
+                this,
+                Class.forName("com.auresus.academy.view.feedback.FeedbackActivity")
+            )
+            myIntent.putExtra("roomName", roomName)
+            myIntent.putExtra("roomId", roomID)
+            myIntent.putExtra("studentName", studentName)
+            myIntent.putExtra("meetingCodeLocal", roomCode)
+            myIntent.putExtra("type", type)
+            startActivity(myIntent)
+            finish()
+        } catch (e: ClassNotFoundException) {
+            e.printStackTrace()
+        }
+
         // TODO Handle screen share
     }
 
@@ -944,6 +980,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         private const val INTENT_EXTRA_ROOM_ID = "intent_room_id"
         private const val INTENT_EXTRA_STUDENT_NAME = "intent_student_name"
         private const val INTENT_EXTRA_ROOM_CODE = "intent_room_code"
+        private const val TYPE = "type"
         private const val USER_TYPE_STUDENT = 1
         private const val USER_TYPE_TEACHER = 2
         private const val LOCAL_PARTICIPANT_STUB_SID = ""
@@ -959,7 +996,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             roomName: String?,
             roomId: String?,
             studentName: String?,
-            meetingCodeLocal: String?
+            meetingCodeLocal: String?,
+            type: String
         ) {
             currActivity.run {
                 val intent = Intent(this, RoomActivity::class.java)
@@ -967,6 +1005,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 intent.putExtra(INTENT_EXTRA_ROOM_ID, roomId)
                 intent.putExtra(INTENT_EXTRA_STUDENT_NAME, studentName)
                 intent.putExtra(INTENT_EXTRA_ROOM_CODE, meetingCodeLocal)
+                intent.putExtra(TYPE, type)
 
                 startActivity(intent)
             }
@@ -977,8 +1016,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         val someHandler = Handler(Looper.getMainLooper())
         someHandler.postDelayed(object : Runnable {
             override fun run() {
-               // binding.videoControlLayout.visibility = View.INVISIBLE
-                slideDown(binding.videoControlLayout)
+                binding.videoControlLayout.visibility = View.INVISIBLE
+                // slideDown(binding.videoControlLayout)
                 //  binding.videoControlLayout.visibility = View.GONE
                 someHandler.postDelayed(this, 5000)
             }

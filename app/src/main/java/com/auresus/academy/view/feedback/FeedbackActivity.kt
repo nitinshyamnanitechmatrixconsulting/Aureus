@@ -34,6 +34,7 @@ class FeedbackActivity : BaseActivity() {
     private var roomName: String = ""
     private var studentName: String = ""
     private var rating: String = ""
+    private var type: String = ""
     private val feedbackViewModel: FeedbackViewModel by viewModel()
     var context: Context? = null
 
@@ -49,6 +50,7 @@ class FeedbackActivity : BaseActivity() {
             roomID = intent.getStringExtra("roomId").toString()
             studentName = intent.getStringExtra("studentName").toString()
             roomCode = intent.getStringExtra("meetingCodeLocal").toString()
+            type = intent.getStringExtra("meetingCodeLocal").toString()
         }
         initClickListener()
     }
@@ -168,7 +170,8 @@ class FeedbackActivity : BaseActivity() {
                     roomName,
                     roomID,
                     studentName,
-                    roomCode
+                    roomCode,
+                    type
                 )
             } else {
                 RoomActivity.open(
@@ -176,7 +179,8 @@ class FeedbackActivity : BaseActivity() {
                     roomName,
                     roomID,
                     studentName,
-                    roomCode
+                    roomCode,
+                    type
                 )
                 if (preferenceHelper != null) {
                     if (preferenceHelper.getUserType() == 1) {

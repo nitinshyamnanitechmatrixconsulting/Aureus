@@ -70,6 +70,7 @@ class StudentOnlineLessonDetailsFragment : BaseFragment() {
                     val roomName = uri.getQueryParameter("room_name")
                     val room_id = booking.bookingId
                     val room_code = booking.lessonPasscode
+                    val type="2"
                     roomName?.let {
                        /* startActivity(Intent(
                             context,VideoActivity::class.java
@@ -79,7 +80,8 @@ class StudentOnlineLessonDetailsFragment : BaseFragment() {
                            roomName,
                            room_id,
                            studentName,
-                           room_code
+                           room_code,
+                           type
                        )
                     }
                 }

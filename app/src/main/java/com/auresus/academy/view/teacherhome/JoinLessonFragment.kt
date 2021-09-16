@@ -94,12 +94,20 @@ class JoinLessonFragment : BaseFragment() {
             val name = homeBinding.editTextName.text.toString()
             val meetingCodeLocal = homeBinding.editTextOnlineMarketingCode.text.toString()
             val meetingCodeRemote = it.Online_Lesson_Passcode__c
+            val type = "3"
             if (meetingCodeLocal == meetingCodeRemote) {
                 it.Online_Lesson_URL__c?.let {
                     val uri = Uri.parse(it)
                     val roomName = uri.getQueryParameter("room_name")
                     roomName?.let {
-                        RoomActivity.open(activity as BaseActivity ,roomName ,rooomId,name,meetingCodeLocal)
+                        RoomActivity.open(
+                            activity as BaseActivity,
+                            roomName,
+                            rooomId,
+                            name,
+                            meetingCodeLocal,
+                            type
+                        )
                     }
                 }
             } else {

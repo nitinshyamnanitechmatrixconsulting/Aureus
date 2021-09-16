@@ -75,13 +75,15 @@ class OnlineLessonDetailsFragment : BaseFragment() {
                     val roomName = uri.getQueryParameter("room_name")
                     val room_id = booking.Id
                     val room_code = booking.Online_Lesson_Passcode__c
+                    val type = "1"
                     roomName?.let {
                        RoomActivity.open(
                            activity as BaseActivity,
                            roomName,
                            room_id,
                            studentName,
-                           room_code
+                           room_code,
+                           type
                        )
                     }
                 }
