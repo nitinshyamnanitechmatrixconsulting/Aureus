@@ -19,12 +19,13 @@ import timber.log.Timber
 
 internal class BottomParticipantViewHolder(
     private val thumb: ParticipantBottomThumbView,
-    private val displayName: String
+    private val displayName: String,
+    private val roomViewModel: RoomViewModel
 
 ) :
     RecyclerView.ViewHolder(thumb) {
 
-//    private val localParticipantIdentity = thumb.context.getString(R.string.you)
+    //    private val localParticipantIdentity = thumb.context.getString(R.string.you)
     private val localParticipantIdentity = displayName
     //  private val localParticipantIdentity = roomViewModel.name
 
@@ -38,6 +39,8 @@ internal class BottomParticipantViewHolder(
                     viewEventAction(PinParticipant(sid))
                 }
             }
+
+
             val identity = if (participantViewState.isLocalParticipant)
                 localParticipantIdentity else participantViewState.identity
             setIdentity(identity)
@@ -49,7 +52,17 @@ internal class BottomParticipantViewHolder(
             networkQualityLevelImg?.let {
                 setNetworkQualityLevelImage(it, participantViewState.networkQualityLevel)
             }
+
+            thumb.findViewById<ImageView>(R.id.mute).setOnClickListener { toggleLocalAudio() }
+            thumb.findViewById<ImageView>(R.id.remove).setOnClickListener {
+                val removeParticipantMessage = MessageCommand.removeParticipant(identity!!)
+                roomViewModel.processInput(RoomViewEvent.SendMessage(removeParticipantMessage))
+            }
         }
+    }
+
+    private fun toggleLocalAudio() {
+        roomViewModel.processInput(RoomViewEvent.ToggleLocalAudio)
     }
 
     private fun updateVideoTrack(participantViewState: ParticipantViewState) {

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.twilio.video.app.participant.ParticipantViewState
 
-internal class ParticipantListAdapter(displayName: String) :
+internal class ParticipantListAdapter(displayName: String,var roomViewModel: RoomViewModel) :
     ListAdapter<ParticipantViewState, BottomParticipantViewHolder>(
         ParticipantDiffCallback()
     ) {
@@ -16,8 +16,9 @@ internal class ParticipantListAdapter(displayName: String) :
     val viewHolderEvents: LiveData<RoomViewEvent> = mutableViewHolderEvents
     private var displayName: String? = displayName
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BottomParticipantViewHolder =BottomParticipantViewHolder(
-        ParticipantBottomThumbView(parent.context),displayName!!
+        ParticipantBottomThumbView(parent.context),displayName!!,roomViewModel
     )
 
 

@@ -13,7 +13,6 @@ import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
 import com.twilio.video.app.R
 import com.twilio.video.app.databinding.FragmentParticipantListBinding
 import com.twilio.video.app.ui.room.*
-import com.twilio.video.app.ui.room.ParticipantAdapter
 
 class ParticipantBottomSheetFragment(val activity: Activity, val roomViewModel: RoomViewModel, val displayName: String) : SuperBottomSheetFragment() {
 
@@ -37,7 +36,7 @@ class ParticipantBottomSheetFragment(val activity: Activity, val roomViewModel: 
         binding.participantList.layoutManager = layoutManager
         binding.toolbar.toolbarTitle.setText(getString(R.string.participant))
         binding.toolbar.backButton.setOnClickListener { dismiss() }
-        participantAdapter = ParticipantListAdapter(displayName)
+        participantAdapter = ParticipantListAdapter(displayName,roomViewModel)
         participantAdapter?.viewHolderEvents?.observe(
                 this, { viewEvent: RoomViewEvent -> roomViewModel.processInput(viewEvent) })
         binding.participantList.adapter = participantAdapter
