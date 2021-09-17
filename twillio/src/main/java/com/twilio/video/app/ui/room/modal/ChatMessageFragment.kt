@@ -77,6 +77,7 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
                 addMessages(it as ArrayList<ChatMessage?>);
             }
         })
+
         roomViewModel.getMessageLiveData().observe(viewLifecycleOwner, Observer {
             addMessage(it)
         })
@@ -90,7 +91,6 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
             // Do some work here
         })
         binding.toolbarJoinLesson.backButton.setOnClickListener(View.OnClickListener { view ->
-
             getActivity()?.onBackPressed()
             // Do some work here
         })
