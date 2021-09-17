@@ -43,18 +43,20 @@ internal class BottomParticipantViewHolder(
             }
 
             swipeLayout = thumb.findViewById(R.id.swipe)
-            swipeLayout!!.isClickable = true
+
+            swipeLayout!!.isClickable = false
 
             if (participantViewState.isLocalParticipant) {
                 swipeLayout!!.isSwipeEnabled = false
             }
-            if (roomViewModel.type.equals("2")) {
+
+            if (roomViewModel.type.equals("2") || roomViewModel.type.equals("3")) {
                 swipeLayout!!.isSwipeEnabled = false
             }
 
-            if (roomViewModel.type.equals("3")) {
+           /* if (roomViewModel.type.equals("3")) {
                 swipeLayout!!.isSwipeEnabled = false
-            }
+            }*/
 
             if (roomViewModel.type.equals("1")) {
                 thumb.findViewById<ImageView>(R.id.mute).setOnClickListener { toggleLocalAudio() }
@@ -65,7 +67,8 @@ internal class BottomParticipantViewHolder(
             }
 
             val identity = if (participantViewState.isLocalParticipant)
-                localParticipantIdentity else participantViewState.identity
+                roomViewModel.name else participantViewState.identity
+
             setIdentity(identity)
             setMuted(participantViewState.isMuted)
             setPinned(participantViewState.isPinned)
