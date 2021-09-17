@@ -316,20 +316,19 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@id/lessonChangesRl"
                     android:layout_below="@id/studentEnrollInfo"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:background="@color/color_F4F5F6">
 
                 <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tabIndicatorColor="@color/colorAccent"
-                        app:tabTextAppearance="@style/lessonDetailTabTextAppearance"
-                        app:tabTextColor="@color/black_text" />
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabTextAppearance="@style/lessonDetailTabTextAppearance"
+                    app:tabTextColor="@color/black_text" />
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewPager"
@@ -457,20 +456,20 @@
 
 
                 <Button
-                        android:id="@+id/contactUsBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_25sdp"
-                        android:background="@color/white"
-                        android:fontFamily="@font/lato_regular"
-                        android:text="Contact Us"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorff4e4e56"
-                        android:textSize="@dimen/text_16" />
+                    android:id="@+id/contactUsBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Contact Us"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorff4e4e56"
+                    android:textSize="@dimen/text_16" />
 
                 <Button
                         android:id="@+id/convetOnline"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_below="@+id/contactUsBtn"
                         android:background="@color/md_blue_400"
                         android:fontFamily="@font/lato_regular"
@@ -488,7 +487,7 @@
                     <Button
                             android:id="@+id/cancelSession"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_25sdp"
+                            android:layout_height="@dimen/_30sdp"
                             android:layout_weight="0.5"
                             android:background="@color/md_red_800"
                             android:fontFamily="@font/lato_regular"
@@ -500,7 +499,7 @@
                     <Button
                             android:id="@+id/reschdeuleSession"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_25sdp"
+                            android:layout_height="@dimen/_30sdp"
                             android:layout_weight="0.5"
                             android:background="@color/md_yellow_700"
                             android:fontFamily="@font/lato_regular"

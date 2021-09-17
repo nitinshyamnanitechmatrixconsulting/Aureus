@@ -3,6 +3,7 @@ package com.twilio.video.app.ui.room
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.daimajia.swipe.SwipeLayout
 import com.twilio.video.NetworkQualityLevel
 import com.twilio.video.NetworkQualityLevel.NETWORK_QUALITY_LEVEL_FIVE
 import com.twilio.video.NetworkQualityLevel.NETWORK_QUALITY_LEVEL_FOUR
@@ -21,13 +22,14 @@ internal class BottomParticipantViewHolder(
     private val thumb: ParticipantBottomThumbView,
     private val displayName: String,
     private val roomViewModel: RoomViewModel
-
 ) :
     RecyclerView.ViewHolder(thumb) {
 
     //    private val localParticipantIdentity = thumb.context.getString(R.string.you)
     private val localParticipantIdentity = displayName
     //  private val localParticipantIdentity = roomViewModel.name
+
+    var swipeLayout: SwipeLayout? = null
 
     fun bind(participantViewState: ParticipantViewState, viewEventAction: (RoomViewEvent) -> Unit) {
         Timber.d("bind ParticipantViewHolder with data item: %s", participantViewState)
@@ -40,6 +42,27 @@ internal class BottomParticipantViewHolder(
                 }
             }
 
+            swipeLayout = thumb.findViewById(R.id.swipe)
+            swipeLayout!!.isClickable = true
+
+            if (participantViewState.isLocalParticipant) {
+                swipeLayout!!.isSwipeEnabled = false
+            }
+            if (roomViewModel.type.equals("2")) {
+                swipeLayout!!.isSwipeEnabled = false
+            }
+
+            if (roomViewModel.type.equals("3")) {
+                swipeLayout!!.isSwipeEnabled = false
+            }
+
+            if (roomViewModel.type.equals("1")) {
+                thumb.findViewById<ImageView>(R.id.mute).setOnClickListener { toggleLocalAudio() }
+                thumb.findViewById<ImageView>(R.id.remove).setOnClickListener {
+                    val removeParticipantMessage = MessageCommand.removeParticipant(identity!!)
+                    roomViewModel.processInput(RoomViewEvent.SendMessage(removeParticipantMessage))
+                }
+            }
 
             val identity = if (participantViewState.isLocalParticipant)
                 localParticipantIdentity else participantViewState.identity
@@ -53,11 +76,7 @@ internal class BottomParticipantViewHolder(
                 setNetworkQualityLevelImage(it, participantViewState.networkQualityLevel)
             }
 
-            thumb.findViewById<ImageView>(R.id.mute).setOnClickListener { toggleLocalAudio() }
-            thumb.findViewById<ImageView>(R.id.remove).setOnClickListener {
-                val removeParticipantMessage = MessageCommand.removeParticipant(identity!!)
-                roomViewModel.processInput(RoomViewEvent.SendMessage(removeParticipantMessage))
-            }
+
         }
     }
 
@@ -113,4 +132,6 @@ internal class BottomParticipantViewHolder(
             networkQualityImage.setImageResource(image)
         } ?: run { networkQualityImage.visibility = View.GONE }
     }
+
+
 }
