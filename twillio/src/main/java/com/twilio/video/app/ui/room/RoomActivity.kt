@@ -766,9 +766,9 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         if (!isConnected) return
         if (isUp) {
             slideDown(binding.videoControlLayout)
-            visibilty()
         } else {
             slideUp(binding.videoControlLayout)
+            visibilty()
         }
         isUp = !isUp
     }
@@ -846,7 +846,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 binding.connectProgress.visibility = View.GONE
                 binding.actionLayout.visibility = View.GONE
                 binding.room.llBottom.visibility = View.GONE
-                binding.videoControlLayout.visibility = View.INVISIBLE
+               // binding.videoControlLayout.visibility = View.INVISIBLE
                 binding.banner.visibility = View.GONE
                 binding.switchCameraActionFab.visibility = View.VISIBLE
                 toggleAudioDevice(true)
@@ -1022,7 +1022,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         val someHandler = Handler(Looper.getMainLooper())
         someHandler.postDelayed(object : Runnable {
             override fun run() {
-                binding.videoControlLayout.visibility = View.INVISIBLE
+                binding.videoControlLayout.visibility = View.GONE
                 // slideDown(binding.videoControlLayout)
                 //  binding.videoControlLayout.visibility = View.GONE
                 someHandler.postDelayed(this, 5000)

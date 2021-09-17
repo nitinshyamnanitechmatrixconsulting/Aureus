@@ -54,12 +54,16 @@ internal class BottomParticipantViewHolder(
                 swipeLayout!!.isSwipeEnabled = false
             }
 
-           /* if (roomViewModel.type.equals("3")) {
-                swipeLayout!!.isSwipeEnabled = false
-            }*/
+            /* if (roomViewModel.type.equals("3")) {
+                 swipeLayout!!.isSwipeEnabled = false
+             }*/
 
             if (roomViewModel.type.equals("1")) {
-                thumb.findViewById<ImageView>(R.id.mute).setOnClickListener { toggleLocalAudio() }
+                thumb.findViewById<ImageView>(R.id.mute).setOnClickListener {
+                    val muteParticipantMessage = MessageCommand.muteParticipantRequest(identity!!)
+                    roomViewModel.processInput(RoomViewEvent.SendMessage(muteParticipantMessage))
+                    // toggleLocalAudio()
+                }
                 thumb.findViewById<ImageView>(R.id.remove).setOnClickListener {
                     val removeParticipantMessage = MessageCommand.removeParticipant(identity!!)
                     roomViewModel.processInput(RoomViewEvent.SendMessage(removeParticipantMessage))
