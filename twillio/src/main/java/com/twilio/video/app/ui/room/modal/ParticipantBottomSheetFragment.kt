@@ -14,7 +14,7 @@ import com.twilio.video.app.R
 import com.twilio.video.app.databinding.FragmentParticipantListBinding
 import com.twilio.video.app.ui.room.*
 
-class ParticipantBottomSheetFragment(val activity: Activity, val roomViewModel: RoomViewModel, val displayName: String) : SuperBottomSheetFragment() {
+class ParticipantBottomSheetFragment(val activity: Activity, val roomViewModel: RoomViewModel) : SuperBottomSheetFragment() {
 
     private var participantAdapter: ParticipantListAdapter? = null
     private lateinit var binding: FragmentParticipantListBinding
@@ -23,9 +23,9 @@ class ParticipantBottomSheetFragment(val activity: Activity, val roomViewModel: 
         private var instance: ParticipantBottomSheetFragment? = null
         const val TAG ="ParticipantBottomSheetFragment"
         @JvmStatic
-        fun openParticipantList(activity: FragmentActivity,roomViewModel: RoomViewModel,displayName:String) {
+        fun openParticipantList(activity: FragmentActivity,roomViewModel: RoomViewModel) {
             if (instance == null) {
-                instance = ParticipantBottomSheetFragment(activity, roomViewModel,displayName)
+                instance = ParticipantBottomSheetFragment(activity, roomViewModel)
             }
             instance?.show(activity.supportFragmentManager, TAG )
         }
@@ -36,7 +36,7 @@ class ParticipantBottomSheetFragment(val activity: Activity, val roomViewModel: 
         binding.participantList.layoutManager = layoutManager
         binding.toolbar.toolbarTitle.setText(getString(R.string.participant))
         binding.toolbar.backButton.setOnClickListener { dismiss() }
-        participantAdapter = ParticipantListAdapter(displayName,roomViewModel)
+        participantAdapter = ParticipantListAdapter(roomViewModel)
         participantAdapter?.viewHolderEvents?.observe(
                 this, { viewEvent: RoomViewEvent -> roomViewModel.processInput(viewEvent) })
         binding.participantList.adapter = participantAdapter

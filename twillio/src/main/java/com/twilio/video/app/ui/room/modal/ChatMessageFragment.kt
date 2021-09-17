@@ -1,9 +1,12 @@
 package com.twilio.video.app.ui.room.modal
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,17 +18,25 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.intentservice.chatui.models.ChatMessage
 import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
+import com.twilio.audioswitch.AudioSwitch
 import com.twilio.video.app.R
 import com.twilio.video.app.databinding.FragmentParticipantListBinding
 import com.twilio.video.app.databinding.LayoutChatUiBinding
 import com.twilio.video.app.databinding.LayoutMeetingOptionBinding
+import com.twilio.video.app.participant.ParticipantViewState
+import com.twilio.video.app.sdk.RoomManager
 import com.twilio.video.app.ui.room.*
 import com.twilio.video.app.ui.room.ParticipantAdapter
+import com.twilio.video.app.util.ChatUtils
+import com.twilio.video.app.util.PermissionUtil
 import java.util.ArrayList
+import javax.inject.Inject
+
 
 class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewModel) : Fragment() {
 
     private lateinit var binding: LayoutChatUiBinding
+
 
     companion object {
         private val TAG: String = "ChatMessageFragment"
@@ -66,6 +77,10 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
                 addMessages(it as ArrayList<ChatMessage?>);
             }
         })
+        roomViewModel.getMessageLiveData().observe(viewLifecycleOwner, Observer {
+            addMessage(it)
+        })
+
 
         binding.rlSend.setOnClickListener(View.OnClickListener { view ->
 
@@ -84,6 +99,28 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
             binding.chatView.inputEditText.setText("")
             false
         }
+
+
+
+        binding.etMessage.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s!!.isNotEmpty()) {
+                    val identity = roomViewModel.getIdentity()
+                    val formattedMessage = MessageCommand.typingMessage(identity!!)
+                    roomViewModel.processInput(RoomViewEvent.SendMessage(formattedMessage))
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+
     }
 
     private fun sendChatMessage(message: String?) {
@@ -104,7 +141,7 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
     }
 
     fun addMessages(messages: ArrayList<ChatMessage?>?) {
-        val adapter = ChatAdapter(context,messages);
+        val adapter = ChatAdapter(context, messages);
 
         // Setting the Adapter with the recyclerview
         binding.rvList.adapter = adapter
@@ -113,4 +150,26 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
         )
 
     }
+
+    @SuppressLint("SetTextI18n")
+    private fun addMessage(message: String?) {
+        if (!message.isNullOrEmpty()) {
+            val messageType = ChatUtils.getMessageType(message)
+            when (messageType) {
+                ChatUtils.MessageType.TYPING -> {
+                    val splitMessage = message.split("_\$\$")
+                    splitMessage.let {
+                        if (it.size > 1) {
+                            val sender = it[1]
+                            if (sender.equals(roomViewModel.name, ignoreCase = true)) {
+                                binding.tvTyping.visibility = View.VISIBLE
+                                binding.tvTyping.text = sender + "is Typing..."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

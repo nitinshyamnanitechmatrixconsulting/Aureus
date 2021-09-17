@@ -421,7 +421,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     override fun handleOpenShowParticipants() {
         if (!isFinishing) {
             //  ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
-            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel, displayName!!)
+            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
         }
     }
 

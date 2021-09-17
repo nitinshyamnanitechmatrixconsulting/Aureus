@@ -20,14 +20,13 @@ import timber.log.Timber
 
 internal class BottomParticipantViewHolder(
     private val thumb: ParticipantBottomThumbView,
-    private val displayName: String,
     private val roomViewModel: RoomViewModel
 ) :
     RecyclerView.ViewHolder(thumb) {
 
     //    private val localParticipantIdentity = thumb.context.getString(R.string.you)
-    private val localParticipantIdentity = displayName
-    //  private val localParticipantIdentity = roomViewModel.name
+
+    //   private val localParticipantIdentity = roomViewModel.name
 
     var swipeLayout: SwipeLayout? = null
 

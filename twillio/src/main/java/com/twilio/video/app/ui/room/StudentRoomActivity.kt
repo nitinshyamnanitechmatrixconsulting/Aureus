@@ -79,7 +79,7 @@ import javax.inject.Inject
 @Suppress("DEPRECATION")
 class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
 
-    private var participantCount: Int=0
+    private var participantCount: Int = 0
     private var isUp: Boolean = false
     private var roomID: String = ""
     private lateinit var participantAdapter: ParticipantAdapter
@@ -95,6 +95,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
     private var currentUserType = USER_TYPE_TEACHER
     private val mutableViewHolderEvents = MutableLiveData<RoomViewEvent>()
     val viewHolderEvents: LiveData<RoomViewEvent> = mutableViewHolderEvents
+
     @Inject
     lateinit var tokenService: TokenService
 
@@ -315,11 +316,11 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
     }
 
     override fun handleShowInfo() {
-       LessionInfoSheetFragment.open(this, this, roomViewModel)
+        LessionInfoSheetFragment.open(this, this, roomViewModel)
     }
 
     override fun handleOpenFiles() {
-       val instance = LessonAddFileFragment.newInstance(roomName, roomID, roomViewModel)
+        val instance = LessonAddFileFragment.newInstance(roomName, roomID, roomViewModel)
         supportFragmentManager.commit {
             setCustomAnimations(
                 R.anim.slide_in_up,
@@ -332,7 +333,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
         }
     }
 
-     private fun openPreConnectScreen() {
+    private fun openPreConnectScreen() {
         val instance = StudentPreConnectFragment.newInstance(roomName, roomID, roomViewModel)
         supportFragmentManager.commit {
             replace(R.id.container, instance, StudentPreConnectFragment.TAG)
@@ -341,7 +342,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
     }
 
     override fun handleOpenShowParticipants() {
-        ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel,displayName!!)
+        ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -364,7 +365,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
 
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
-        if (count >=1) {
+        if (count >= 1) {
             supportFragmentManager.popBackStack()
         } else {
             super.onBackPressed()
@@ -457,7 +458,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
 
     }
 
-    private fun removePreconnect(){
+    private fun removePreconnect() {
         val fragment = supportFragmentManager.findFragmentByTag(StudentPreConnectFragment.TAG)
         fragment?.let {
             binding.approvingProgress.visibility = View.VISIBLE
@@ -476,7 +477,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
     private fun addMessage(message: String?) {
         if (!message.isNullOrEmpty()) {
             val messageType = ChatUtils.getMessageType(message)
-            when(messageType){
+            when (messageType) {
                 ChatUtils.MessageType.JOIN_ROOM_ACCEPTED -> {
                     isRequestApproved = true
                     removePreconnect()
@@ -522,7 +523,8 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
     @TargetApi(21)
     private fun requestScreenCapturePermission() {
         Timber.d("Requesting permission to capture screen")
-        val mediaProjectionManager = getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+        val mediaProjectionManager =
+            getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
         startActivityForResult(
             mediaProjectionManager.createScreenCaptureIntent(),
             MEDIA_PROJECTION_REQUEST_CODE
@@ -543,7 +545,8 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
     }
 
     private fun updateParticipantList(roomViewState: RoomViewState) {
-        val fragment = supportFragmentManager.findFragmentByTag(ParticipantBottomSheetFragment.TAG) as? ParticipantBottomSheetFragment
+        val fragment =
+            supportFragmentManager.findFragmentByTag(ParticipantBottomSheetFragment.TAG) as? ParticipantBottomSheetFragment
         fragment?.renderThumbnails(roomViewState)
         renderPrimaryView(roomViewState.primaryParticipant)
         val newThumbnails = if (roomViewState.configuration is RoomViewConfiguration.Connected)
@@ -552,7 +555,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
         sendRequestToJoin()
         when (currentLayoutMode) {
             SPLIT -> {
-                binding.room.participantThumbView.visibility= View.GONE
+                binding.room.participantThumbView.visibility = View.GONE
                 if (participantCount > 1) {
                     binding.room.participantThumbView.visibility = View.VISIBLE
                     val topTwoPartcipantList = newThumbnails?.subList(0, 2)
@@ -563,7 +566,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
                 }
             }
             DEFAULT -> {
-                binding.room.participantThumbView.visibility= View.VISIBLE
+                binding.room.participantThumbView.visibility = View.VISIBLE
                 renderPrimaryView(roomViewState.primaryParticipant)
                 renderThumbnails(roomViewState)
             }
@@ -579,8 +582,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
                     lastSendRequestTime = System.currentTimeMillis()
                     binding.connectProgress.visibility = View.VISIBLE
                 }
-            }
-            else{
+            } else {
                 binding.connectProgress.visibility = View.VISIBLE
             }
         }
@@ -722,14 +724,14 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
             roomViewState.participantThumbnails else null
         val participantCount = roomViewState.participantThumbnails?.size ?: 0
         if (participantCount > 1) {
-            binding.room.participantThumbView.visibility = if (currentLayoutMode == DEFAULT) View.VISIBLE else View.GONE
+            binding.room.participantThumbView.visibility =
+                if (currentLayoutMode == DEFAULT) View.VISIBLE else View.GONE
             val topTwoPartcipantList = newThumbnails?.subList(0, 2)
             val participantView = topTwoPartcipantList?.get(0)
             participantView?.let {
                 bind(it) { mutableViewHolderEvents.value = it }
             }
-        }
-        else{
+        } else {
             binding.room.participantThumbView.visibility = View.GONE
         }
     }
@@ -826,7 +828,11 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
                 for (a in audioDevices) {
                     audioDeviceNames.add(a.name)
                 }
-                createAudioDeviceDialog(this, index, audioDeviceNames) { dialogInterface: DialogInterface, i: Int ->
+                createAudioDeviceDialog(
+                    this,
+                    index,
+                    audioDeviceNames
+                ) { dialogInterface: DialogInterface, i: Int ->
                     dialogInterface.dismiss()
                     val viewEvent = SelectAudioDevice(audioDevices[i])
                     roomViewModel.processInput(viewEvent)
@@ -852,7 +858,8 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
     }
 
     private fun handleTokenError(error: AuthServiceError?) {
-        val errorMessage = if (error === AuthServiceError.EXPIRED_PASSCODE_ERROR) R.string.room_screen_token_expired_message else R.string.room_screen_token_retrieval_failure_message
+        val errorMessage =
+            if (error === AuthServiceError.EXPIRED_PASSCODE_ERROR) R.string.room_screen_token_expired_message else R.string.room_screen_token_retrieval_failure_message
         AlertDialog.Builder(this, R.style.AppTheme_Dialog)
             .setTitle(getString(R.string.room_screen_connection_failure_title))
             .setMessage(getString(errorMessage))

@@ -7,8 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:paddingTop="@dimen/margin_20"
-        >
+        android:paddingTop="@dimen/margin_20">
 
         <co.intentservice.chatui.ChatView
             android:id="@+id/chat_view"
@@ -31,12 +30,21 @@
                 android:id="@+id/rv_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/ll_bottom"
+                android:layout_above="@+id/tvTyping"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/layout_chat_row" />
+
+            <TextView
+                android:text="Typing"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/margin_15"
+                android:layout_above="@+id/ll_bottom"
+                android:id="@+id/tvTyping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:id="@+id/ll_bottom"
@@ -57,12 +65,12 @@
                     android:layout_weight="8"
                     android:backgroundTint="@color/white"
                     android:hint="@string/typemessage"
+                    android:importantForAutofill="no"
                     android:maxLines="1"
-                    android:textColorHint="@color/lobbyColorAccent"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:importantForAutofill="no" />
+                    android:textColorHint="@color/lobbyColorAccent"
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:id="@+id/rlSend"
