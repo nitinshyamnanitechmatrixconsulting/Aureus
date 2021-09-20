@@ -595,12 +595,13 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
                 }
                 ChatUtils.MessageType.NEW_JOIN -> {
-                    val splitMessage = message.split("_\$\$")
-                    splitMessage.let {
-                        if (it.size > 1) {
-                            val sender = it[1]
-                            if (type.equals("1"))
+                    if (type.equals("1")) {
+                        val splitMessage = message.split("_\$\$")
+                        splitMessage.let {
+                            if (it.size > 1) {
+                                val sender = it[1]
                                 openGuestAdmitDenyDialog(sender)
+                            }
                         }
                     }
                 }
@@ -846,7 +847,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 binding.connectProgress.visibility = View.GONE
                 binding.actionLayout.visibility = View.GONE
                 binding.room.llBottom.visibility = View.GONE
-               // binding.videoControlLayout.visibility = View.INVISIBLE
+                // binding.videoControlLayout.visibility = View.INVISIBLE
                 binding.banner.visibility = View.GONE
                 binding.switchCameraActionFab.visibility = View.VISIBLE
                 toggleAudioDevice(true)
