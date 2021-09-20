@@ -37,6 +37,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
@@ -176,6 +177,14 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
         setupRecordingAnimation()
         setUpThumbnail()
+        val someHandler = Handler(Looper.getMainLooper())
+        someHandler.postDelayed(object : Runnable {
+            override fun run() {
+                visibilty()
+                someHandler.postDelayed(this, 5000)
+            }
+        }, 5000)
+
 
 
         onStates(roomViewModel) { state ->
@@ -769,7 +778,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             slideDown(binding.videoControlLayout)
         } else {
             slideUp(binding.videoControlLayout)
-            visibilty()
+
         }
         isUp = !isUp
     }
@@ -1020,15 +1029,21 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     }
 
     fun visibilty() {
-        val someHandler = Handler(Looper.getMainLooper())
-        someHandler.postDelayed(object : Runnable {
-            override fun run() {
-                binding.videoControlLayout.visibility = View.GONE
-                // slideDown(binding.videoControlLayout)
-                //  binding.videoControlLayout.visibility = View.GONE
-                someHandler.postDelayed(this, 5000)
-            }
-        }, 5000)
+        if (isUp){
+           // binding.videoControlLayout.animate().translationY(0.toFloat());
+    /*        val animate = TranslateAnimation(
+                0.toFloat(),  // fromXDelta
+                0.toFloat(),  // toXDelta
+                0.toFloat(),  // fromYDelta
+                binding.videoControlLayout.height.toFloat()
+            ) // toYDelta
+            animate.setDuration(500)
+            animate.setFillAfter(true)
+            binding.videoControlLayout.startAnimation(animate)*/
+            slideDown(binding.videoControlLayout)
+           binding.videoControlLayout.visibility = View.GONE
+            Log.d("Visibilty","dddhv")
+         }
     }
 
 
