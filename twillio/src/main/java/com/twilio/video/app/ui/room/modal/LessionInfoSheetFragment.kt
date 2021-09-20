@@ -70,7 +70,7 @@ class LessionInfoSheetFragment(val activity: Activity, meettingOptionHandler: Me
 
     override fun getStatusBarColor() = Color.RED
 
-    override fun getExpandedHeight() =activity.resources.getDimension(R.dimen.margin_400).roundToInt()
+    override fun getExpandedHeight() =activity.resources.getDimension(R.dimen.margin_420).roundToInt()
 
-    override fun getPeekHeight()= activity.resources.getDimension(R.dimen.margin_400).roundToInt()
+    override fun getPeekHeight()= activity.resources.getDimension(R.dimen.margin_420).roundToInt()
 }

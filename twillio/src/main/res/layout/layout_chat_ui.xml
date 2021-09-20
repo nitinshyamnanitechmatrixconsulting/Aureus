@@ -7,8 +7,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:paddingTop="@dimen/margin_20">
-
+       >
+        <include
+            android:id="@+id/toolbarJoinLesson"
+            layout="@layout/toolbar_center_title_twillio" />
         <co.intentservice.chatui.ChatView
             android:id="@+id/chat_view"
             android:layout_width="match_parent"
@@ -24,6 +26,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/toolbarJoinLesson"
             android:background="@color/color_353b3e">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -31,7 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/tvTyping"
-                android:layout_marginTop="50dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -85,14 +87,12 @@
                         android:layout_height="34dp"
                         android:layout_centerInParent="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/sendicon" />
+                        android:src="@drawable/send_icon_light_mode" />
                 </RelativeLayout>
 
             </LinearLayout>
         </RelativeLayout>
 
-        <include
-            android:id="@+id/toolbarJoinLesson"
-            layout="@layout/toolbar_center_title_twillio" />
+
     </RelativeLayout>
 </layout>

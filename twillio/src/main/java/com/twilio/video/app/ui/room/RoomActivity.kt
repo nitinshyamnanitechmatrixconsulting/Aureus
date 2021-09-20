@@ -599,7 +599,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                     splitMessage.let {
                         if (it.size > 1) {
                             val sender = it[1]
-                            if (type.equals(1))
+                            if (type.equals("1"))
                                 openGuestAdmitDenyDialog(sender)
                         }
                     }

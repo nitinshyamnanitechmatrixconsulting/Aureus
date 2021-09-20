@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:layout_marginTop="@dimen/margin_20"
         android:background="@color/color_353b3e"
         android:orientation="vertical"
         android:layout_width="match_parent"
