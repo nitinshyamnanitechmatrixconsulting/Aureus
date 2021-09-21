@@ -161,9 +161,11 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
                     splitMessage.let {
                         if (it.size > 1) {
                             val sender = it[1]
-                            if (sender.equals(roomViewModel.name, ignoreCase = true)) {
+                            if (sender.equals(roomViewModel.getIdentity(), ignoreCase = true)) {
                                 binding.tvTyping.visibility = View.VISIBLE
-                                binding.tvTyping.text = sender + "is Typing..."
+                                binding.tvTyping.text = "$sender is Typing..."
+                            }else{
+                                binding.tvTyping.visibility = View.GONE
                             }
                         }
                     }

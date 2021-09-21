@@ -604,8 +604,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
                 }
                 ChatUtils.MessageType.NEW_JOIN -> {
+                    val splitMessage = message.split("_\$\$")
                     if (type.equals("1")) {
-                        val splitMessage = message.split("_\$\$")
                         splitMessage.let {
                             if (it.size > 1) {
                                 val sender = it[1]
@@ -615,13 +615,48 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                     }
                 }
                 ChatUtils.MessageType.MUTE_PARTICIPANT -> {
-                    toggleLocalAudio()
+                    val splitMessage = message.split("_\$\$")
+                    splitMessage.let {
+                        if (it.size > 1) {
+                            val name = it[1]
+                            if (displayName.equals(name)) {
+                                toggleLocalAudio()
+                            }
+                        }
+                    }
+
+                   /* val requestType = message.split("_\$\$")[0]
+                    val Name = message.split("_\$\$")[1]
+                    if (requestType.equals("mute")) {
+                        if (displayName.equals(Name)) {
+                            toggleLocalAudio()
+                        }
+
+                    }*/
                 }
                 ChatUtils.MessageType.REMOVE_ALL -> {
                     disconnectButtonClick()
                 }
+
                 ChatUtils.MessageType.REMOVE_PARTICIPANT -> {
-                    disconnectButtonClick()
+                    val splitMessage = message.split("_\$\$")
+                    splitMessage.let {
+                        if (it.size > 1) {
+                            val name = it[1]
+                            if (displayName.equals(name)) {
+                                disconnectButtonClick()
+                            }
+                        }
+                    }
+                   /* val requestType = message.split("_\$\$")[0]
+                    val Name = message.split("_\$\$")[1]
+                    if (requestType.equals("remove")) {
+                        if (displayName.equals(Name)) {
+                            disconnectButtonClick()
+                        }
+
+                    }*/
+
                 }
                 ChatUtils.MessageType.TYPING -> {
 
@@ -1029,21 +1064,21 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     }
 
     fun visibilty() {
-        if (isUp){
-           // binding.videoControlLayout.animate().translationY(0.toFloat());
-    /*        val animate = TranslateAnimation(
-                0.toFloat(),  // fromXDelta
-                0.toFloat(),  // toXDelta
-                0.toFloat(),  // fromYDelta
-                binding.videoControlLayout.height.toFloat()
-            ) // toYDelta
-            animate.setDuration(500)
-            animate.setFillAfter(true)
-            binding.videoControlLayout.startAnimation(animate)*/
-            slideDown(binding.videoControlLayout)
-           binding.videoControlLayout.visibility = View.GONE
-            Log.d("Visibilty","dddhv")
-         }
+        if (isUp) {
+            // binding.videoControlLayout.animate().translationY(0.toFloat());
+            /*        val animate = TranslateAnimation(
+                        0.toFloat(),  // fromXDelta
+                        0.toFloat(),  // toXDelta
+                        0.toFloat(),  // fromYDelta
+                        binding.videoControlLayout.height.toFloat()
+                    ) // toYDelta
+                    animate.setDuration(500)
+                    animate.setFillAfter(true)
+                    binding.videoControlLayout.startAnimation(animate)*/
+            // slideDown(binding.videoControlLayout)
+            binding.videoControlLayout.visibility = View.GONE
+            Log.d("Visibilty", "dddhv")
+        }
     }
 
 

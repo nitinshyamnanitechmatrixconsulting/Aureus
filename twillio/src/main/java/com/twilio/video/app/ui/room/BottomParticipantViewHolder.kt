@@ -45,6 +45,7 @@ internal class BottomParticipantViewHolder(
 
             swipeLayout!!.isClickable = false
 
+
             if (participantViewState.isLocalParticipant) {
                 swipeLayout!!.isSwipeEnabled = false
             }
@@ -57,6 +58,11 @@ internal class BottomParticipantViewHolder(
                  swipeLayout!!.isSwipeEnabled = false
              }*/
 
+
+
+            val identity = if (participantViewState.isLocalParticipant)
+                roomViewModel.name else participantViewState.identity
+
             if (roomViewModel.type.equals("1")) {
                 thumb.findViewById<ImageView>(R.id.mute).setOnClickListener {
                     val muteParticipantMessage = MessageCommand.muteParticipantRequest(identity!!)
@@ -68,9 +74,6 @@ internal class BottomParticipantViewHolder(
                     roomViewModel.processInput(RoomViewEvent.SendMessage(removeParticipantMessage))
                 }
             }
-
-            val identity = if (participantViewState.isLocalParticipant)
-                roomViewModel.name else participantViewState.identity
 
             setIdentity(identity)
             setMuted(participantViewState.isMuted)
