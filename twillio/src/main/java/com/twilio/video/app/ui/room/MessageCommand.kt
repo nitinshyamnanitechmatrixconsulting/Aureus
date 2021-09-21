@@ -16,6 +16,6 @@ object  MessageCommand {
 
     fun chatMessage(message: String,participantName: String): String = "${participantName}\$\$\$${message}"
 
-    fun typingMessage(participantName: String): String = "${participantName}+\$\$\$"+"typing...."
+    fun typingMessage(participantName: String): String = "${participantName}\$\$\$typing...."
 
 }

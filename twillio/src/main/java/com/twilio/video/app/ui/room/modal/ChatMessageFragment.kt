@@ -109,7 +109,7 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s!!.isNotEmpty()) {
-                    val identity = roomViewModel.getIdentity()
+                    val identity = roomViewModel.name
                     val formattedMessage = MessageCommand.typingMessage(identity!!)
                     roomViewModel.processInput(RoomViewEvent.SendMessage(formattedMessage))
                 }
@@ -140,6 +140,7 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun addMessages(messages: ArrayList<ChatMessage?>?) {
         val adapter = ChatAdapter(context, messages);
 
@@ -148,8 +149,26 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
         binding.rvList.layoutManager!!.scrollToPosition(
             binding.rvList.adapter!!.itemCount - 1
         )
+       /* val messageType = ChatUtils.getMessageType(messages!![0]!!.sender!!)
+        when(messageType){
+            ChatUtils.MessageType.TYPING -> {
+                val splitMessage = messages!![0]!!.sender!!.split("_\$\$\$typing")
+                splitMessage.let {
+                    if (it.size > 1) {
+                        val sender = it[1]
+                            binding.tvTyping.visibility = View.VISIBLE
+                            binding.tvTyping.text = sender+"is Typing..."
+                        }else{
+                            binding.tvTyping.visibility = View.GONE
+                        }
+                    }
+                }
+            }*/
 
-    }
+        }
+
+
+
 
     @SuppressLint("SetTextI18n")
     private fun addMessage(message: String?) {
@@ -157,17 +176,16 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
             val messageType = ChatUtils.getMessageType(message)
             when (messageType) {
                 ChatUtils.MessageType.TYPING -> {
-                    val splitMessage = message.split("_\$\$")
+                    val splitMessage = message.split("_\$\$\$")
                     splitMessage.let {
                         if (it.size > 1) {
                             val sender = it[1]
-                            if (sender.equals(roomViewModel.getIdentity(), ignoreCase = true)) {
                                 binding.tvTyping.visibility = View.VISIBLE
                                 binding.tvTyping.text = "$sender is Typing..."
                             }else{
                                 binding.tvTyping.visibility = View.GONE
                             }
-                        }
+
                     }
                 }
             }

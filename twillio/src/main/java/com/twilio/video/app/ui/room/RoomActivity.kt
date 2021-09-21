@@ -142,7 +142,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         binding.localAudio.setOnClickListener { toggleLocalAudio() }
         binding.buttonJoinOnlineStudio.setOnClickListener {
             if (type.equals("3")) {
-                val sendJoinRoomRequest = MessageCommand.sendJoinRoomRequest(displayName!!)
+                val sendJoinRoomRequest = MessageCommand.sendJoinRoomRequest(displayName.toString())
                 roomViewModel.processInput(SendMessage(sendJoinRoomRequest))
                 connect()
             } else {
@@ -604,14 +604,17 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
                 }
                 ChatUtils.MessageType.NEW_JOIN -> {
-                    val splitMessage = message.split("_\$\$")
+                    val splitMessage = message.split("_\$\$")[1]
                     if (type.equals("1")) {
+                        openGuestAdmitDenyDialog(splitMessage)
+/*
                         splitMessage.let {
                             if (it.size > 1) {
                                 val sender = it[1]
                                 openGuestAdmitDenyDialog(sender)
                             }
                         }
+*/
                     }
                 }
                 ChatUtils.MessageType.MUTE_PARTICIPANT -> {
