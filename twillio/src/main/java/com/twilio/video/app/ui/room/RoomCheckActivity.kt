@@ -26,7 +26,6 @@ import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
@@ -40,7 +39,6 @@ import com.gdacciaro.iOSDialog.iOSDialog
 import com.gdacciaro.iOSDialog.iOSDialogBuilder
 import com.gdacciaro.iOSDialog.iOSDialogClickListener
 import com.github.javiersantos.bottomdialogs.BottomDialog
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.twilio.audioswitch.AudioDevice
@@ -52,7 +50,6 @@ import com.twilio.video.app.base.BaseActivity
 import com.twilio.video.app.data.api.AuthServiceError
 import com.twilio.video.app.data.api.TokenService
 import com.twilio.video.app.databinding.ActivityRoomCheckBinding
-import com.twilio.video.app.databinding.RoomActivityBinding
 import com.twilio.video.app.helper.StringHelper
 import com.twilio.video.app.participant.ParticipantViewState
 import com.twilio.video.app.sdk.RoomManager

@@ -56,7 +56,6 @@ import com.twilio.video.app.R
 import com.twilio.video.app.base.BaseActivity
 import com.twilio.video.app.data.api.AuthServiceError
 import com.twilio.video.app.data.api.TokenService
-import com.twilio.video.app.databinding.RoomActivityBinding
 import com.twilio.video.app.databinding.StudentRoomActivityBinding
 import com.twilio.video.app.participant.ParticipantViewState
 import com.twilio.video.app.sdk.RoomManager

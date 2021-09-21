@@ -65,11 +65,14 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/circleyellow_bg.xml" value="0.14444444444444443" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/default_screen.xml" value="0.14444444444444443" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/ic_mic_off_gray_24px.xml" value="0.17592592592592593" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/incoming_msg.xml" value="0.19537037037037036" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/local_thumb_view.xml" value="0.18703703703703703" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/outgoing_sms.xml" value="0.19537037037037036" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/participant_background.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/participant_selected_background.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/roundbutton.xml" value="0.18703703703703703" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/split_screen.xml" value="0.14444444444444443" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/whitebg_chat.xml" value="0.19166666666666668" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/activity_room_check.xml" value="0.1" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/content_room.xml" value="0.18" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/fragment_layout_option.xml" value="0.1537037037037037" />
@@ -89,6 +92,7 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/participant_view.xml" value="0.25" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/room_activity.xml" value="0.15" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/stats_view.xml" value="0.13055555555555556" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/toolbar_center_title_twillio.xml" value="0.1921875" />
       </map>
     </option>
   </component>

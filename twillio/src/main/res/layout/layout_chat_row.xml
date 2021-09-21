@@ -34,6 +34,7 @@
                         android:text=""
                         android:textColor="@color/white"
                         android:textSize="14sp"
+                        android:textStyle="bold"
                         tools:ignore="HardcodedText" />
                 </RelativeLayout>
 
@@ -71,7 +72,9 @@
                         android:id="@+id/txtDateleft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="end"
                         android:layout_marginTop="2dp"
+                        android:gravity="end"
                         android:paddingLeft="2dp"
                         android:text=""
                         android:textColor="@color/black"
@@ -130,8 +133,9 @@
                         android:id="@+id/txtDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
+                        android:layout_gravity="start"
                         android:layout_marginTop="3sp"
+                        android:gravity="start"
                         android:paddingRight="5dp"
                         android:text=""
                         android:textColor="@color/black"
@@ -152,7 +156,8 @@
                         android:layout_centerInParent="true"
                         android:text=""
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>

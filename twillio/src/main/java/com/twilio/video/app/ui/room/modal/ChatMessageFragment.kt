@@ -2,7 +2,6 @@ package com.twilio.video.app.ui.room.modal
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -10,30 +9,24 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
 import co.intentservice.chatui.models.ChatMessage
-import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
-import com.twilio.audioswitch.AudioSwitch
 import com.twilio.video.app.R
-import com.twilio.video.app.databinding.FragmentParticipantListBinding
 import com.twilio.video.app.databinding.LayoutChatUiBinding
-import com.twilio.video.app.databinding.LayoutMeetingOptionBinding
-import com.twilio.video.app.participant.ParticipantViewState
-import com.twilio.video.app.sdk.RoomManager
 import com.twilio.video.app.ui.room.*
-import com.twilio.video.app.ui.room.ParticipantAdapter
 import com.twilio.video.app.util.ChatUtils
-import com.twilio.video.app.util.PermissionUtil
 import java.util.ArrayList
-import javax.inject.Inject
 
 
-class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewModel) : Fragment() {
+class ChatMessageFragment(
+    val activity: Activity,
+    val roomViewModel: RoomViewModel
+
+    ) : Fragment() {
 
     private lateinit var binding: LayoutChatUiBinding
 
@@ -41,6 +34,7 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
     companion object {
         private val TAG: String = "ChatMessageFragment"
         private var instance: ChatMessageFragment? = null
+        var tvTyping: TextView? = null
 
         @JvmStatic
         fun openChat(activity: FragmentActivity, roomViewModel: RoomViewModel) {
@@ -77,11 +71,17 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
                 addMessages(it as ArrayList<ChatMessage?>);
             }
         })
+        tvTyping = binding.tvTyping
 
+/*
         roomViewModel.getMessageLiveData().observe(viewLifecycleOwner, Observer {
             addMessage(it)
         })
+*/
 
+        binding.toolbarJoinLesson.llMain.setBackgroundColor(activity.resources.getColor(R.color.white))
+        binding.toolbarJoinLesson.toolbarTitle.setTextColor(activity.resources.getColor(R.color.black))
+        binding.toolbarJoinLesson.backButton.setColorFilter(activity.resources.getColor(R.color.black))
 
         binding.rlSend.setOnClickListener(View.OnClickListener { view ->
 
@@ -149,25 +149,22 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
         binding.rvList.layoutManager!!.scrollToPosition(
             binding.rvList.adapter!!.itemCount - 1
         )
-       /* val messageType = ChatUtils.getMessageType(messages!![0]!!.sender!!)
-        when(messageType){
-            ChatUtils.MessageType.TYPING -> {
-                val splitMessage = messages!![0]!!.sender!!.split("_\$\$\$typing")
-                splitMessage.let {
-                    if (it.size > 1) {
-                        val sender = it[1]
-                            binding.tvTyping.visibility = View.VISIBLE
-                            binding.tvTyping.text = sender+"is Typing..."
-                        }else{
-                            binding.tvTyping.visibility = View.GONE
-                        }
-                    }
-                }
-            }*/
+        /* val messageType = ChatUtils.getMessageType(messages!![0]!!.sender!!)
+         when (messageType) {
+             ChatUtils.MessageType.TYPING -> {
+                 val splitMessage = messages!![0]!!.sender!!.split("_\$\$\$typing")
+                 splitMessage.let {
+                     if (it.size > 1) {
+                         val sender = it[1]
+                         binding.tvTyping.text = sender + "is Typing..."
+                     } else {
+                         binding.tvTyping.text = " "
+                     }
+                 }
+             }
+         }*/
 
-        }
-
-
+    }
 
 
     @SuppressLint("SetTextI18n")
@@ -180,11 +177,11 @@ class ChatMessageFragment(val activity: Activity, val roomViewModel: RoomViewMod
                     splitMessage.let {
                         if (it.size > 1) {
                             val sender = it[1]
-                                binding.tvTyping.visibility = View.VISIBLE
-                                binding.tvTyping.text = "$sender is Typing..."
-                            }else{
-                                binding.tvTyping.visibility = View.GONE
-                            }
+                            binding.tvTyping.visibility = View.VISIBLE
+                            binding.tvTyping.text = "$sender is Typing..."
+                        } else {
+                            binding.tvTyping.visibility = View.GONE
+                        }
 
                     }
                 }

@@ -177,15 +177,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
         setupRecordingAnimation()
         setUpThumbnail()
-        val someHandler = Handler(Looper.getMainLooper())
-        someHandler.postDelayed(object : Runnable {
-            override fun run() {
-                visibilty()
-                someHandler.postDelayed(this, 5000)
-            }
-        }, 5000)
-
-
 
         onStates(roomViewModel) { state ->
             if (state is RoomViewState) bindRoomViewState(state)
@@ -628,7 +619,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         }
                     }
 
-                   /* val requestType = message.split("_\$\$")[0]
+                    /* val requestType = message.split("_\$\$")[0]
                     val Name = message.split("_\$\$")[1]
                     if (requestType.equals("mute")) {
                         if (displayName.equals(Name)) {
@@ -651,7 +642,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                             }
                         }
                     }
-                   /* val requestType = message.split("_\$\$")[0]
+                    /* val requestType = message.split("_\$\$")[0]
                     val Name = message.split("_\$\$")[1]
                     if (requestType.equals("remove")) {
                         if (displayName.equals(Name)) {
@@ -662,10 +653,25 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
                 }
                 ChatUtils.MessageType.TYPING -> {
+                    val splitMessage = message.split("\$\$\$typing....")[0]
+                    splitMessage.let {
+                        ChatMessageFragment.tvTyping!!.visibility = View.VISIBLE
+                        ChatMessageFragment.tvTyping!!.text =
+                            (splitMessage + " is Typing...").toString()
+                        val someHandler = Handler(Looper.getMainLooper())
+                        someHandler.postDelayed(object : Runnable {
+                            override fun run() {
+                                ChatMessageFragment.tvTyping!!.text = " "
+                               // ChatMessageFragment.tvTyping!!.visibility = View.GONE
+                                // someHandler.postDelayed(this, 2000)
+                            }
+                        }, 3000)
 
+                    }
                 }
             }
         }
+
     }
 
     private fun setTitle(toolbarTitle: String?) {
@@ -816,7 +822,15 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             slideDown(binding.videoControlLayout)
         } else {
             slideUp(binding.videoControlLayout)
+            val someHandler = Handler(Looper.getMainLooper())
+            someHandler.postDelayed(object : Runnable {
+                override fun run() {
+                    slideDown(binding.videoControlLayout)
+                    isUp = !isUp
 
+                    // someHandler.postDelayed(this, 5000)
+                }
+            }, 5000)
         }
         isUp = !isUp
     }
@@ -1063,24 +1077,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 intent.putExtra(TYPE, type)
                 startActivity(intent)
             }
-        }
-    }
-
-    fun visibilty() {
-        if (isUp) {
-            // binding.videoControlLayout.animate().translationY(0.toFloat());
-            /*        val animate = TranslateAnimation(
-                        0.toFloat(),  // fromXDelta
-                        0.toFloat(),  // toXDelta
-                        0.toFloat(),  // fromYDelta
-                        binding.videoControlLayout.height.toFloat()
-                    ) // toYDelta
-                    animate.setDuration(500)
-                    animate.setFillAfter(true)
-                    binding.videoControlLayout.startAnimation(animate)*/
-            // slideDown(binding.videoControlLayout)
-            binding.videoControlLayout.visibility = View.GONE
-            Log.d("Visibilty", "dddhv")
         }
     }
 
