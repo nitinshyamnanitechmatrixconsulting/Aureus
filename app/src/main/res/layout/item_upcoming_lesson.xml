@@ -31,15 +31,15 @@
                             android:layout_height="wrap_content">
 
                         <TextView
-                                android:id="@+id/lessonTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:fontFamily="@font/lato_bold"
-                                android:textColor="@android:color/holo_blue_light"
-                                android:textSize="@dimen/text_12"
-                                android:textStyle="bold"
-                                tools:text="Tue 11, Jan 2020 at 03:00 PM" />
+                            android:id="@+id/lessonTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:fontFamily="@font/lato_bold"
+                            android:textColor="@android:color/holo_blue_light"
+                            android:textSize="@dimen/text_12"
+                            android:textStyle="bold"
+                            tools:text="Tue 11, Jan 2020 at 03:00 PM" />
 
                         <Button
                                 android:id="@+id/scheduleBtn"

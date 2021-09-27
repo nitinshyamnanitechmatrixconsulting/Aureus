@@ -29,6 +29,7 @@ internal class BottomParticipantViewHolder(
     //   private val localParticipantIdentity = roomViewModel.name
 
     var swipeLayout: SwipeLayout? = null
+    var view: View? = null
 
     fun bind(participantViewState: ParticipantViewState, viewEventAction: (RoomViewEvent) -> Unit) {
         Timber.d("bind ParticipantViewHolder with data item: %s", participantViewState)
@@ -42,9 +43,16 @@ internal class BottomParticipantViewHolder(
             }
 
             swipeLayout = thumb.findViewById(R.id.swipe)
+            view = thumb.findViewById(R.id.view)
 
             swipeLayout!!.isClickable = false
 
+
+            if (participantViewState.isLocalParticipant) {
+                view?.visibility = View.VISIBLE
+            } else {
+                view?.visibility = View.GONE
+            }
 
             if (participantViewState.isLocalParticipant) {
                 swipeLayout!!.isSwipeEnabled = false
@@ -57,7 +65,6 @@ internal class BottomParticipantViewHolder(
             /* if (roomViewModel.type.equals("3")) {
                  swipeLayout!!.isSwipeEnabled = false
              }*/
-
 
 
             val identity = if (participantViewState.isLocalParticipant)

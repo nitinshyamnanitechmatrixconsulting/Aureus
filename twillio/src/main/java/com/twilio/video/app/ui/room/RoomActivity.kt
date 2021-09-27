@@ -41,6 +41,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
@@ -447,6 +448,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         val count = supportFragmentManager.backStackEntryCount
         if (count >= 1) {
             supportFragmentManager.popBackStack()
+            hideKeyboard()
         } else if (binding.actionLayout.visibility == View.VISIBLE) {
             super.onBackPressed()
         } else {
@@ -662,7 +664,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         someHandler.postDelayed(object : Runnable {
                             override fun run() {
                                 ChatMessageFragment.tvTyping!!.text = " "
-                               // ChatMessageFragment.tvTyping!!.visibility = View.GONE
+                                // ChatMessageFragment.tvTyping!!.visibility = View.GONE
                                 // someHandler.postDelayed(this, 2000)
                             }
                         }, 3000)
@@ -750,7 +752,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         } else {
             roomViewModel.processInput(StopScreenCapture)
             imageView.setTag(R.id.imageTag, 1)
-
         }
 
     }
@@ -1080,5 +1081,10 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         }
     }
 
+    private fun hideKeyboard() {
+        val imm: InputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+    }
 
 }

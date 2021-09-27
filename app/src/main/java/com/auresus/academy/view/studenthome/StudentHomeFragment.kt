@@ -171,6 +171,9 @@ class StudentHomeFragment : BaseFragment() {
         initUpComingLessonRecyclerView()
         initEnrollmentRecyclerView()
         baseViewModel.getHomeLiveData().observe(this, eventDataObserver)
+        viewMoreLessons.setOnClickListener{
+            (activity as HomeAcitivty).navigateToSchedule()
+        }
     }
 
     override fun onPause() {

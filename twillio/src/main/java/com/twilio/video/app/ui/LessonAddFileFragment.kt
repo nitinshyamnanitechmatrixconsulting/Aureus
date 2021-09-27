@@ -1,5 +1,6 @@
 package com.twilio.video.app.ui
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -153,6 +154,7 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
 
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
             val url =
                 "https://full-aureusgroup.cs117.force.com/AureusFileUploadPageFromIpad?Color=black&id=$room_id"
@@ -172,6 +174,7 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
                     when (action) {
                         "true" -> handleUploadComplete()
                         else -> {
+
                         }
                     }
                 }
