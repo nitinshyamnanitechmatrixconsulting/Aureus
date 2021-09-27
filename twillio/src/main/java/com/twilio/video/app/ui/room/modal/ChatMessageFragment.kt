@@ -2,6 +2,7 @@ package com.twilio.video.app.ui.room.modal
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import co.intentservice.chatui.models.ChatMessage
+import com.firebase.ui.auth.AuthUI.getApplicationContext
 import com.twilio.video.app.R
 import com.twilio.video.app.databinding.LayoutChatUiBinding
 import com.twilio.video.app.ui.room.*
@@ -29,7 +31,7 @@ class ChatMessageFragment(
     ) : Fragment() {
 
     private lateinit var binding: LayoutChatUiBinding
-
+    var mediaPlayer: MediaPlayer? = null
 
     companion object {
         private val TAG: String = "ChatMessageFragment"
@@ -163,7 +165,14 @@ class ChatMessageFragment(
                  }
              }
          }*/
+        val chatMessageFragment: ChatMessageFragment =
+            childFragmentManager.findFragmentByTag("testID") as ChatMessageFragment
+        if (chatMessageFragment != null && chatMessageFragment.isVisible) {
 
+        } else {
+            mediaPlayer = MediaPlayer.create(activity, R.raw.newmessage);
+            mediaPlayer!!.start()
+        }
     }
 
 

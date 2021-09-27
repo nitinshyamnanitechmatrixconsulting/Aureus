@@ -34,15 +34,17 @@
                 android:paddingStart="@dimen/margin_20"
                 android:paddingEnd="@dimen/margin_20">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_20">
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:weightSum="3">
 
                     <LinearLayout
                         android:id="@+id/showParticipants"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
                         android:padding="@dimen/margin_10">
@@ -50,22 +52,21 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="@dimen/dp40"
                             android:layout_height="@dimen/dp_25"
-                            android:layout_alignParentLeft="true"
                             app:srcCompat="@drawable/participants_active" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/imv_participant"
                             android:text="@string/participants"
                             android:textColor="@color/white" />
                     </LinearLayout>
 
                     <LinearLayout
+
                         android:id="@+id/showMessage"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
                         android:padding="@dimen/margin_10">
@@ -85,10 +86,10 @@
 
                     <LinearLayout
                         android:id="@+id/showInfo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
                         android:layout_gravity="end"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
                         android:padding="@dimen/margin_10">
@@ -101,26 +102,25 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/imv_participant"
                             android:text="@string/information"
                             android:textColor="@color/white" />
                     </LinearLayout>
-                </RelativeLayout>
+                </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_20">
+
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/margin_20"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true">
+                        android:orientation="horizontal"
+                        android:weightSum="3">
 
                         <LinearLayout
                             android:id="@+id/showFiles"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
                             android:padding="@dimen/margin_10">
@@ -128,24 +128,20 @@
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="@dimen/dp60"
                                 android:layout_height="@dimen/dp_25"
-                                android:layout_alignParentLeft="true"
                                 app:srcCompat="@drawable/files_active" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/imv_participant"
                                 android:text="@string/files"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/showPresentScreen"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="@dimen/margin_10"
-                            android:layout_marginLeft="@dimen/margin_10"
+                            android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
                             android:padding="@dimen/margin_10"
@@ -155,24 +151,20 @@
                                 android:id="@+id/ivScreenshare"
                                 android:layout_width="@dimen/dp60"
                                 android:layout_height="@dimen/dp_25"
-                                android:layout_alignParentLeft="true"
                                 app:srcCompat="@drawable/present_screen_active" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/ivScreenshare"
                                 android:text="@string/present_screen"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/showLayoutOption"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="@dimen/margin_10"
-                            android:layout_marginLeft="@dimen/margin_35"
+                            android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
                             android:padding="@dimen/margin_10">
@@ -180,19 +172,15 @@
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="@dimen/dp60"
                                 android:layout_height="@dimen/dp_25"
-                                android:layout_alignParentLeft="true"
                                 app:srcCompat="@drawable/layout_active" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/imv_participant"
                                 android:text="@string/Layout"
                                 android:textColor="@color/white" />
                         </LinearLayout>
                     </LinearLayout>
-
-                </RelativeLayout>
 
             </LinearLayout>
         </RelativeLayout>
