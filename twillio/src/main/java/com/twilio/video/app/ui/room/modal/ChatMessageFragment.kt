@@ -166,7 +166,7 @@ class ChatMessageFragment(
              }
          }*/
         val chatMessageFragment: ChatMessageFragment =
-            childFragmentManager.findFragmentByTag("testID") as ChatMessageFragment
+            childFragmentManager.findFragmentByTag("ChatMessageFragment") as ChatMessageFragment
         if (chatMessageFragment != null && chatMessageFragment.isVisible) {
 
         } else {
