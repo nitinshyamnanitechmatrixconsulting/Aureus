@@ -165,14 +165,15 @@ class ChatMessageFragment(
                  }
              }
          }*/
-        val chatMessageFragment: ChatMessageFragment =
+
+       /* val chatMessageFragment: ChatMessageFragment =
             childFragmentManager.findFragmentByTag("ChatMessageFragment") as ChatMessageFragment
         if (chatMessageFragment != null && chatMessageFragment.isVisible) {
 
         } else {
             mediaPlayer = MediaPlayer.create(activity, R.raw.newmessage);
             mediaPlayer!!.start()
-        }
+        }*/
     }
 
 

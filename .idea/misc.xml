@@ -99,7 +99,9 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/participant_view.xml" value="0.25" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/room_activity.xml" value="0.15" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/stats_view.xml" value="0.13055555555555556" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/student_room_activity.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/toolbar_center_title_twillio.xml" value="0.1921875" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/waiting_dailog.xml" value="0.1921875" />
       </map>
     </option>
   </component>
