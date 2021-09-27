@@ -4,6 +4,7 @@
     xmlns:swipe="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:paddingTop="@dimen/margin_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_353b3e"
