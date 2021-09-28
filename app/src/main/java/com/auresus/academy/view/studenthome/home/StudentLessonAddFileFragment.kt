@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -147,10 +148,15 @@ class StudentLessonAddFileFragment : BaseFragment() {
             val roomName = it.centerId
             val url =
                 "https://full-aureusgroup.cs117.force.com/AureusFileUploadPageFromIpad?Color=white&id=$roomName"
-            simpleWebView.setClickable(true);
-            simpleWebView.getSettings().setJavaScriptEnabled(true)
-            simpleWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
-            simpleWebView.getSettings().setUseWideViewPort(false);
+            simpleWebView.isClickable = true;
+            simpleWebView.settings.javaScriptEnabled = true
+            simpleWebView.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL;
+            simpleWebView.settings.useWideViewPort = false
+            simpleWebView.settings.domStorageEnabled = true
+            simpleWebView.settings.allowContentAccess = true
+            simpleWebView.settings.allowFileAccess = true
+            //simpleWebView.settings.pluginState = WebSettings.PluginState.ON;
+            //webSettings.setLoadWithOverviewMode(true);
             simpleWebView.loadUrl(url)
             simpleWebView.webViewClient = object : WebViewClient() {
                 private fun handleUrl(url: String?) {
@@ -163,6 +169,7 @@ class StudentLessonAddFileFragment : BaseFragment() {
                     when (action) {
                         "true" -> handleUploadComplete()
                         else -> {
+
                         }
                     }
                 }
@@ -192,9 +199,11 @@ class StudentLessonAddFileFragment : BaseFragment() {
 
                 override fun onLoadResource(view: WebView?, url: String?) {
                     super.onLoadResource(view, url)
+
                 }
             }
-            simpleWebView.setWebChromeClient(object : WebChromeClient() {
+
+            simpleWebView.webChromeClient = object : WebChromeClient() {
 
                 // For 3.0+ Devices (Start)
                 // onActivityResult attached before constructor
@@ -264,7 +273,7 @@ class StudentLessonAddFileFragment : BaseFragment() {
                     }
                 }
 
-            })
+            }
         }
     }
 
@@ -285,10 +294,10 @@ class StudentLessonAddFileFragment : BaseFragment() {
 
 
     private fun setRecyclerView() {
-        recycler_view.setLayoutManager(LinearLayoutManager(activity))
+        recycler_view.layoutManager = LinearLayoutManager(activity)
         mAdapter = RecyclerViewAdapter(activity, mDataSet)
         (mAdapter as RecyclerViewAdapter).mode = Attributes.Mode.Single
-        recycler_view.setAdapter(mAdapter)
+        recycler_view.adapter = mAdapter
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         ContextCompat.getDrawable(activity as FragmentActivity, R.drawable.item_divider)?.let {
             itemDecorator.setDrawable(it)
@@ -297,25 +306,7 @@ class StudentLessonAddFileFragment : BaseFragment() {
 
     }
 
-    fun Fragment.openDocumentPicker() {
-        val openDocumentIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "*/*"
-            putExtra(Intent.EXTRA_MIME_TYPES, supportedMimeTypes)
-        }
 
-        startActivityForResult(openDocumentIntent, OPEN_DOCUMENT_REQUEST_CODE)
-    }
-
-    fun Fragment.tryHandleOpenDocumentResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ): OpenFileResult {
-        return if (requestCode == OPEN_DOCUMENT_REQUEST_CODE) {
-            handleOpenDocumentResult(resultCode, data)
-        } else OpenFileResult.DifferentResult
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -343,7 +334,7 @@ class StudentLessonAddFileFragment : BaseFragment() {
                 "Failed to open file uploader, please check app permissions.",
                 Toast.LENGTH_LONG
             ).show()
-            super.onActivityResult(requestCode, resultCode, data)
+
         }
     }
 
@@ -351,39 +342,6 @@ class StudentLessonAddFileFragment : BaseFragment() {
         mUploadMessage?.onReceiveValue(Uri.parse(fileName));
         mUploadMessage = null;
 
-    }
-
-    private fun Fragment.handleOpenDocumentResult(resultCode: Int, data: Intent?): OpenFileResult {
-        return if (resultCode == Activity.RESULT_OK && data != null) {
-            val contentUri = data.data
-            if (contentUri != null) {
-                val stream =
-                    try {
-                        requireActivity().application.contentResolver.openInputStream(contentUri)
-                    } catch (exception: FileNotFoundException) {
-                        Log.e("LessonDetailsFragment", exception.message!!)
-                        return OpenFileResult.ErrorOpeningFile
-                    }
-
-                val fileName = requireContext().contentResolver.queryFileName(contentUri)
-
-                if (stream != null && fileName != null) {
-                    OpenFileResult.FileWasOpened(fileName, stream)
-                } else OpenFileResult.ErrorOpeningFile
-            } else {
-                OpenFileResult.ErrorOpeningFile
-            }
-        } else {
-            OpenFileResult.OpenFileWasCancelled
-        }
-    }
-
-
-    sealed class OpenFileResult {
-        object OpenFileWasCancelled : OpenFileResult()
-        data class FileWasOpened(val fileName: String, val content: InputStream) : OpenFileResult()
-        object ErrorOpeningFile : OpenFileResult()
-        object DifferentResult : OpenFileResult()
     }
 
 }

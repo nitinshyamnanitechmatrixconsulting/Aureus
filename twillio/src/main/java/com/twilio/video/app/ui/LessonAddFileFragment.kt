@@ -167,10 +167,11 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
     private fun initWebView() {
             val url =
                 "https://full-aureusgroup.cs117.force.com/AureusFileUploadPageFromIpad?Color=black&id=$room_id"
-            simpleWebView?.setClickable(true);
-            simpleWebView?.getSettings()?.setJavaScriptEnabled(true)
-            simpleWebView?.getSettings()?.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
-            simpleWebView?.getSettings()?.setUseWideViewPort(false);
+        simpleWebView?.isClickable = true;
+        simpleWebView?.settings?.javaScriptEnabled = true
+        simpleWebView?.settings?.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL;
+        simpleWebView?.settings?.useWideViewPort = false
+        simpleWebView?.settings?.domStorageEnabled = true
             simpleWebView?.loadUrl(url)
             simpleWebView?.webViewClient = object : WebViewClient() {
                 private fun handleUrl(url: String?) {
@@ -306,7 +307,7 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
 
 
     private fun setRecyclerView() {
-        recycler_view?.setLayoutManager(LinearLayoutManager(activity))
+        recycler_view?.layoutManager = LinearLayoutManager(activity)
         mAdapter = RecyclerViewAdapter(activity, mDataSet)
         (mAdapter as RecyclerViewAdapter).mode = Attributes.Mode.Single
         recycler_view?.setAdapter(mAdapter)
@@ -374,6 +375,7 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
 
     }
 
+    @SuppressLint("LogNotTimber")
     private fun Fragment.handleOpenDocumentResult(resultCode: Int, data: Intent?): OpenFileResult {
         return if (resultCode == Activity.RESULT_OK && data != null) {
             val contentUri = data.data

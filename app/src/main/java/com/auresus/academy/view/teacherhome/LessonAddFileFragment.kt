@@ -147,10 +147,11 @@ class LessonAddFileFragment : BaseFragment() {
             val roomName = it.Id
             val url =
                 "https://full-aureusgroup.cs117.force.com/AureusFileUploadPageFromIpad?Color=white&id=$roomName"
-            simpleWebView.setClickable(true);
-            simpleWebView.getSettings().setJavaScriptEnabled(true)
-            simpleWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
-            simpleWebView.getSettings().setUseWideViewPort(false);
+            simpleWebView.isClickable = true;
+            simpleWebView.settings.javaScriptEnabled = true
+            simpleWebView.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL;
+            simpleWebView.settings.useWideViewPort = false
+            simpleWebView.settings.domStorageEnabled = true
             simpleWebView.loadUrl(url)
             simpleWebView.webViewClient = object : WebViewClient() {
                 private fun handleUrl(url: String?) {
