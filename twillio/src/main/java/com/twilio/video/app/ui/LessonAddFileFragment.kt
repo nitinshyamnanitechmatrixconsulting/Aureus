@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.util.Attributes
+import com.google.firebase.crashlytics.internal.common.CommonUtils
 import com.twilio.video.app.R
 import com.twilio.video.app.data.api.model.ApiResponse
 import com.twilio.video.app.ui.room.RoomViewModel
@@ -35,6 +37,7 @@ import java.io.InputStream
 class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment() {
     private var recycler_view: RecyclerView?=null
     private var backButton: ImageView?=null
+    private var llMain: LinearLayout?=null
     private var simpleWebView: WebView?=null
     private val OPEN_DOCUMENT_REQUEST_CODE = 2
     private var mUploadMessage: ValueCallback<Uri>? = null
@@ -134,6 +137,7 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
         simpleWebView = view?.findViewById<WebView>(R.id.simpleWebView)
         recycler_view = view?.findViewById<RecyclerView>(R.id.recycler_view)
         backButton = view?.findViewById<ImageView>(R.id.backButton)
+        llMain = view?.findViewById<LinearLayout>(R.id.llMain)
         setRecyclerView()
         room_id = arguments?.get(EXTRA_ROOM_ID) as String
         room_name = arguments?.get(EXTRA_ROOM_NAME) as String
@@ -146,6 +150,7 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
             getActivity()?.onBackPressed()
             // Do some work here
         })
+        llMain!!.setBackgroundColor(resources.getColor(R.color.color_353b3e));
 
     }
 
