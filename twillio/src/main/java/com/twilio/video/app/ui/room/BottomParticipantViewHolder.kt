@@ -45,7 +45,8 @@ internal class BottomParticipantViewHolder(
             swipeLayout = thumb.findViewById(R.id.swipe)
             view = thumb.findViewById(R.id.view)
 
-            swipeLayout!!.isClickable = false
+
+            swipeLayout!!.isClickable = true
 
 
             if (participantViewState.isLocalParticipant) {

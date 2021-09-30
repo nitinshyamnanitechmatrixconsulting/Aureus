@@ -18,22 +18,37 @@ import com.twilio.video.app.ui.room.*
 import com.twilio.video.app.ui.room.ParticipantAdapter
 import kotlin.math.roundToInt
 
-class MeetingOptionBottomSheetFragment(val activity: Activity,val meettingOptionHandler: MeettingOptionHandler, val roomViewModel: RoomViewModel) : SuperBottomSheetFragment() {
+class MeetingOptionBottomSheetFragment(
+    val activity: Activity,
+    val meettingOptionHandler: MeettingOptionHandler,
+    val roomViewModel: RoomViewModel
+) : SuperBottomSheetFragment() {
 
     private lateinit var binding: LayoutMeetingOptionBinding
 
     companion object {
         private var instance: MeetingOptionBottomSheetFragment? = null
+        var ivMsg: ImageView? = null
+
         @JvmStatic
-        fun openMeetingOption(activity: FragmentActivity,meettingOptionHandler: MeettingOptionHandler,roomViewModel: RoomViewModel) {
+        fun openMeetingOption(
+            activity: FragmentActivity,
+            meettingOptionHandler: MeettingOptionHandler,
+            roomViewModel: RoomViewModel
+        ) {
             if (instance == null) {
-                instance = MeetingOptionBottomSheetFragment(activity, meettingOptionHandler, roomViewModel)
+                instance =
+                    MeetingOptionBottomSheetFragment(activity, meettingOptionHandler, roomViewModel)
             }
             instance?.show(activity.supportFragmentManager, "MeetingOptionBottomSheetFragment")
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = LayoutMeetingOptionBinding.inflate(inflater)
         return binding.root
@@ -41,7 +56,8 @@ class MeetingOptionBottomSheetFragment(val activity: Activity,val meettingOption
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.ivScreenshare.setTag(R.id.imageTag,1)
+        ivMsg = binding.ivMsg
+        binding.ivScreenshare.setTag(R.id.imageTag, 1)
         binding.showFiles.setOnClickListener {
             dismiss()
             meettingOptionHandler.handleOpenFiles()
@@ -54,7 +70,10 @@ class MeetingOptionBottomSheetFragment(val activity: Activity,val meettingOption
             dismiss()
             meettingOptionHandler.handleShowLayoutOption()
         }
+
         binding.showMessage.setOnClickListener {
+            RoomActivity.isFirstTime = false
+            ivMsg!!.setImageResource(R.drawable.messages_active)
             dismiss()
             meettingOptionHandler.handleShowMessages()
         }
@@ -75,12 +94,12 @@ class MeetingOptionBottomSheetFragment(val activity: Activity,val meettingOption
 
     override fun getStatusBarColor() = Color.RED
 
-    override fun getBackgroundColor()=activity.resources.getColor(R.color.color_353b3e)
+    override fun getBackgroundColor() = activity.resources.getColor(R.color.color_353b3e)
 
-    override fun getExpandedHeight() =activity.resources.getDimension(R.dimen.margin_200).roundToInt()
+    override fun getExpandedHeight() =
+        activity.resources.getDimension(R.dimen.margin_200).roundToInt()
 
-    override fun getPeekHeight()= activity.resources.getDimension(R.dimen.margin_250).roundToInt()
-
+    override fun getPeekHeight() = activity.resources.getDimension(R.dimen.margin_250).roundToInt()
 
 
 }

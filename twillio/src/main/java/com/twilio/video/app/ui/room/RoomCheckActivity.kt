@@ -86,6 +86,7 @@ class RoomCheckActivity : BaseActivity() , MeettingOptionHandler {
     private val viewHolderEvents: LiveData<RoomViewEvent> = mutableViewHolderEvents
 
 
+
     @Inject
     lateinit var tokenService: TokenService
 
@@ -923,14 +924,6 @@ class RoomCheckActivity : BaseActivity() , MeettingOptionHandler {
             intent.data = appLink
             context.startActivity(intent)
         }
-
-
-
-
-
-
-
-
         fun open(
             currActivity: Context,
             roomName: String?,

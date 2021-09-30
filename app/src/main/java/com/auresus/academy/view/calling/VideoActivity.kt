@@ -951,6 +951,7 @@ class VideoActivity : BaseActivity() {
                 .setAction("Action", null).show()
             return
         }
+
         participantIdentity = remoteParticipant.identity
         videoStatusTextView.text = "Participant $participantIdentity joined"
 

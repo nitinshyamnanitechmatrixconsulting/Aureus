@@ -3,12 +3,15 @@ package com.twilio.video.app.sdk
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.MediaPlayer
+import android.widget.Toast
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.GsonBuilder
 import com.twilio.video.*
 import com.twilio.video.TwilioException.ROOM_MAX_PARTICIPANTS_EXCEEDED_EXCEPTION
+import com.twilio.video.app.R
 import com.twilio.video.app.data.api.AuthServiceError
 import com.twilio.video.app.data.api.AuthServiceException
 import com.twilio.video.app.data.api.VideoAppService
@@ -30,6 +33,8 @@ import org.json.JSONArray
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
+import java.util.*
+import kotlin.Comparator
 
 
 const val MICROPHONE_TRACK_NAME = "microphone"
@@ -42,18 +47,20 @@ class RoomManager(
     sharedPreferences: SharedPreferences,
     coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-
+    var mediaPlayer: MediaPlayer? = null
     private var statsScheduler: StatsScheduler? = null
     private val roomListener = RoomListener()
+
     @VisibleForTesting(otherwise = PRIVATE)
     internal var roomScope = CoroutineScope(coroutineDispatcher)
     private val mutableRoomEvents: MutableSharedFlow<RoomEvent> = MutableSharedFlow()
     val roomEvents: SharedFlow<RoomEvent> = mutableRoomEvents
+
     @VisibleForTesting(otherwise = PRIVATE)
     internal var localParticipantManager: LocalParticipantManager =
-            LocalParticipantManager(context, this, sharedPreferences)
+        LocalParticipantManager(context, this, sharedPreferences)
     var room: Room? = null
-    var localDataTrack:LocalDataTrack? = LocalDataTrack.create(context)
+    var localDataTrack: LocalDataTrack? = LocalDataTrack.create(context)
 
 
     fun disconnect() {
@@ -65,7 +72,10 @@ class RoomManager(
         connectToRoom(identity, roomName)
     }
 
-    suspend fun getAttachmentList(roomName: String, bookingListResponse: MutableLiveData<ApiResponse<List<Attachment>>>) {
+    suspend fun getAttachmentList(
+        roomName: String,
+        bookingListResponse: MutableLiveData<ApiResponse<List<Attachment>>>
+    ) {
         val ATTACHEMENT_BASE_URL = "https://full-aureusgroup.cs117.force.com/services/apexrest/"
         var response: okhttp3.ResponseBody? = null
         val retrofit = Retrofit.Builder()
@@ -77,26 +87,27 @@ class RoomManager(
         bookingListResponse.value = apiResponse
         response = videoAppService.getAttachmentList(roomName)
         response.let {
-                val jsonString = response?.string()
-                if (!jsonString.isNullOrEmpty()) {
-                    val clean = jsonString.removeSurrounding("\"").replace("\\", "")
-                    val jsonArray: JSONArray = JSONArray(clean)
-                    val attachList = mutableListOf<Attachment>()
-                    jsonArray.let {
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject = jsonArray.getJSONObject(i)
-                            val gson= GsonBuilder().serializeNulls().create()
-                            val attachment = gson.fromJson(jsonObject.toString(), Attachment::class.java)
-                            attachList.add(attachment)
-                        }
+            val jsonString = response?.string()
+            if (!jsonString.isNullOrEmpty()) {
+                val clean = jsonString.removeSurrounding("\"").replace("\\", "")
+                val jsonArray: JSONArray = JSONArray(clean)
+                val attachList = mutableListOf<Attachment>()
+                jsonArray.let {
+                    for (i in 0 until jsonArray.length()) {
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        val gson = GsonBuilder().serializeNulls().create()
+                        val attachment =
+                            gson.fromJson(jsonObject.toString(), Attachment::class.java)
+                        attachList.add(attachment)
                     }
-                    val apiResponse = ApiResponse<List<Attachment>>(
-                        ApiResponse.Status.SUCCESS,
-                        attachList,
-                        null
-                    )
-                    bookingListResponse.value = apiResponse
                 }
+                val apiResponse = ApiResponse<List<Attachment>>(
+                    ApiResponse.Status.SUCCESS,
+                    attachList,
+                    null
+                )
+                bookingListResponse.value = apiResponse
+            }
         }
     }
 
@@ -111,7 +122,6 @@ class RoomManager(
             }
         }
     }
-
 
 
     fun sendRoomEvent(roomEvent: RoomEvent) {
@@ -224,6 +234,16 @@ class RoomManager(
 
             remoteParticipant.setListener(RemoteParticipantListener(this@RoomManager))
             sendRoomEvent(RemoteParticipantConnected(remoteParticipant))
+            if (!remoteParticipant.identity.contains("*%$&")) {
+                mediaPlayer = MediaPlayer.create(context, R.raw.joinmeeting)
+                mediaPlayer!!.start()
+                Toast.makeText(
+                    context,
+                    "${remoteParticipant.identity} has joined",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
         }
 
         override fun onParticipantDisconnected(room: Room, remoteParticipant: RemoteParticipant) {
@@ -233,6 +253,15 @@ class RoomManager(
             )
 
             sendRoomEvent(RemoteParticipantDisconnected(remoteParticipant.sid))
+            if (!remoteParticipant.identity.contains("*%$&")) {
+                mediaPlayer = MediaPlayer.create(context, R.raw.joinmeeting)
+                mediaPlayer!!.start()
+                Toast.makeText(
+                    context,
+                    "${remoteParticipant.identity} has left",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         override fun onDominantSpeakerChanged(room: Room, remoteParticipant: RemoteParticipant?) {

@@ -195,7 +195,7 @@ class LessonAddFileFragment : BaseFragment() {
                     super.onLoadResource(view, url)
                 }
             }
-            simpleWebView.setWebChromeClient(object : WebChromeClient() {
+            simpleWebView.webChromeClient = object : WebChromeClient() {
 
                 // For 3.0+ Devices (Start)
                 // onActivityResult attached before constructor
@@ -265,7 +265,7 @@ class LessonAddFileFragment : BaseFragment() {
                     }
                 }
 
-            })
+            }
         }
     }
 

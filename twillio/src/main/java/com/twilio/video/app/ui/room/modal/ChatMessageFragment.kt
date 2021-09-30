@@ -2,7 +2,6 @@ package com.twilio.video.app.ui.room.modal
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -16,7 +15,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import co.intentservice.chatui.models.ChatMessage
-import com.firebase.ui.auth.AuthUI.getApplicationContext
 import com.twilio.video.app.R
 import com.twilio.video.app.databinding.LayoutChatUiBinding
 import com.twilio.video.app.ui.room.*
@@ -28,15 +26,16 @@ class ChatMessageFragment(
     val activity: Activity,
     val roomViewModel: RoomViewModel
 
-    ) : Fragment() {
+) : Fragment() {
 
     private lateinit var binding: LayoutChatUiBinding
-    var mediaPlayer: MediaPlayer? = null
+
 
     companion object {
         private val TAG: String = "ChatMessageFragment"
         private var instance: ChatMessageFragment? = null
         var tvTyping: TextView? = null
+
 
         @JvmStatic
         fun openChat(activity: FragmentActivity, roomViewModel: RoomViewModel) {
@@ -51,6 +50,8 @@ class ChatMessageFragment(
                 replace(R.id.container, instance, ChatMessageFragment.TAG)
                 addToBackStack(null)
             }
+            RoomActivity.isActive = true
+
         }
     }
 
@@ -61,6 +62,7 @@ class ChatMessageFragment(
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = LayoutChatUiBinding.inflate(inflater)
+        RoomActivity.isActive = true
         return binding.root
     }
 
@@ -74,6 +76,7 @@ class ChatMessageFragment(
             }
         })
         tvTyping = binding.tvTyping
+        RoomActivity.isActive=true
 
 /*
         roomViewModel.getMessageLiveData().observe(viewLifecycleOwner, Observer {
@@ -93,6 +96,7 @@ class ChatMessageFragment(
             // Do some work here
         })
         binding.toolbarJoinLesson.backButton.setOnClickListener(View.OnClickListener { view ->
+            RoomActivity.isActive = false
             getActivity()?.onBackPressed()
             // Do some work here
         })
@@ -144,7 +148,7 @@ class ChatMessageFragment(
 
     @SuppressLint("SetTextI18n")
     fun addMessages(messages: ArrayList<ChatMessage?>?) {
-        val adapter = ChatAdapter(context, messages);
+        val adapter = ChatAdapter(context, messages)
 
         // Setting the Adapter with the recyclerview
         binding.rvList.adapter = adapter
@@ -166,14 +170,7 @@ class ChatMessageFragment(
              }
          }*/
 
-       /* val chatMessageFragment: ChatMessageFragment =
-            childFragmentManager.findFragmentByTag("ChatMessageFragment") as ChatMessageFragment
-        if (chatMessageFragment != null && chatMessageFragment.isVisible) {
 
-        } else {
-            mediaPlayer = MediaPlayer.create(activity, R.raw.newmessage);
-            mediaPlayer!!.start()
-        }*/
     }
 
 
@@ -197,6 +194,16 @@ class ChatMessageFragment(
                 }
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        RoomActivity.isActive = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RoomActivity.isActive = false
     }
 
 }

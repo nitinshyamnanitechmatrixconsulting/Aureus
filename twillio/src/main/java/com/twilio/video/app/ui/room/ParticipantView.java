@@ -49,7 +49,7 @@ import tvi.webrtc.VideoSink;
 
 abstract class ParticipantView extends FrameLayout implements VideoSink {
 
-    private static final VideoScaleType DEFAULT_VIDEO_SCALE_TYPE = VideoScaleType.ASPECT_FIT;
+    private static final VideoScaleType DEFAULT_VIDEO_SCALE_TYPE = VideoScaleType.ASPECT_BALANCED;
 
     String identity = "";
     int state = State.NO_VIDEO;

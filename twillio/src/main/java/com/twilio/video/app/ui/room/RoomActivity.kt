@@ -31,13 +31,13 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.AudioManager
+import android.media.MediaPlayer
 import android.media.projection.MediaProjectionManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
@@ -90,6 +90,8 @@ import com.twilio.video.app.helper.StringHelper
 class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
     private var isConnected: Boolean = false
+
+
     private var participantCount: Int = 0
     private var isUp: Boolean = false
     private var roomID: String = ""
@@ -122,11 +124,13 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
     @Inject
     lateinit var audioSwitch: AudioSwitch
+    var mediaPlayer: MediaPlayer? = null
 
     /** Coordinates participant thumbs and primary participant rendering.  */
     private lateinit var primaryParticipantController: PrimaryParticipantController
     private lateinit var roomViewModel: RoomViewModel
     private lateinit var recordingAnimation: ObjectAnimator
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -281,7 +285,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         val tv: TextView = dialog.findViewById(R.id.tv_popup_title)
         val arrayAdapter =
             UserListAdapter(this, R.layout.item_assignment_dialog_list_layout, allUsersList)
-        listView.setAdapter(arrayAdapter)
+        listView.adapter = arrayAdapter
         listView.setOnItemClickListener({ adapterView, view, which, l ->
             changeDominantSpeakerView(
                 allUsersList[which].sid
@@ -505,6 +509,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
     private fun disconnectButtonClick() {
         roomViewModel.processInput(Disconnect)
+
         try {
             val myIntent = Intent(
                 this,
@@ -655,22 +660,39 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
                 }
                 ChatUtils.MessageType.TYPING -> {
+
                     val splitMessage = message.split("\$\$\$typing....")[0]
                     splitMessage.let {
-                        ChatMessageFragment.tvTyping!!.visibility = View.VISIBLE
-                        ChatMessageFragment.tvTyping!!.text =
-                            (splitMessage + " is Typing...").toString()
-                        val someHandler = Handler(Looper.getMainLooper())
-                        someHandler.postDelayed(object : Runnable {
-                            override fun run() {
-                                ChatMessageFragment.tvTyping!!.text = " "
-                                // ChatMessageFragment.tvTyping!!.visibility = View.GONE
-                                // someHandler.postDelayed(this, 2000)
-                            }
-                        }, 3000)
+                        if (ChatMessageFragment.tvTyping != null) {
+                            ChatMessageFragment.tvTyping!!.visibility = View.VISIBLE
+                            ChatMessageFragment.tvTyping!!.text =
+                                (splitMessage + " is Typing...").toString()
+                            val someHandler = Handler(Looper.getMainLooper())
+                            someHandler.postDelayed(object : Runnable {
+                                override fun run() {
+                                    ChatMessageFragment.tvTyping!!.text = " "
+                                    // ChatMessageFragment.tvTyping!!.visibility = View.GONE
+                                    // someHandler.postDelayed(this, 2000)
+                                }
+                            }, 3000)
 
+                        }
                     }
                 }
+                ChatUtils.MessageType.CHAT_MESSAGE -> {
+                    if (!isActive) {
+                        mediaPlayer = MediaPlayer.create(applicationContext, R.raw.newmessage)
+                        mediaPlayer!!.start()
+                    }
+                    if (MeetingOptionBottomSheetFragment.ivMsg != null) {
+                        if (!isActive && message.isNotEmpty()) {
+                            MeetingOptionBottomSheetFragment.ivMsg!!.setImageResource(R.drawable.new_message_alert)
+                        } else {
+                            MeetingOptionBottomSheetFragment.ivMsg!!.setImageResource(R.drawable.messages_active)
+                        }
+                    }
+                }
+
             }
         }
 
@@ -1054,6 +1076,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         private const val USER_TYPE_STUDENT = 1
         private const val USER_TYPE_TEACHER = 2
         private const val LOCAL_PARTICIPANT_STUB_SID = ""
+        var isActive: Boolean = false
+        var isFirstTime: Boolean = true
         fun startActivity(context: Context, appLink: Uri?) {
             val intent = Intent(context, RoomActivity::class.java)
             intent.data = appLink
