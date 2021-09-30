@@ -56,8 +56,14 @@ class MeetingOptionBottomSheetFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (!RoomActivity.isActive && !RoomActivity.isFirstTime) {
+            binding.ivMsg.setImageResource(R.drawable.new_message_alert)
+        } else {
+            binding.ivMsg.setImageResource(R.drawable.messages_active)
+        }
         ivMsg = binding.ivMsg
-        binding.ivScreenshare.setTag(R.id.imageTag, 1)
+     //   binding.ivScreenshare.setTag(R.id.imageTag, 1)
         binding.showFiles.setOnClickListener {
             dismiss()
             meettingOptionHandler.handleOpenFiles()
@@ -72,7 +78,7 @@ class MeetingOptionBottomSheetFragment(
         }
 
         binding.showMessage.setOnClickListener {
-            RoomActivity.isFirstTime = false
+            RoomActivity.isFirstTime = true
             ivMsg!!.setImageResource(R.drawable.messages_active)
             dismiss()
             meettingOptionHandler.handleShowMessages()

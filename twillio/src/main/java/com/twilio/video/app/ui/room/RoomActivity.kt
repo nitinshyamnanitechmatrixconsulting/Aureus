@@ -690,6 +690,10 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         } else {
                             MeetingOptionBottomSheetFragment.ivMsg!!.setImageResource(R.drawable.messages_active)
                         }
+
+                    }
+                    if(message.isNotEmpty()){
+                        isFirstTime=false
                     }
                 }
 
