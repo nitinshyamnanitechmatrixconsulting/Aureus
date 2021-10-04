@@ -42,11 +42,16 @@ internal class BottomParticipantViewHolder(
                 }
             }
 
+
             swipeLayout = thumb.findViewById(R.id.swipe)
             view = thumb.findViewById(R.id.view)
 
 
-            swipeLayout!!.isClickable = true
+            swipeLayout!!.setOnClickListener { viewEventAction(participantViewState.sid?.let { it1 ->
+                PinParticipant(
+                    it1
+                )
+            }!!) }
 
 
             if (participantViewState.isLocalParticipant) {
