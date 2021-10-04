@@ -444,6 +444,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             }
             data?.let { data ->
                 roomViewModel.processInput(StartScreenCapture(resultCode, data))
+                isBordcasting = true
             }
         }
     }
@@ -692,8 +693,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         }
 
                     }
-                    if(message.isNotEmpty()){
-                        isFirstTime=false
+                    if (message.isNotEmpty()) {
+                        isFirstTime = false
                     }
                 }
 
@@ -772,12 +773,13 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
     override fun handleScreenShare(imageView: ImageView) {
         val tag = imageView.getTag(R.id.imageTag)
-        if (tag == 1) {
+        if (!isBordcasting) {
             requestScreenCapturePermission()
             imageView.setTag(R.id.imageTag, -1)
         } else {
             roomViewModel.processInput(StopScreenCapture)
             imageView.setTag(R.id.imageTag, 1)
+            isBordcasting = false
         }
 
     }
@@ -1082,6 +1084,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         private const val LOCAL_PARTICIPANT_STUB_SID = ""
         var isActive: Boolean = false
         var isFirstTime: Boolean = true
+        var isBordcasting: Boolean = false
         fun startActivity(context: Context, appLink: Uri?) {
             val intent = Intent(context, RoomActivity::class.java)
             intent.data = appLink

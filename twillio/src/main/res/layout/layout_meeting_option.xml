@@ -157,6 +157,7 @@
                             app:srcCompat="@drawable/present_screen_active" />
 
                         <TextView
+                            android:id="@+id/tvShareScreen"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:autoSizeTextType="uniform"

@@ -1,5 +1,6 @@
 package com.twilio.video.app.ui.room.modal
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
@@ -54,6 +55,7 @@ class MeetingOptionBottomSheetFragment(
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,6 +63,11 @@ class MeetingOptionBottomSheetFragment(
             binding.ivMsg.setImageResource(R.drawable.new_message_alert)
         } else {
             binding.ivMsg.setImageResource(R.drawable.messages_active)
+        }
+        if(!RoomActivity.isBordcasting){
+            binding.tvShareScreen.text="Present Screen"
+        }else{
+            binding.tvShareScreen.text="Stop Presenting"
         }
         ivMsg = binding.ivMsg
      //   binding.ivScreenshare.setTag(R.id.imageTag, 1)
