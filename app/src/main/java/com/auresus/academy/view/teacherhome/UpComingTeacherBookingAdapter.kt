@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.RecyclerView
+import com.auresus.academy.R
 import com.auresus.academy.databinding.ItemTeacherBookinggBinding
 import com.auresus.academy.databinding.ItemUpcomingLessonBinding
 import com.auresus.academy.model.bean.Booking
@@ -15,6 +16,7 @@ import com.auresus.academy.utils.AureusColors
 import com.auresus.academy.utils.DateTimeUtil
 import com.auresus.academy.utils.DateTimeUtil.bookingTimeParser
 import com.auresus.academy.view.OnItemClickListener
+import kotlinx.android.synthetic.main.activity_lesson_details.*
 import java.text.SimpleDateFormat
 
 class UpComingTeacherBookingAdapter(private val items: MutableList<TeacherBooking>) :
@@ -58,6 +60,10 @@ class UpComingTeacherBookingAdapter(private val items: MutableList<TeacherBookin
                 }
                 binding.lessonTime.text = tileLabel
                binding.studentDescription.text = formattedDescription
+                if (booking.Lesson_Type__c == "Online")
+                    binding.timeIcon.setImageResource(R.drawable.globe_icon)
+                else
+                    binding.timeIcon.setImageResource(R.drawable.ic_baseline_location)
 
             }
         }

@@ -169,6 +169,10 @@ class LessonDetailsActivity : BaseActivity() {
             tvTime.text =
                 DateTimeUtil.timeFormatter.format(DateTimeUtil.bookingTimeParser.parse(it.Start_Time__c))
             tvStudentName.text = it.student_Name__c
+            if (it.Lesson_Type__c == "Online")
+               ivLocationIcon.setImageResource(R.drawable.globe_icon)
+            else
+                ivLocationIcon.setImageResource(R.drawable.ic_baseline_location)
         }
     }
 

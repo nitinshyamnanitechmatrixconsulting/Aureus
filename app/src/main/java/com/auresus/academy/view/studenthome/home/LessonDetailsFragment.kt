@@ -119,6 +119,10 @@ class LessonDetailsFragment : BaseFragment() {
         binding.teacherName.text = lessonDetails?.teacherName
         binding.lessonDuration.text = lessonDetails?.duration
         binding.lessonLocation.text = lessonDetails?.lessonTypeNew
+        if (lessonDetails!!.lessonTypeNew == "Online")
+            binding.ivLocationIcon.setImageResource(R.drawable.globe_icon)
+        else
+            binding.ivLocationIcon.setImageResource(R.drawable.ic_baseline_location)
 
         if (lessonDetails!!.lessonTypeNew == "Online")
             binding.convetOnline.text = "Convert To In Center"

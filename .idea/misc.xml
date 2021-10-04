@@ -40,7 +40,9 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_arrow_right.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_baseline_access.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_baseline_checkbox.xml" value="0.20512820512820512" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_baseline_location.xml" value="0.19722222222222222" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_file_present.xml" value="0.19166666666666668" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_online.xml" value="0.19722222222222222" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/item_divider.xml" value="0.19166666666666668" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/local_thumb_view.xml" value="0.18703703703703703" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/notification_badge.xml" value="0.20833333333333334" />
@@ -56,14 +58,16 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_feedback.xml" value="0.1712962962962963" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_join_online_session.xml" value="0.14537037037037037" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_join_session.xml" value="0.1824074074074074" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_lesson_details.xml" value="0.22" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_login.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/bottom_sheet_enrollemnt.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_home.xml" value="0.14907407407407408" />
-        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_lesson_details.xml" value="0.33" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_lesson_details.xml" value="0.15462962962962962" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_lesson_files.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_online_lesson_details.xml" value="0.15" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_refer_freind.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_schedule.xml" value="0.18923076923076923" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/item_teacher_bookingg.xml" value="0.22" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/item_upcoming_lesson.xml" value="0.25" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/toolbar_home.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/circleyellow_bg.xml" value="0.14444444444444443" />
