@@ -17,6 +17,8 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.twilio.video.app.R;
 import com.twilio.video.app.helper.ApiHelper;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +33,14 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapter.SimpleViewHolder> {
     private Context mContext;
     private ArrayList<Attachment> mDataset;
+    private String type;
 
     //protected SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
 
-    public RecyclerViewAdapter(Context context, List<Attachment> objects) {
+    public RecyclerViewAdapter(Context context, List<Attachment> objects,  String type) {
         this.mContext = context;
         this.mDataset = (ArrayList<Attachment>) objects;
+        this.type=type;
     }
 
     @Override
@@ -47,6 +51,9 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position) {
+        if(type.equals("3")){
+            viewHolder.swipeLayout.setSwipeEnabled(false);
+        }
         Attachment item = mDataset.get(position);
         viewHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
         viewHolder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {

@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.util.Attributes
-import com.google.firebase.crashlytics.internal.common.CommonUtils
 import com.twilio.video.app.R
 import com.twilio.video.app.data.api.model.ApiResponse
 import com.twilio.video.app.ui.room.RoomViewModel
@@ -308,7 +307,7 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
 
     private fun setRecyclerView() {
         recycler_view?.layoutManager = LinearLayoutManager(activity)
-        mAdapter = RecyclerViewAdapter(activity, mDataSet)
+        mAdapter = RecyclerViewAdapter(activity, mDataSet,dashboardViewModel.type)
         (mAdapter as RecyclerViewAdapter).mode = Attributes.Mode.Single
         recycler_view?.setAdapter(mAdapter)
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
