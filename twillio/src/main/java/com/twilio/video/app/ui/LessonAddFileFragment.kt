@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.util.Attributes
 import com.twilio.video.app.R
 import com.twilio.video.app.data.api.model.ApiResponse
+import com.twilio.video.app.ui.room.RoomActivity
 import com.twilio.video.app.ui.room.RoomViewModel
 import com.twilio.video.app.util.Connectivity
 import com.twilio.video.app.util.allSupportedDocumentsTypesToExtensions
@@ -172,6 +173,20 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
         simpleWebView?.settings?.useWideViewPort = false
         simpleWebView?.settings?.domStorageEnabled = true
             simpleWebView?.loadUrl(url)
+        simpleWebView?.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                val url = request?.url.toString()
+                view?.loadUrl(url)
+                val uri = Uri.parse(url)
+                val action = uri.getQueryParameter("upload")
+
+                when (action) {
+                    "true" -> handleUploadComplete()
+                }
+                return super.shouldOverrideUrlLoading(view, request)
+            }
+        }
+/*
             simpleWebView?.webViewClient = object : WebViewClient() {
                 private fun handleUrl(url: String?) {
                     if (!isConsentFormUrl(url)) {
@@ -181,7 +196,7 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
                     val action = uri.getQueryParameter("upload")
 
                     when (action) {
-                        "true" -> handleUploadComplete()
+                      "true" -> handleUploadComplete()
                         else -> {
 
                         }
@@ -215,77 +230,78 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
                     super.onLoadResource(view, url)
                 }
             }
-            simpleWebView?.setWebChromeClient(object : WebChromeClient() {
+*/
+        simpleWebView?.webChromeClient = object : WebChromeClient() {
 
-                // For 3.0+ Devices (Start)
-                // onActivityResult attached before constructor
-                fun openFileChooser(uploadMsg: ValueCallback<Uri>, acceptType: String) {
-                    mUploadMessage = uploadMsg
-                    val i = Intent(Intent.ACTION_GET_CONTENT)
-                    i.addCategory(Intent.CATEGORY_OPENABLE)
-                    i.type = "*/*"
-                    startActivityForResult(
-                        Intent.createChooser(i, "File Browser"),
-                        FILECHOOSER_RESULTCODE
-                    )
-                }
+            // For 3.0+ Devices (Start)
+            // onActivityResult attached before constructor
+            fun openFileChooser(uploadMsg: ValueCallback<Uri>, acceptType: String) {
+                mUploadMessage = uploadMsg
+                val i = Intent(Intent.ACTION_GET_CONTENT)
+                i.addCategory(Intent.CATEGORY_OPENABLE)
+                i.type = "*/*"
+                startActivityForResult(
+                    Intent.createChooser(i, "File Browser"),
+                    FILECHOOSER_RESULTCODE
+                )
+            }
 
 
-                //For Android 4.1 only
-                fun openFileChooser(
-                    uploadMsg: ValueCallback<Uri>,
-                    acceptType: String,
-                    capture: String
-                ) {
-                    mUploadMessage = uploadMsg
-                    val intent = Intent(Intent.ACTION_GET_CONTENT)
-                    intent.addCategory(Intent.CATEGORY_OPENABLE)
-                    intent.type = "*/*"
-                    startActivityForResult(
-                        Intent.createChooser(intent, "File Browser"),
-                        FILECHOOSER_RESULTCODE
-                    )
-                }
+            //For Android 4.1 only
+            fun openFileChooser(
+                uploadMsg: ValueCallback<Uri>,
+                acceptType: String,
+                capture: String
+            ) {
+                mUploadMessage = uploadMsg
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.addCategory(Intent.CATEGORY_OPENABLE)
+                intent.type = "*/*"
+                startActivityForResult(
+                    Intent.createChooser(intent, "File Browser"),
+                    FILECHOOSER_RESULTCODE
+                )
+            }
 
-                fun openFileChooser(uploadMsg: ValueCallback<Uri>) {
-                    mUploadMessage = uploadMsg
-                    val i = Intent(Intent.ACTION_GET_CONTENT)
-                    i.addCategory(Intent.CATEGORY_OPENABLE)
-                    i.type = "*/*"
-                    startActivityForResult(
-                        Intent.createChooser(i, "File Browser"),
-                        FILECHOOSER_RESULTCODE
-                    )
-                }
+            fun openFileChooser(uploadMsg: ValueCallback<Uri>) {
+                mUploadMessage = uploadMsg
+                val i = Intent(Intent.ACTION_GET_CONTENT)
+                i.addCategory(Intent.CATEGORY_OPENABLE)
+                i.type = "*/*"
+                startActivityForResult(
+                    Intent.createChooser(i, "File Browser"),
+                    FILECHOOSER_RESULTCODE
+                )
+            }
 
-                // For Lollipop 5.0+ Devices
-                override fun onShowFileChooser(
-                    mWebView: WebView,
-                    filePathCallback: ValueCallback<Array<Uri>>,
-                    fileChooserParams: WebChromeClient.FileChooserParams
-                ): Boolean {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        if (uploadMessage != null) {
-                            uploadMessage?.onReceiveValue(null)
-                            uploadMessage = null
-                        }
-                        uploadMessage = filePathCallback
-                        val intent = fileChooserParams.createIntent()
-                        try {
-                            startActivityForResult(intent, REQUEST_SELECT_FILE)
-                        } catch (e: ActivityNotFoundException) {
-                            uploadMessage = null
-                            Toast.makeText(activity, "Cannot Open File Chooser", Toast.LENGTH_LONG)
-                                .show()
-                            return false
-                        }
-                        return true
-                    } else {
+            // For Lollipop 5.0+ Devices
+            override fun onShowFileChooser(
+                mWebView: WebView,
+                filePathCallback: ValueCallback<Array<Uri>>,
+                fileChooserParams: WebChromeClient.FileChooserParams
+            ): Boolean {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    if (uploadMessage != null) {
+                        uploadMessage?.onReceiveValue(null)
+                        uploadMessage = null
+                    }
+                    uploadMessage = filePathCallback
+                    val intent = fileChooserParams.createIntent()
+                    try {
+                        startActivityForResult(intent, REQUEST_SELECT_FILE)
+                    } catch (e: ActivityNotFoundException) {
+                        uploadMessage = null
+                        Toast.makeText(activity, "Cannot Open File Chooser", Toast.LENGTH_LONG)
+                            .show()
                         return false
                     }
+                    return true
+                } else {
+                    return false
                 }
+            }
 
-            })
+        }
 
     }
 

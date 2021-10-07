@@ -153,6 +153,20 @@ class LessonAddFileFragment : BaseFragment() {
             simpleWebView.settings.useWideViewPort = false
             simpleWebView.settings.domStorageEnabled = true
             simpleWebView.loadUrl(url)
+            simpleWebView?.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                    val url = request?.url.toString()
+                    view?.loadUrl(url)
+                    val uri = Uri.parse(url)
+                    val action = uri.getQueryParameter("upload")
+
+                    when (action) {
+                        "true" -> handleUploadComplete()
+                    }
+                    return super.shouldOverrideUrlLoading(view, request)
+                }
+            }
+/*
             simpleWebView.webViewClient = object : WebViewClient() {
                 private fun handleUrl(url: String?) {
                     if (!isConsentFormUrl(url)) {
@@ -195,6 +209,7 @@ class LessonAddFileFragment : BaseFragment() {
                     super.onLoadResource(view, url)
                 }
             }
+*/
             simpleWebView.webChromeClient = object : WebChromeClient() {
 
                 // For 3.0+ Devices (Start)

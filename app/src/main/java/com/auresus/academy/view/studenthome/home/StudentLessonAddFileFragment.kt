@@ -158,6 +158,20 @@ class StudentLessonAddFileFragment : BaseFragment() {
             //simpleWebView.settings.pluginState = WebSettings.PluginState.ON;
             //webSettings.setLoadWithOverviewMode(true);
             simpleWebView.loadUrl(url)
+            simpleWebView?.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                    val url = request?.url.toString()
+                    view?.loadUrl(url)
+                    val uri = Uri.parse(url)
+                    val action = uri.getQueryParameter("upload")
+
+                    when (action) {
+                        "true" -> handleUploadComplete()
+                    }
+                    return super.shouldOverrideUrlLoading(view, request)
+                }
+            }
+/*
             simpleWebView.webViewClient = object : WebViewClient() {
                 private fun handleUrl(url: String?) {
                     if (!isConsentFormUrl(url)) {
@@ -202,6 +216,7 @@ class StudentLessonAddFileFragment : BaseFragment() {
 
                 }
             }
+*/
 
             simpleWebView.webChromeClient = object : WebChromeClient() {
 

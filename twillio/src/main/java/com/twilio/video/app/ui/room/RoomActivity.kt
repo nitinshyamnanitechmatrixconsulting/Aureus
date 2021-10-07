@@ -38,6 +38,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
@@ -46,6 +47,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.*
 import co.intentservice.chatui.ChatView
@@ -90,8 +92,6 @@ import com.twilio.video.app.helper.StringHelper
 class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
     private var isConnected: Boolean = false
-
-
     private var participantCount: Int = 0
     private var isUp: Boolean = false
     private var roomID: String = ""
@@ -645,9 +645,10 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                     splitMessage.let {
                         if (it.size > 1) {
                             val name = it[1]
-                            if (displayName.equals(name)) {
+                            if (displayName.equals(name,ignoreCase = true)) {
                                 disconnectButtonClick()
                             }
+                            Log.v("name",name)
                         }
                     }
                     /* val requestType = message.split("_\$\$")[0]
@@ -1117,5 +1118,12 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
-
+    fun recreateFragment(fragment: Fragment){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            supportFragmentManager.beginTransaction().detach(fragment).commitNow()
+            supportFragmentManager.beginTransaction().attach(fragment).commitNow()
+        }else{
+            supportFragmentManager.beginTransaction().detach(fragment).attach(fragment).commitNow()
+        }
+    }
 }
