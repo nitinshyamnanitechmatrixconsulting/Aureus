@@ -328,8 +328,7 @@
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
                                 android:contentDescription="TODO"
-                                android:src="@drawable/ic_baseline_location"
-                                app:tint="@color/black_text" />
+                                android:src="@drawable/ic_baseline_location" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"

@@ -67,7 +67,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/onlineMeetingCode"
+                android:id="@+id/onlineMeetingId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -77,7 +77,7 @@
                 android:textSize="@dimen/text_size_online_meeting_code" />
 
             <TextView
-                android:id="@+id/onlineMeetingId"
+                android:id="@+id/onlineMeetingCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -85,6 +85,7 @@
                 android:fontFamily="@font/lato_bold"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/text_size_online_meeting_code" />
+
 
         </LinearLayout>
     </RelativeLayout>

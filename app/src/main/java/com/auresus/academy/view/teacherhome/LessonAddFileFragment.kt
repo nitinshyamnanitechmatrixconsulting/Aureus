@@ -123,8 +123,10 @@ class LessonAddFileFragment : BaseFragment() {
         setRecyclerView()
         booking = arguments?.get(EXTRA_TEACHER_BOOKING) as TeacherBooking
         val isOnline = booking?.Lesson_Type__c == "Online"
-        if (!isOnline) view.findViewById<LinearLayout>(R.id.toolbar).visibility = View.GONE
-        backButton.visibility = View.GONE
+       // if (!isOnline) view.findViewById<LinearLayout>(R.id.toolbar).visibility = View.GONE
+        view.findViewById<LinearLayout>(R.id.toolbar).visibility = View.GONE
+       // backButton.visibility = View.GONE
+       // toolbar_title.visibility = View.GONE
         setAttachmentListAObserver()
         initWebView()
         callAttachmentList()
