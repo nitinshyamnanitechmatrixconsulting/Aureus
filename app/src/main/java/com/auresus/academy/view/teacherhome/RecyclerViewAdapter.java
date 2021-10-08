@@ -1,10 +1,16 @@
 package com.auresus.academy.view.teacherhome;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -56,7 +62,8 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         viewHolder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
             @Override
             public void onDoubleClick(SwipeLayout layout, boolean surface) {
-                Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
+                showDialog("https://full-aureusgroup.cs117.force.com/servlet/servlet.FileDownload?file="+item.getFileID());
             }
         });
         viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +114,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
             textViewFileSize = itemView.findViewById(R.id.tvFileSize);
             buttonDelete = itemView.findViewById(R.id.deleteButton);
 
+/*
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -114,6 +122,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
                     Toast.makeText(view.getContext(), "onItemSelected: " + textViewFileName.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
+*/
         }
     }
 
@@ -145,6 +154,36 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
 
             }
         });
+    }
+    @SuppressLint("SetJavaScriptEnabled")
+    void showDialog(String url) {
+        final Dialog dialog = new Dialog(mContext);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(com.twilio.video.app.R.layout.dialog_open_file);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        wlp.gravity = Gravity.CENTER;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
+        window.setAttributes( wlp );
+        dialog.getWindow().setLayout( WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.MATCH_PARENT );
+
+        ImageView ivClose = (ImageView) dialog.findViewById(com.twilio.video.app.R.id.ivClose);
+
+
+        WebView webview = (WebView) dialog.findViewById(com.twilio.video.app.R.id.webview);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.getSettings().setUseWideViewPort(true);
+        webview.loadUrl(url);
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 }

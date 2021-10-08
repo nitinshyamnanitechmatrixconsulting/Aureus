@@ -61,6 +61,7 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_lesson_details.xml" value="0.22" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/activity_login.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/bottom_sheet_enrollemnt.xml" value="0.1921875" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/dialog_open_file.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_home.xml" value="0.14907407407407408" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_lesson_details.xml" value="0.15462962962962962" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/fragment_lesson_files.xml" value="0.1921875" />
@@ -85,6 +86,7 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/alerts_two_buttons.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/assignment_dialog_list_view.xml" value="0.18923076923076923" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/content_room.xml" value="0.18" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/dialog_open_file.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/fragment_layout_option.xml" value="0.1537037037037037" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/fragment_lession_detail_meeting.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/fragment_lesson_add_files.xml" value="0.1921875" />

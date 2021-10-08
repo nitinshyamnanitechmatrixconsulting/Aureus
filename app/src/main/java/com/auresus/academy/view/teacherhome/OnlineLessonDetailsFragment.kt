@@ -57,7 +57,7 @@ class OnlineLessonDetailsFragment : BaseFragment() {
         val shortRoom=roomName!!.substringAfter("-")
         booking?.Online_Lesson_Passcode__c?.let {
             onlineMeetingId.text =
-                String.format("Online Meeting Id: %s", shortRoom)
+                String.format("Booking Id: %s", shortRoom)
         }
         buttonLink.text = booking?.Online_Lesson_URL__c
         buttonCopyLink.setOnClickListener {

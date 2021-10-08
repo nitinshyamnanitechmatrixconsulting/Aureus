@@ -165,8 +165,8 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
-            val url =
-                "https://full-aureusgroup.cs117.force.com/AureusFileUploadPageFromIpad?Color=black&id=$room_id"
+            val url = "https://full-aureusgroup.cs117.force.com/AureusFileUploadPageFromIpad?Color=black&id=$room_id"
+       // val url  = "https://full-aureusgroup.cs117.force.com/servlet/servlet.FileDownload?file=00P1m000001JYGkEAO"
         simpleWebView?.isClickable = true;
         simpleWebView?.settings?.javaScriptEnabled = true
         simpleWebView?.settings?.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL;
