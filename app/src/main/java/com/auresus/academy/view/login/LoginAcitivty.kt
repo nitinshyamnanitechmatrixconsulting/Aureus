@@ -62,17 +62,22 @@ class LoginAcitivty : BaseActivity() {
             }
             ApiResponse.Status.ERROR -> {
                 progressLoader.isVisible(false)
-               // if (response.error?.code == 500)
+                if (response.error?.code == 500)
                     Toast.makeText(this, response.error?.message, Toast.LENGTH_LONG).show()
-              /*  else
+                else
                     Toast.makeText(
                         this,
                         getString(R.string.internal_server_error),
                         Toast.LENGTH_LONG
-                    ).show()*/
+                    ).show()
 
             }
+            else -> {
+                progressLoader.isVisible(false)
+                Toast.makeText(this, "some thing went wrong", Toast.LENGTH_LONG).show()
+            }
         }
+
     }
 
     private fun setLoginData(data: CommonLoginResponse?) {
