@@ -72,10 +72,10 @@ class LoginAcitivty : BaseActivity() {
                     ).show()
 
             }
-            else -> {
+            /*else -> {
                 progressLoader.isVisible(false)
                 Toast.makeText(this, "some thing went wrong", Toast.LENGTH_LONG).show()
-            }
+            }*/
         }
 
     }
