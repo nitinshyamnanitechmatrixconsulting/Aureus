@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,10 +60,18 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position) {
         Attachment item = mDataset.get(position);
         viewHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+/*
         viewHolder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
             @Override
             public void onDoubleClick(SwipeLayout layout, boolean surface) {
                 //Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
+                showDialog("https://full-aureusgroup.cs117.force.com/servlet/servlet.FileDownload?file="+item.getFileID());
+            }
+        });
+*/
+        viewHolder.rlMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 showDialog("https://full-aureusgroup.cs117.force.com/servlet/servlet.FileDownload?file="+item.getFileID());
             }
         });
@@ -105,6 +114,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         TextView textViewFileName;
         TextView textViewFileSize;
         LinearLayout buttonDelete;
+        RelativeLayout rlMain;
 
         public SimpleViewHolder(View itemView) {
             super(itemView);
@@ -113,6 +123,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
             textViewFileName = itemView.findViewById(R.id.tvFileName);
             textViewFileSize = itemView.findViewById(R.id.tvFileSize);
             buttonDelete = itemView.findViewById(R.id.deleteButton);
+            rlMain = itemView.findViewById(R.id.rlMain);
 
 /*
             itemView.setOnClickListener(new View.OnClickListener() {

@@ -16,6 +16,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,8 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         if (type.equals("3")) {
             viewHolder.swipeLayout.setSwipeEnabled(false);
         }
+        viewHolder.swipeLayout.setClickable(true);
+
         Attachment item = mDataset.get(position);
         viewHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
         viewHolder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
@@ -89,7 +92,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         viewHolder.textViewFileSize.setText(item.getFileSize());
         mItemManger.bindView(viewHolder.itemView, position);
 
-        viewHolder.swipeLayout.setOnClickListener(new View.OnClickListener() {
+        viewHolder.rlMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog("https://full-aureusgroup.cs117.force.com/servlet/servlet.FileDownload?file="+item.getFileID());
@@ -114,6 +117,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         TextView textViewFileName;
         TextView textViewFileSize;
         LinearLayout buttonDelete;
+        RelativeLayout rlMain;
 
         public SimpleViewHolder(View itemView) {
             super(itemView);
@@ -122,6 +126,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
             textViewFileName = itemView.findViewById(R.id.tvFileName);
             textViewFileSize = itemView.findViewById(R.id.tvFileSize);
             buttonDelete = itemView.findViewById(R.id.deleteButton);
+            rlMain = itemView.findViewById(R.id.rlMain);
 
 /*
             itemView.setOnClickListener(new View.OnClickListener() {
