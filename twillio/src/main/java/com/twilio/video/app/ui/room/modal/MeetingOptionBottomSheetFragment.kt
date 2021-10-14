@@ -65,12 +65,12 @@ class MeetingOptionBottomSheetFragment(
             binding.ivMsg.setImageResource(R.drawable.messages_active)
         }
         if(!RoomActivity.isBordcasting){
-            binding.tvShareScreen.text="Present Screen"
+            binding.tvShareScreen.text="Share Screen"
         }else{
-            binding.tvShareScreen.text="Stop Presenting"
+            binding.tvShareScreen.text="Stop Sharing"
         }
         ivMsg = binding.ivMsg
-     //   binding.ivScreenshare.setTag(R.id.imageTag, 1)
+     // binding.ivScreenshare.setTag(R.id.imageTag, 1)
         binding.showFiles.setOnClickListener {
             dismiss()
             meettingOptionHandler.handleOpenFiles()

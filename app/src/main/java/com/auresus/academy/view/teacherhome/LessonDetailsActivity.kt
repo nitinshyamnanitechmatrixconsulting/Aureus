@@ -118,7 +118,7 @@ class LessonDetailsActivity : BaseActivity() {
             if (isOnline) {
                 inCenterLayoutContainer.visibility = View.GONE
                 onlineLayoutContainer.visibility = View.VISIBLE
-                val bookingdate = SimpleDateFormat("yyyy-MM-dd").parse(it.Booking_Date__c)
+                val bookingdate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(it.Booking_Date__c+" "+it.Start_Time__c)
                 val isBookingInPast = bookingdate.before(currentDate)
                 val firstTabTitle =
                     if (isBookingInPast) getString(R.string.lesson_history) else getString(R.string.online_lesson_details)

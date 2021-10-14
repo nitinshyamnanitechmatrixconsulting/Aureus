@@ -145,7 +145,7 @@ class StudentLessonAddFileFragment : BaseFragment() {
 
     private fun initWebView() {
         booking?.let {
-            val roomName = it.centerId
+            val roomName = it.bookingId
             val url =
                 "https://full-aureusgroup.cs117.force.com/AureusFileUploadPageFromIpad?Color=white&id=$roomName"
             simpleWebView.isClickable = true;

@@ -41,30 +41,32 @@ class StudentOnlineLessonDetailsFragment : BaseFragment() {
     override fun onViewsInitialized(binding: ViewDataBinding, view: View) {
         val booking = arguments?.get(EXTRA_MEETING_CODE) as Booking
         booking?.let {
-            val bookingdate = SimpleDateFormat("yyyy-MM-dd").parse(it.date)
+            val bookingdate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(it.date+" "+it.time)
             val isPastBookingDate = bookingdate.before(Date())
             detailLayout.isVisible = !isPastBookingDate
         }
-        booking?.lessonPasscode?.let {
+        booking?.lessonPasscode.let {
             onlineMeetingCode.text =
-                String.format("Online Meeting Code: %s", booking?.lessonPasscode)
+                String.format("Online Meeting Code: %s", booking.lessonPasscode)
         }
-        val uri = Uri.parse(booking?.lessonOnlineURL)
+
+        val uri = Uri.parse(booking.lessonOnlineURL)
+
         val roomName = uri.getQueryParameter("room_name")
         val shortRoomName= roomName!!.substringAfter("-")
-        booking?.lessonPasscode?.let {
+        booking.lessonPasscode.let {
             onlineMeetingId.text =
                 String.format("Booking Id: %s", shortRoomName)
         }
-        buttonLink.text = booking?.lessonOnlineURL
+        buttonLink.text = booking.lessonOnlineURL
         buttonCopyLink.setOnClickListener {
             ShareCompat.IntentBuilder.from(activity as FragmentActivity)
                 .setType("text/plain")
-                .setText(booking?.lessonOnlineURL+"&password="+booking?.lessonPasscode)
+                .setText(booking.lessonOnlineURL +"&password="+ booking.lessonPasscode)
                 .startChooser();
         }
         buttonJoinOnlineStudio.setOnClickListener {
-            booking?.let {
+            booking.let {
                 val studentName = it.studentName
                 it.lessonOnlineURL?.let {
                     val uri = Uri.parse(booking?.lessonOnlineURL)
@@ -73,17 +75,17 @@ class StudentOnlineLessonDetailsFragment : BaseFragment() {
                     val room_code = booking.lessonPasscode
                     val type="2"
                     roomName?.let {
-                       /* startActivity(Intent(
-                            context,VideoActivity::class.java
-                        ))*/
-                       RoomActivity.open(
-                           activity as BaseActivity,
-                           roomName,
-                           room_id,
-                           studentName,
-                           room_code,
-                           type
-                       )
+                        /* startActivity(Intent(
+                                    context,VideoActivity::class.java
+                                ))*/
+                        RoomActivity.open(
+                            activity as BaseActivity,
+                            roomName,
+                            room_id,
+                            studentName,
+                            room_code,
+                            type
+                        )
                     }
                 }
             }

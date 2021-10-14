@@ -125,6 +125,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     @Inject
     lateinit var audioSwitch: AudioSwitch
     var mediaPlayer: MediaPlayer? = null
+    var audioManager: AudioManager? = null
 
     /** Coordinates participant thumbs and primary participant rendering.  */
     private lateinit var primaryParticipantController: PrimaryParticipantController
@@ -662,7 +663,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
 
                 }
                 ChatUtils.MessageType.TYPING -> {
-
                     val splitMessage = message.split("\$\$\$typing....")[0]
                     splitMessage.let {
                         if (ChatMessageFragment.tvTyping != null) {
@@ -683,6 +683,14 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 }
                 ChatUtils.MessageType.CHAT_MESSAGE -> {
                     if (!isActive) {
+                        audioManager =
+                            applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                        audioManager!!.setStreamVolume(
+                            AudioManager.STREAM_MUSIC,
+                            audioManager!!.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+                            0)
+                       // audioManager!!.setStreamVolume(AudioManager.STREAM_MUSIC, 100, 0);
+                        //  audioManager!!.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
                         mediaPlayer = MediaPlayer.create(applicationContext, R.raw.newmessage)
                         mediaPlayer!!.start()
                     }

@@ -198,7 +198,7 @@ class LessonDetailsFragment : BaseFragment() {
 
     private fun initTabViewPager() {
         lessonDetails?.let {
-            val bookingdate = SimpleDateFormat("yyyy-MM-dd").parse(it.date)
+            val bookingdate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(it.date+" "+it.time)
             val isBookingInPast = bookingdate.before(currentDate)
             val firstTabTitle =
                 if (isBookingInPast) getString(R.string.lesson_history) else getString(R.string.online_lesson_details)
