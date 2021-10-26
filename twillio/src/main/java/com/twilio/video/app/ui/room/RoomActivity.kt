@@ -420,7 +420,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 R.anim.slide_out_up
             );
             replace(R.id.container, instance, LessonAddFileFragment.TAG)
-            //  addToBackStack(null)
+          addToBackStack(null)
         }
     }
 
@@ -1125,7 +1125,11 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     private fun hideKeyboard() {
         val imm: InputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        if (imm != null && imm.isActive) {
+            if (currentFocus != null)
+                imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+
+        }
     }
 
     fun recreateFragment(fragment: Fragment) {
