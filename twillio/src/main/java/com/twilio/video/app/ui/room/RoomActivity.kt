@@ -420,7 +420,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 R.anim.slide_out_up
             );
             replace(R.id.container, instance, LessonAddFileFragment.TAG)
-            addToBackStack(null)
+            //  addToBackStack(null)
         }
     }
 
@@ -454,9 +454,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         val count = supportFragmentManager.backStackEntryCount
         if (count >= 1) {
             supportFragmentManager.popBackStack()
-            if (currentFocus != null) {
-                hideKeyboard()
-            }
+            hideKeyboard()
         } else if (binding.actionLayout.visibility == View.VISIBLE) {
             super.onBackPressed()
         } else {
