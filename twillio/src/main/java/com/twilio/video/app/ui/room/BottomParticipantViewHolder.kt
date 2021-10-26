@@ -1,7 +1,9 @@
 package com.twilio.video.app.ui.room
 
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.SwipeLayout
 import com.twilio.video.NetworkQualityLevel
@@ -29,6 +31,7 @@ internal class BottomParticipantViewHolder(
     //   private val localParticipantIdentity = roomViewModel.name
 
     var swipeLayout: SwipeLayout? = null
+    var llMain: LinearLayout? = null
     var view: View? = null
 
     fun bind(participantViewState: ParticipantViewState, viewEventAction: (RoomViewEvent) -> Unit) {
@@ -43,11 +46,14 @@ internal class BottomParticipantViewHolder(
             }
 
 
+
             swipeLayout = thumb.findViewById(R.id.swipe)
+            llMain = thumb.findViewById(R.id.llMain)
             view = thumb.findViewById(R.id.view)
+            swipeLayout!!.isClickable=false
 
 
-            swipeLayout!!.setOnClickListener { viewEventAction(participantViewState.sid?.let { it1 ->
+            llMain!!.setOnClickListener { viewEventAction(participantViewState.sid?.let { it1 ->
                 PinParticipant(
                     it1
                 )

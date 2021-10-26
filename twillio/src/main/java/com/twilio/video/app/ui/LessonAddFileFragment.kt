@@ -149,7 +149,6 @@ class LessonAddFileFragment( val dashboardViewModel: RoomViewModel) : Fragment()
         callAttachmentList()
 
        backButton!!.setOnClickListener(View.OnClickListener { view ->
-
             getActivity()?.onBackPressed()
             // Do some work here
         })

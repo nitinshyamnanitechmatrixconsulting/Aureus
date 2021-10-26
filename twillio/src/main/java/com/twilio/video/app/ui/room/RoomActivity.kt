@@ -454,7 +454,9 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         val count = supportFragmentManager.backStackEntryCount
         if (count >= 1) {
             supportFragmentManager.popBackStack()
-            hideKeyboard()
+            if (currentFocus != null) {
+                hideKeyboard()
+            }
         } else if (binding.actionLayout.visibility == View.VISIBLE) {
             super.onBackPressed()
         } else {
@@ -646,10 +648,10 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                     splitMessage.let {
                         if (it.size > 1) {
                             val name = it[1]
-                            if (displayName.equals(name,ignoreCase = true)) {
+                            if (displayName.equals(name, ignoreCase = true)) {
                                 disconnectButtonClick()
                             }
-                            Log.v("name",name)
+                            Log.v("name", name)
                         }
                     }
                     /* val requestType = message.split("_\$\$")[0]
@@ -688,8 +690,9 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         audioManager!!.setStreamVolume(
                             AudioManager.STREAM_MUSIC,
                             audioManager!!.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                            0)
-                       // audioManager!!.setStreamVolume(AudioManager.STREAM_MUSIC, 100, 0);
+                            0
+                        )
+                        // audioManager!!.setStreamVolume(AudioManager.STREAM_MUSIC, 100, 0);
                         //  audioManager!!.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
                         mediaPlayer = MediaPlayer.create(applicationContext, R.raw.newmessage)
                         mediaPlayer!!.start()
@@ -1126,11 +1129,12 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
-    fun recreateFragment(fragment: Fragment){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+
+    fun recreateFragment(fragment: Fragment) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             supportFragmentManager.beginTransaction().detach(fragment).commitNow()
             supportFragmentManager.beginTransaction().attach(fragment).commitNow()
-        }else{
+        } else {
             supportFragmentManager.beginTransaction().detach(fragment).attach(fragment).commitNow()
         }
     }
