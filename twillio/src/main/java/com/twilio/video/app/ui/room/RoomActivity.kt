@@ -623,7 +623,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         if (it.size > 1) {
                             val name = it[1]
                             if (displayName.equals(name)) {
-                                toggleLocalAudio()
+                                roomViewModel.processInput(DisableLocalAudio)
+                              //  toggleLocalAudio()
                             }
                         }
                     }
