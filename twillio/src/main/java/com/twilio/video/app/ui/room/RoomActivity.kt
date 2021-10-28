@@ -625,8 +625,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         if (it.size > 1) {
                             val name = it[1]
                             if (displayName.equals(name)) {
-                                roomManager.disableLocalAudio()
-                                //roomViewModel.processInput(DeactivateAudioDevice)
+                               // roomManager.disableLocalAudio()
+                                roomViewModel.processInput(DisableLocalAudio)
                               //  toggleLocalAudio()
                             }
                         }
