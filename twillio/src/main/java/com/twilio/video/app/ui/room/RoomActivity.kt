@@ -578,9 +578,11 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         binding.localAudio.isEnabled = isLocalMediaEnabled
         binding.localVideo.isEnabled = isLocalMediaEnabled
         val micDrawable =
-            if (roomViewState.isAudioMuted || !isLocalMediaEnabled) R.drawable.microphone_off else R.drawable.micropfone_on
+            if (roomViewState.isAudioMuted || !isLocalMediaEnabled) R.drawable.microphone_off
+            else R.drawable.micropfone_on
         val videoDrawable =
-            if (roomViewState.isVideoOff || !isLocalMediaEnabled) R.drawable.video_off else R.drawable.video_on
+            if (roomViewState.isVideoOff || !isLocalMediaEnabled) R.drawable.video_off
+            else R.drawable.video_on
         binding.localAudio.setImageResource(micDrawable)
         binding.localVideo.setImageResource(videoDrawable)
         binding.room.localAudio1.setImageResource(micDrawable)
@@ -623,7 +625,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         if (it.size > 1) {
                             val name = it[1]
                             if (displayName.equals(name)) {
-                                roomViewModel.processInput(DisableLocalAudio)
+                                roomManager.disableLocalAudio()
+                                //roomViewModel.processInput(DeactivateAudioDevice)
                               //  toggleLocalAudio()
                             }
                         }
