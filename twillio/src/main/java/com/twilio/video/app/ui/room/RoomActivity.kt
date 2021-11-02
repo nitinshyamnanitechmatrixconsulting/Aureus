@@ -624,10 +624,11 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                     splitMessage.let {
                         if (it.size > 1) {
                             val name = it[1]
-                            if (displayName.equals(name)) {
+                            if (displayName.equals(name, ignoreCase = true)) {
                                // roomManager.disableLocalAudio()
                                 roomViewModel.processInput(DisableLocalAudio)
-                              //  toggleLocalAudio()
+                                binding.localAudio.setImageResource(R.drawable.microphone_off)
+                                //  toggleLocalAudio()
                             }
                         }
                     }
