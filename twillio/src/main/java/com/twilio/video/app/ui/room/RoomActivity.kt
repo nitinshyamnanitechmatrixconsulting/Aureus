@@ -628,6 +628,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                                // roomManager.disableLocalAudio()
                                 roomViewModel.processInput(DisableLocalAudio)
                                 binding.localAudio.setImageResource(R.drawable.microphone_off)
+                                binding.room.localAudio1.setImageResource(R.drawable.microphone_off)
                                 //  toggleLocalAudio()
                             }
                         }
