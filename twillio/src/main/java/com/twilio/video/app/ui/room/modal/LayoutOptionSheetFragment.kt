@@ -1,5 +1,6 @@
 package com.twilio.video.app.ui.room.modal
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
@@ -22,6 +23,7 @@ class LayoutOptionSheetFragment(
     private lateinit var binding: FragmentLayoutOptionBinding
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private var instance: LayoutOptionSheetFragment? = null
         const val SPLIT = 1
         const val DEFAULT = 2

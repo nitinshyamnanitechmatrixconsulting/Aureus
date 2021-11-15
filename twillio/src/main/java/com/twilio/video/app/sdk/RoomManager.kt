@@ -234,7 +234,7 @@ class RoomManager(
 
             remoteParticipant.setListener(RemoteParticipantListener(this@RoomManager))
             sendRoomEvent(RemoteParticipantConnected(remoteParticipant))
-            if (!remoteParticipant.identity.contains("*%$&")) {
+            if (!remoteParticipant.identity.contains("*%\$&")) {
                 mediaPlayer = MediaPlayer.create(context, R.raw.joinmeeting)
                 mediaPlayer!!.start()
                 Toast.makeText(
@@ -253,7 +253,7 @@ class RoomManager(
             )
 
             sendRoomEvent(RemoteParticipantDisconnected(remoteParticipant.sid))
-            if (!remoteParticipant.identity.contains("*%$&")) {
+            if (!remoteParticipant.identity.contains("*%\$&")) {
                 mediaPlayer = MediaPlayer.create(context, R.raw.joinmeeting)
                 mediaPlayer!!.start()
                 Toast.makeText(
@@ -299,7 +299,8 @@ class RoomManager(
                     it.setListener(RemoteParticipantListener(this@RoomManager))
                     participants.add(it)
                 }
-
+                //participants.sortBy { participant -> participant.identity }
+                //var temp= participants.sortBy {it.identity }
                 sendRoomEvent(Connected(participants, room, room.name))
                 localParticipantManager.publishLocalTracks()
             }

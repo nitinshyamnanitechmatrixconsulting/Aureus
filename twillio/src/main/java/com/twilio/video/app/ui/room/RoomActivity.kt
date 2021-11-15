@@ -34,11 +34,7 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.projection.MediaProjectionManager
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
+import android.os.*
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
@@ -46,10 +42,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import co.intentservice.chatui.ChatView
 import com.gdacciaro.iOSDialog.iOSDialog
 import com.gdacciaro.iOSDialog.iOSDialogBuilder
@@ -60,8 +57,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.twilio.audioswitch.AudioDevice
 import com.twilio.audioswitch.AudioDevice.*
 import com.twilio.audioswitch.AudioSwitch
-import com.twilio.video.NetworkQualityLevel
-import com.twilio.video.VideoTrack
 import com.twilio.video.app.R
 import com.twilio.video.app.base.BaseActivity
 import com.twilio.video.app.data.api.AuthServiceError
@@ -85,11 +80,38 @@ import io.uniflow.android.livedata.onStates
 import timber.log.Timber
 import javax.inject.Inject
 import com.bumptech.glide.Glide
+import com.twilio.video.*
+import com.twilio.video.app.data.api.model.Token
+import com.twilio.video.app.helper.ApiHelper
 import com.twilio.video.app.helper.StringHelper
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
+import java.nio.ByteBuffer
+import java.util.*
+import kotlin.collections.ArrayList
+import com.twilio.video.RemoteDataTrack
+
+import com.twilio.video.RemoteDataTrackPublication
+
+import com.twilio.video.RemoteParticipant
+import com.twilio.video.RemoteVideoTrackPublication
+
+import com.twilio.video.RemoteAudioTrackPublication
+
+import com.twilio.video.TwilioException
+
+import com.twilio.video.RemoteVideoTrack
+
+import com.twilio.video.RemoteAudioTrack
 
 
 @Suppress("DEPRECATION")
-class RoomActivity : BaseActivity(), MeettingOptionHandler {
+class RoomActivity : BaseActivity(),
+    MeettingOptionHandler/*, LocalParticipant.Listener*//*,RemoteParticipant.Listener*/ {
 
     private var isConnected: Boolean = false
     private var participantCount: Int = 0
@@ -110,8 +132,10 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     private var currentLayoutMode = DEFAULT
     private var currentUserType = USER_TYPE_TEACHER
     private val mutableViewHolderEvents = MutableLiveData<RoomViewEvent>()
-    val viewHolderEvents: LiveData<RoomViewEvent> = mutableViewHolderEvents
-
+    private val viewHolderEvents: LiveData<RoomViewEvent> = mutableViewHolderEvents
+    var room: Room? = null
+    var temToken: String = ""
+    lateinit var localDataTrack: LocalDataTrack
 
     @Inject
     lateinit var tokenService: TokenService
@@ -132,13 +156,189 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
     private lateinit var roomViewModel: RoomViewModel
     private lateinit var recordingAnimation: ObjectAnimator
 
+    // Map used to map remote data tracks to remote participants
+    private val dataTrackRemoteParticipantMap: Map<RemoteDataTrack, RemoteParticipant> = HashMap()
+    private val DATA_TRACK_MESSAGE_THREAD_NAME = "DataTrackMessages"
+    val dataTrackMessageThread = HandlerThread(DATA_TRACK_MESSAGE_THREAD_NAME)
+    lateinit var dataTrackMessageThreadHandler: Handler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RoomActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        localDataTrack = LocalDataTrack.create(this@RoomActivity)!!
+        // Start the thread where data messages are received
+        dataTrackMessageThread.start();
+        dataTrackMessageThreadHandler = Handler(dataTrackMessageThread.looper);
+
+        fun token() {
+            binding.connectProgress.visibility = View.VISIBLE
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://aureusacademy-meeting.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val apiHelper = retrofit.create(
+                ApiHelper::class.java
+            )
+            val call = apiHelper.getToken(displayName!! + Uri.encode("*%\$&"), roomName)
+            call.enqueue(object : Callback<Token?>, Room.Listener {
+                override fun onResponse(
+                    call: Call<Token?>,
+                    response: Response<Token?>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        try {
+                            /* var temp= mutableListOf<LocalDataTrack>()
+                              temp.add(localDataTrack)*/
+                            temToken = response.body()?.key.toString()
+                            val connectOptions =
+                                ConnectOptions.Builder(temToken).roomName(roomName).dataTracks(
+                                    Collections.singletonList(localDataTrack)
+                                )
+                                    .build()
+                            room = Video.connect(this@RoomActivity, connectOptions, this)
+
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Token?>, t: Throwable) {
+                    Toast.makeText(this@RoomActivity, "something went wrong", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                override fun onConnected(room: Room) {
+                    val someHandler = Handler(Looper.getMainLooper())
+                    someHandler.postDelayed(object : Runnable {
+                        override fun run() {
+
+
+                            //  room.localParticipant.publishTrack(local)
+                            val d = (room.remoteParticipants)
+                            val isChecked =
+                                d.any { it.identity.replace("*%\$&", "") == displayName }
+                            if (isChecked) {
+                                AlertDialog.Builder(this@RoomActivity, R.style.AppTheme_Dialog)
+                                    .setTitle("Joined on Another Device")
+                                    .setMessage(
+                                        "You have joined this call on another device.\n" +
+                                                "If you would like to join the call on this device as $displayName, please leave the call on your other device and rejoin on this one."
+                                    )
+                                    .setPositiveButton(getString(android.R.string.ok), null)
+                                    .show()
+                                room.disconnect()
+                            } else {
+                                if (type == "1") {
+                                    room.disconnect()
+                                    connect()
+                                } else if (type == "2") {
+                                    var participantSize = 0
+                                    for (participant in room.remoteParticipants) {
+                                        if (participant.identity.contains("*%\$&")) {
+                                            participantSize += 1
+                                        }
+                                    }
+                                    if (room.remoteParticipants.size >= 1 && participantSize == 0) {
+                                        room.disconnect()
+                                        connect()
+                                    } else {
+                                        //waiting screen
+                                        room.disconnect()
+                                        binding.rlWaiting.visibility = View.VISIBLE
+                                    }
+                                } else {
+                                    var participantSize = 0
+                                    for (participant in room.remoteParticipants) {
+                                        if (participant.identity.contains("*%\$&")) {
+                                            participantSize += 1
+                                        }
+                                    }
+                                    if (room.remoteParticipants.size >= 1 && participantSize == 0) {
+                                        //send request msg
+                                        room.localParticipant!!.publishTrack(localDataTrack)
+                                        val someHandler = Handler(Looper.getMainLooper())
+                                        someHandler.postDelayed(
+                                            { localDataTrack.send("NewJoin_\$\$$displayName") },
+                                            2000
+                                        )
+
+                                        onSNACK(binding.llMain)
+
+                                    } else {
+                                        //waiting screen
+                                        room.disconnect()
+                                        binding.rlWaiting.visibility = View.VISIBLE
+
+                                    }
+                                }
+
+
+                            }
+
+                            for (remoteParticipant in room.remoteParticipants) {
+                                addRemoteParticipant(remoteParticipant!!)
+                            }
+                            token()
+                            someHandler.postDelayed(this, 3000)
+                        }
+                    }, 3000)
+                    //  TODO("Not yet implemented")
+                }
+
+                override fun onConnectFailure(room: Room, twilioException: TwilioException) {
+                    //TODO("Not yet implemented")
+                }
+
+                override fun onReconnecting(room: Room, twilioException: TwilioException) {
+                    //TODO("Not yet implemented")
+                }
+
+                override fun onReconnected(room: Room) {
+                    //TODO("Not yet implemented")
+                }
+
+                override fun onDisconnected(room: Room, twilioException: TwilioException?) {
+                    //TODO("Not yet implemented")
+
+                }
+
+                override fun onParticipantConnected(
+                    room: Room,
+                    remoteParticipant: RemoteParticipant
+                ) {
+
+                    addRemoteParticipant(remoteParticipant)
+
+                    // TODO("Not yet implemented")
+                }
+
+                override fun onParticipantDisconnected(
+                    room: Room,
+                    remoteParticipant: RemoteParticipant
+                ) {
+
+                    //  TODO("Not yet implemented")
+                }
+
+                override fun onRecordingStarted(room: Room) {
+                    // TODO("Not yet implemented")
+                }
+
+                override fun onRecordingStopped(room: Room) {
+                    //TODO("Not yet implemented")
+                }
+            })
+
+
+        }
+
         binding.disconnect.setOnClickListener {
-            if (type.equals("1")) {
+            if (type == "1") {
                 openDisconnectAllDialog()
             } else {
                 disconnectButtonClick()
@@ -147,24 +347,29 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         binding.localVideo.setOnClickListener { toggleLocalVideo() }
         binding.localAudio.setOnClickListener { toggleLocalAudio() }
         binding.buttonJoinOnlineStudio.setOnClickListener {
-            if (type.equals("3")) {
-                val sendJoinRoomRequest = MessageCommand.sendJoinRoomRequest(displayName.toString())
-                roomViewModel.processInput(SendMessage(sendJoinRoomRequest))
-                connect()
-            } else {
-                connect()
-            }
+            token()
         }
         binding.meetingOption.setOnClickListener { openMeetingOption() }
         binding.room.localAudio1.setOnClickListener { toggleLocalAudio() }
         binding.room.localVideo1.setOnClickListener { toggleLocalVideo() }
+        binding.ivWaitingBack.setOnClickListener {
+            binding.rlWaiting.visibility = View.GONE
+            binding.joinProgressLoader.visibility = View.GONE
+        }
         Glide.with(this).load(R.raw.loding).into(this.binding.joinProgressLoader)
+        Glide.with(this).load(R.raw.loding).into(this.binding.waitingjJoinProgressLoader)
 
 
-        binding.switchCameraActionFab.setOnClickListener { roomViewModel.processInput(SwitchCamera) }
+        binding.switchCameraActionFab.setOnClickListener {
+            roomViewModel.processInput(SwitchCamera)
+        }
         val factory = RoomViewModelFactory(roomManager, audioSwitch, PermissionUtil(this))
-        roomViewModel = ViewModelProvider(this, factory).get(RoomViewModel::class.java)
-        roomViewModel.getMessageLiveData().observe(this, Observer {
+        roomViewModel = ViewModelProvider(this, factory).get(
+            RoomViewModel::
+            class.java
+        )
+        roomViewModel.getMessageLiveData().observe(this, Observer
+        {
             addMessage(it)
         })
 
@@ -184,10 +389,12 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         setupRecordingAnimation()
         setUpThumbnail()
 
-        onStates(roomViewModel) { state ->
+        onStates(roomViewModel)
+        { state ->
             if (state is RoomViewState) bindRoomViewState(state)
         }
-        onEvents(roomViewModel) { event ->
+        onEvents(roomViewModel)
+        { event ->
             if (event is RoomViewEffect) bindRoomViewEffects(event)
         }
     }
@@ -320,59 +527,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         }
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        val inflater = menuInflaterf
-//        inflater.inflate(R.menu.room_menu, menu)
-//        onStates(roomViewModel) { state ->
-//            if (state is RoomViewState) bindRoomViewState(state)
-//        }
-//        onEvents(roomViewModel) { event ->
-//            if (event is RoomViewEffect) bindRoomViewEffects(event)
-//        }
-//        return true
-//    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.switch_camera_menu_item -> {
-//                roomViewModel.processInput(SwitchCamera)
-//                true
-//            }
-//            R.id.share_screen_menu_item -> {
-//                openMeetingOption()
-////                if (item.title == getString(R.string.share_screen)) {
-////                    requestScreenCapturePermission()
-////                } else {
-////                    roomViewModel.processInput(StopScreenCapture)
-////                }
-//                true
-//            }
-//            R.id.device_menu_item -> {
-//                displayAudioDeviceList()
-//                true
-//            }
-//            R.id.pause_audio_menu_item -> {
-//                if (item.title == getString(R.string.pause_audio))
-//                    roomViewModel.processInput(DisableLocalAudio)
-//                else
-//                    roomViewModel.processInput(EnableLocalAudio)
-//                true
-//            }
-//            R.id.pause_video_menu_item -> {
-//                if (item.title == getString(R.string.pause_video))
-//                    roomViewModel.processInput(DisableLocalVideo)
-//                else
-//                    roomViewModel.processInput(EnableLocalVideo)
-//                true
-//            }
-//            R.id.settings_menu_item -> {
-//                openMeetingOption()
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
-
 
     private fun openMeetingOption() {
         if (!isFinishing)
@@ -420,13 +574,12 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 R.anim.slide_out_up
             );
             replace(R.id.container, instance, LessonAddFileFragment.TAG)
-          addToBackStack(null)
+            addToBackStack(null)
         }
     }
 
     override fun handleOpenShowParticipants() {
         if (!isFinishing) {
-            //  ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
             ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
         }
     }
@@ -455,26 +608,14 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         if (count >= 1) {
             supportFragmentManager.popBackStack()
             hideKeyboard()
-        } else if (binding.actionLayout.visibility == View.VISIBLE) {
-            super.onBackPressed()
-        } else {
+        } else if (binding.actionLayout.visibility == View.VISIBLE && binding.rlWaiting.visibility == View.VISIBLE) {
+            binding.rlWaiting.visibility = View.GONE
+            binding.joinProgressLoader.visibility = View.GONE
             // super.onBackPressed()
-            /*   roomViewModel.processInput(Disconnect)
-               try {
-                   val myIntent = Intent(
-                       this,
-                       Class.forName("com.auresus.academy.view.feedback.FeedbackActivity")
-                   )
-                   myIntent.putExtra("roomName", roomName)
-                   myIntent.putExtra("roomId", roomID)
-                   myIntent.putExtra("studentName", studentName)
-                   myIntent.putExtra("meetingCodeLocal", roomCode)
-                   startActivity(myIntent)
-               } catch (e: ClassNotFoundException) {
-                   e.printStackTrace()
-               }*/
+        } else if (binding.actionLayout.visibility == View.VISIBLE) {
+            onBackPressed()
+        } else {
 
-            // FeedbackActivity.open(this,roomName ,roomID,name,roomCode)
         }
     }
 
@@ -565,6 +706,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 binding.meetingOption.visibility = View.VISIBLE
                 binding.switchCameraActionFab.visibility = View.VISIBLE
                 binding.room.llBottom.visibility = View.GONE
+                binding.rlWaiting.visibility = View.GONE
                 roomName = roomViewState.title
                 toolbarTitle = roomName
 
@@ -574,7 +716,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         binding.videoControlLayout.visibility = View.GONE
         val isMicEnabled = roomViewState.isMicEnabled
         val isCameraEnabled = roomViewState.isCameraEnabled
-        val isLocalMediaEnabled = isMicEnabled && isCameraEnabled
+        val isLocalMediaEnabled = isMicEnabled && isCameraEnabled && roomViewState.isAudioEnabled
         binding.localAudio.isEnabled = isLocalMediaEnabled
         binding.localVideo.isEnabled = isLocalMediaEnabled
         val micDrawable =
@@ -591,7 +733,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         binding.disconnect.visibility = disconnectButtonState
         setTitle(toolbarTitle)
         binding.tvHostName.text = StringHelper.getShortString(studentName)
-
     }
 
 
@@ -600,10 +741,28 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             val messageType = ChatUtils.getMessageType(message)
             when (messageType) {
                 ChatUtils.MessageType.JOIN_ROOM_ACCEPTED -> {
-
+                    val splitMessage = message.split("_\$\$")
+                    splitMessage.let {
+                        if (it.size > 1) {
+                            val name = it[1]
+                            room?.disconnect()
+                            connect()
+                        }
+                    }
                 }
                 ChatUtils.MessageType.JOIN_ROOM_DENIED -> {
-
+                    val splitMessage = message.split("_\$\$")
+                    splitMessage.let {
+                        if (it.size > 1) {
+                            val name = it[1]
+                            room?.disconnect()
+                            AlertDialog.Builder(this@RoomActivity, R.style.AppTheme_Dialog)
+                                .setTitle("Request Declined")
+                                .setMessage("Your request to join the call has been denied.")
+                                .setPositiveButton(getString(android.R.string.ok), null)
+                                .show()
+                        }
+                    }
                 }
                 ChatUtils.MessageType.NEW_JOIN -> {
                     val splitMessage = message.split("_\$\$")[1]
@@ -625,10 +784,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                         if (it.size > 1) {
                             val name = it[1]
                             if (displayName.equals(name, ignoreCase = true)) {
-                               // roomManager.disableLocalAudio()
+                                // roomManager.disableLocalAudio()
                                 roomViewModel.processInput(DisableLocalAudio)
-                                binding.localAudio.setImageResource(R.drawable.microphone_off)
-                                binding.room.localAudio1.setImageResource(R.drawable.microphone_off)
                                 //  toggleLocalAudio()
                             }
                         }
@@ -655,7 +812,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                             if (displayName.equals(name, ignoreCase = true)) {
                                 disconnectButtonClick()
                             }
-                            Log.v("name", name)
+
                         }
                     }
                     /* val requestType = message.split("_\$\$")[0]
@@ -696,8 +853,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                             audioManager!!.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
                             0
                         )
-                        // audioManager!!.setStreamVolume(AudioManager.STREAM_MUSIC, 100, 0);
-                        //  audioManager!!.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
                         mediaPlayer = MediaPlayer.create(applicationContext, R.raw.newmessage)
                         mediaPlayer!!.start()
                     }
@@ -843,8 +998,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             view.height.toFloat(),  // fromYDelta
             0.toFloat()
         ) // toYDelta
-        animate.setDuration(500)
-        animate.setFillAfter(true)
+        animate.duration = 500
+        animate.fillAfter = true
         view.startAnimation(animate)
     }
 
@@ -856,8 +1011,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             0.toFloat(),  // fromYDelta
             view.height.toFloat()
         ) // toYDelta
-        animate.setDuration(500)
-        animate.setFillAfter(true)
+        animate.duration = 500
+        animate.fillAfter = true
         view.startAnimation(animate)
     }
 
@@ -872,15 +1027,13 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
                 override fun run() {
                     slideDown(binding.videoControlLayout)
                     isUp = !isUp
-
-                    // someHandler.postDelayed(this, 5000)
                 }
             }, 5000)
         }
         isUp = !isUp
     }
 
-    fun updateVideoTrack(participantViewState: ParticipantViewState) {
+    private fun updateVideoTrack(participantViewState: ParticipantViewState) {
         binding.room.participantThumbView.run {
             val videoTrackViewState = participantViewState.videoTrack
             val newVideoTrack = videoTrackViewState?.let { it.videoTrack }
@@ -929,7 +1082,7 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         } ?: run { networkQualityImage.visibility = View.GONE }
     }
 
-    fun renderThumbnails(roomViewState: RoomViewState) {
+    private fun renderThumbnails(roomViewState: RoomViewState) {
         val newThumbnails = if (roomViewState.configuration is RoomViewConfiguration.Connected)
             roomViewState.participantThumbnails else null
         val participantCount = roomViewState.participantThumbnails?.size ?: 0
@@ -1006,7 +1159,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             is Speakerphone -> R.drawable.ic_volume_up_white_24dp
             else -> R.drawable.ic_phonelink_ring_white_24dp
         }
-//        this.deviceMenuItem.setIcon(audioDeviceMenuIcon)
     }
 
     private fun renderPrimaryView(primaryParticipant: ParticipantViewState) {
@@ -1020,7 +1172,6 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
             )
             binding.room.primaryVideo.showIdentityBadge(!primaryParticipant.isLocalParticipant)
             binding.room.primaryVideo.setOnClickListener { onSlideViewButtonClick(binding.room.primaryVideo) }
-            //binding.room.participantThumbView.setOnClickListener { onSlideViewButtonClick(binding.room.primaryVideo) }
         }
     }
 
@@ -1101,6 +1252,8 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         var isActive: Boolean = false
         var isFirstTime: Boolean = true
         var isBordcasting: Boolean = false
+        var isMute: Boolean = false
+
         fun startActivity(context: Context, appLink: Uri?) {
             val intent = Intent(context, RoomActivity::class.java)
             intent.data = appLink
@@ -1138,12 +1291,232 @@ class RoomActivity : BaseActivity(), MeettingOptionHandler {
         }
     }
 
-    fun recreateFragment(fragment: Fragment) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            supportFragmentManager.beginTransaction().detach(fragment).commitNow()
-            supportFragmentManager.beginTransaction().attach(fragment).commitNow()
-        } else {
-            supportFragmentManager.beginTransaction().detach(fragment).attach(fragment).commitNow()
+
+    private fun addRemoteParticipant(remoteParticipant: RemoteParticipant) {
+        // Observe remote participant events
+        remoteParticipant.setListener(remoteParticipantListener())
+        for (remoteDataTrackPublication in remoteParticipant.remoteDataTracks) {
+            /*
+             * Data track messages are received on the thread that calls setListener. Post the
+             * invocation of setting the listener onto our dedicated data track message thread.
+*/
+            if (remoteDataTrackPublication.isTrackSubscribed) {
+                dataTrackMessageThreadHandler.post {
+                    addRemoteDataTrack(
+                        remoteParticipant,
+                        remoteDataTrackPublication.remoteDataTrack
+                    )
+                }
+            }
+/*
+            if (remoteDataTrackPublication.isTrackSubscribed) {
+                addRemoteDataTrack(
+                    remoteParticipant,
+                    remoteDataTrackPublication.remoteDataTrack
+                )
+
+            }
+*/
+
+
         }
     }
+
+
+    private fun addRemoteDataTrack(
+        remoteParticipant: RemoteParticipant, remoteDataTrack: RemoteDataTrack?
+    ) {
+        //dataTrackRemoteParticipantMap.put(remoteDataTrack, remoteParticipant)
+        remoteDataTrack!!.setListener(remoteDataTrackListener())
+    }
+
+    private fun remoteParticipantListener(): RemoteParticipant.Listener? {
+        return object : RemoteParticipant.Listener {
+            override fun onAudioTrackPublished(
+                remoteParticipant: RemoteParticipant,
+                remoteAudioTrackPublication: RemoteAudioTrackPublication
+            ) {
+            }
+
+            override fun onAudioTrackUnpublished(
+                remoteParticipant: RemoteParticipant,
+                remoteAudioTrackPublication: RemoteAudioTrackPublication
+            ) {
+            }
+
+            override fun onDataTrackPublished(
+                remoteParticipant: RemoteParticipant,
+                remoteDataTrackPublication: RemoteDataTrackPublication
+            ) {
+            }
+
+            override fun onDataTrackUnpublished(
+                remoteParticipant: RemoteParticipant,
+                remoteDataTrackPublication: RemoteDataTrackPublication
+            ) {
+            }
+
+            override fun onVideoTrackPublished(
+                remoteParticipant: RemoteParticipant,
+                remoteVideoTrackPublication: RemoteVideoTrackPublication
+            ) {
+            }
+
+            override fun onVideoTrackUnpublished(
+                remoteParticipant: RemoteParticipant,
+                remoteVideoTrackPublication: RemoteVideoTrackPublication
+            ) {
+            }
+
+            override fun onAudioTrackSubscribed(
+                remoteParticipant: RemoteParticipant,
+                remoteAudioTrackPublication: RemoteAudioTrackPublication,
+                remoteAudioTrack: RemoteAudioTrack
+            ) {
+            }
+
+            override fun onAudioTrackUnsubscribed(
+                remoteParticipant: RemoteParticipant,
+                remoteAudioTrackPublication: RemoteAudioTrackPublication,
+                remoteAudioTrack: RemoteAudioTrack
+            ) {
+            }
+
+            override fun onAudioTrackSubscriptionFailed(
+                remoteParticipant: RemoteParticipant,
+                remoteAudioTrackPublication: RemoteAudioTrackPublication,
+                twilioException: TwilioException
+            ) {
+            }
+
+            override fun onDataTrackSubscribed(
+                remoteParticipant: RemoteParticipant,
+                remoteDataTrackPublication: RemoteDataTrackPublication,
+                remoteDataTrack: RemoteDataTrack
+            ) {
+                /*
+                 * Data track messages are received on the thread that calls setListener. Post the
+                 * invocation of setting the listener onto our dedicated data track message thread.
+                 */
+                dataTrackMessageThreadHandler.post {
+                    addRemoteDataTrack(
+                        remoteParticipant,
+                        remoteDataTrack
+                    )
+                }
+/*
+                addRemoteDataTrack(
+                    remoteParticipant,
+                    remoteDataTrack
+                )
+*/
+
+            }
+
+            override fun onDataTrackUnsubscribed(
+                remoteParticipant: RemoteParticipant,
+                remoteDataTrackPublication: RemoteDataTrackPublication,
+                remoteDataTrack: RemoteDataTrack
+            ) {
+            }
+
+            override fun onDataTrackSubscriptionFailed(
+                remoteParticipant: RemoteParticipant,
+                remoteDataTrackPublication: RemoteDataTrackPublication,
+                twilioException: TwilioException
+            ) {
+            }
+
+            override fun onVideoTrackSubscribed(
+                remoteParticipant: RemoteParticipant,
+                remoteVideoTrackPublication: RemoteVideoTrackPublication,
+                remoteVideoTrack: RemoteVideoTrack
+            ) {
+            }
+
+            override fun onVideoTrackUnsubscribed(
+                remoteParticipant: RemoteParticipant,
+                remoteVideoTrackPublication: RemoteVideoTrackPublication,
+                remoteVideoTrack: RemoteVideoTrack
+            ) {
+            }
+
+            override fun onVideoTrackSubscriptionFailed(
+                remoteParticipant: RemoteParticipant,
+                remoteVideoTrackPublication: RemoteVideoTrackPublication,
+                twilioException: TwilioException
+            ) {
+            }
+
+            override fun onAudioTrackEnabled(
+                remoteParticipant: RemoteParticipant,
+                remoteAudioTrackPublication: RemoteAudioTrackPublication
+            ) {
+            }
+
+            override fun onAudioTrackDisabled(
+                remoteParticipant: RemoteParticipant,
+                remoteAudioTrackPublication: RemoteAudioTrackPublication
+            ) {
+            }
+
+            override fun onVideoTrackEnabled(
+                remoteParticipant: RemoteParticipant,
+                remoteVideoTrackPublication: RemoteVideoTrackPublication
+            ) {
+            }
+
+            override fun onVideoTrackDisabled(
+                remoteParticipant: RemoteParticipant,
+                remoteVideoTrackPublication: RemoteVideoTrackPublication
+            ) {
+            }
+        }
+    }
+
+    private fun remoteDataTrackListener(): RemoteDataTrack.Listener? {
+        return object : RemoteDataTrack.Listener {
+            override fun onMessage(remoteDataTrack: RemoteDataTrack, byteBuffer: ByteBuffer) {}
+            override fun onMessage(remoteDataTrack: RemoteDataTrack, message: String) {
+                val splitMessage = message.split("_\$\$")
+                splitMessage?.let {
+                    if (it.size > 1) {
+                        val sender = it[0]
+                        val data = it[1]
+                        if (sender == "yes") {
+                            room?.disconnect()
+                            connect()
+                        } else if (sender == "No") {
+
+                            room?.disconnect()
+                            AlertDialog.Builder(this@RoomActivity, R.style.AppTheme_Dialog)
+                                .setTitle("Request Declined")
+                                .setMessage("Your request to join the call has been denied.")
+                                .setPositiveButton(getString(android.R.string.ok), null)
+                                .show()
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    fun onSNACK(view: View) {
+        //Snackbar(view)
+        val snackbar = Snackbar.make(
+            view, "Your request has been send to the teacher",
+            Snackbar.LENGTH_LONG
+        )
+        val snackbarView = snackbar.view
+        snackbarView.setBackgroundColor(Color.GREEN)
+        val textView =
+            snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+        textView.setTextColor(Color.WHITE)
+        textView.textSize = 20f
+        snackbar.show()
+    }
+
 }

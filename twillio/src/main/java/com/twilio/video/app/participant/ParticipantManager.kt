@@ -112,8 +112,8 @@ class ParticipantManager {
 
     private fun moveDominantSpeakerToTop(newDominantSpeaker: ParticipantViewState) {
         if (mutableParticipants.size > 1) {
-            mutableParticipants.removeAll { it.sid == newDominantSpeaker.sid }
-            mutableParticipants.add(1, newDominantSpeaker)
+          // mutableParticipants.removeAll { it.sid == newDominantSpeaker.sid }
+              // mutableParticipants.add(1, newDominantSpeaker)
             updatePrimaryParticipant()
         }
     }

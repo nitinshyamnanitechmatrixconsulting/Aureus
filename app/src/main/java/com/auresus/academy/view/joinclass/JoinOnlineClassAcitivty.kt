@@ -116,7 +116,7 @@ class JoinOnlineClassAcitivty : BaseActivity() {
                     val uri = Uri.parse(it)
                     val roomName = uri.getQueryParameter("room_name")
                     roomName?.let {
-                        onSNACK(binding.rlMain)
+                       // onSNACK(binding.rlMain)
                         RoomActivity.open(
                             this as BaseActivity,
                             roomName,

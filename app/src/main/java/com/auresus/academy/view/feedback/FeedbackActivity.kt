@@ -50,7 +50,7 @@ class FeedbackActivity : BaseActivity() {
             roomID = intent.getStringExtra("roomId").toString()
             studentName = intent.getStringExtra("studentName").toString()
             roomCode = intent.getStringExtra("meetingCodeLocal").toString()
-            type = intent.getStringExtra("meetingCodeLocal").toString()
+            type = intent.getStringExtra("type").toString()
         }
         initClickListener()
     }

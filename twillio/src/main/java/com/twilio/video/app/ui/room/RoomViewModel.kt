@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder
 import com.twilio.audioswitch.AudioSwitch
 import com.twilio.video.Participant
 import com.twilio.video.RemoteDataTrack
+import com.twilio.video.app.R
 import com.twilio.video.app.data.api.VideoAppService
 import com.twilio.video.app.data.api.model.ApiResponse
 import com.twilio.video.app.participant.ParticipantManager

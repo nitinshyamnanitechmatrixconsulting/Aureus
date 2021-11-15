@@ -104,7 +104,10 @@ class LocalParticipantManager(
         if (!isAudioMuted) {
             isAudioMuted = true
             removeAudioTrack()
-        } else {
+        } /*else if (roomManager.roomEvents.equals(AudioDisabled)) {
+            isAudioMuted = false
+            setupLocalAudioTrack()
+        }*/ else {
             isAudioMuted = false
             setupLocalAudioTrack()
         }
