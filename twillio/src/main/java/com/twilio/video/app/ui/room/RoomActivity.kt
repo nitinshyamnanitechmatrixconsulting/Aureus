@@ -35,6 +35,7 @@ import android.media.MediaPlayer
 import android.media.projection.MediaProjectionManager
 import android.net.Uri
 import android.os.*
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
@@ -161,7 +162,10 @@ class RoomActivity : BaseActivity(),
     private val DATA_TRACK_MESSAGE_THREAD_NAME = "DataTrackMessages"
     val dataTrackMessageThread = HandlerThread(DATA_TRACK_MESSAGE_THREAD_NAME)
     lateinit var dataTrackMessageThreadHandler: Handler
-
+    var handler: Handler? = null
+    var runnable: Runnable? = null
+    private var isRunning: Boolean = true
+    var temp = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RoomActivityBinding.inflate(layoutInflater)
@@ -213,80 +217,105 @@ class RoomActivity : BaseActivity(),
                 }
 
                 override fun onConnected(room: Room) {
-                    val someHandler = Handler(Looper.getMainLooper())
-                    someHandler.postDelayed(object : Runnable {
-                        override fun run() {
 
+                    // Let it continue running until it is stopped.
+                    //  Toast.makeText(this, "Service Started onStartcommand", Toast.LENGTH_LONG).show();
+                    handler = Handler()
+                    runnable = Runnable {
 
-                            //  room.localParticipant.publishTrack(local)
-                            val d = (room.remoteParticipants)
-                            val isChecked =
-                                d.any { it.identity.replace("*%\$&", "") == displayName }
-                            if (isChecked) {
-                                AlertDialog.Builder(this@RoomActivity, R.style.AppTheme_Dialog)
-                                    .setTitle("Joined on Another Device")
-                                    .setMessage(
-                                        "You have joined this call on another device.\n" +
-                                                "If you would like to join the call on this device as $displayName, please leave the call on your other device and rejoin on this one."
-                                    )
-                                    .setPositiveButton(getString(android.R.string.ok), null)
-                                    .show()
+                        /* val someHandler = Handler(Looper.getMainLooper())
+                         someHandler.postDelayed(object : Runnable {
+                             override fun run() {*/
+                        //  room.localParticipant.publishTrack(local)
+                        val d = (room.remoteParticipants)
+                        val isChecked =
+                            d.any { it.identity.replace("*%\$&", "") == displayName }
+                        if (isChecked) {
+                            AlertDialog.Builder(this@RoomActivity, R.style.AppTheme_Dialog)
+                                .setTitle("Joined on Another Device")
+                                .setMessage(
+                                    "You have joined this call on another device.\n" +
+                                            "If you would like to join the call on this device as $displayName, please leave the call on your other device and rejoin on this one."
+                                )
+                                .setPositiveButton(getString(android.R.string.ok), null)
+                                .show()
+                            room.disconnect()
+                            binding.joinProgressLoader.visibility = View.GONE
+                            handler!!.removeCallbacks(runnable!!)
+                            isRunning = false
+                        } else {
+                            if (type == "1") {
                                 room.disconnect()
-                            } else {
-                                if (type == "1") {
+                                connect()
+                                handler!!.removeCallbacks(runnable!!)
+                                isRunning = false
+                            } else if (type == "2") {
+                                var participantSize = 0
+                                for (participant in room.remoteParticipants) {
+                                    if (participant.identity.contains("*%\$&")) {
+                                        participantSize += 1
+                                    }
+                                }
+                                if (room.remoteParticipants.size >= 1 && participantSize == 0) {
                                     room.disconnect()
                                     connect()
-                                } else if (type == "2") {
-                                    var participantSize = 0
-                                    for (participant in room.remoteParticipants) {
-                                        if (participant.identity.contains("*%\$&")) {
-                                            participantSize += 1
-                                        }
-                                    }
-                                    if (room.remoteParticipants.size >= 1 && participantSize == 0) {
-                                        room.disconnect()
-                                        connect()
-                                    } else {
-                                        //waiting screen
-                                        room.disconnect()
-                                        binding.rlWaiting.visibility = View.VISIBLE
-                                    }
+                                    handler!!.removeCallbacks(runnable!!)
+                                    isRunning = false
                                 } else {
-                                    var participantSize = 0
-                                    for (participant in room.remoteParticipants) {
-                                        if (participant.identity.contains("*%\$&")) {
-                                            participantSize += 1
-                                        }
+                                    //waiting screen
+                                    //room.disconnect()
+                                    binding.rlWaiting.visibility = View.VISIBLE
+                                }
+                            } else {
+                                var participantSize = 0
+                                for (participant in room.remoteParticipants) {
+                                    if (participant.identity.contains("*%\$&")) {
+                                        participantSize += 1
                                     }
-                                    if (room.remoteParticipants.size >= 1 && participantSize == 0) {
-                                        //send request msg
+                                }
+                                if (room.remoteParticipants.size >= 1 && participantSize == 0) {
+                                    //send request msg
+
+                                    if (temp == 0) {
                                         room.localParticipant!!.publishTrack(localDataTrack)
                                         val someHandler = Handler(Looper.getMainLooper())
                                         someHandler.postDelayed(
                                             { localDataTrack.send("NewJoin_\$\$$displayName") },
                                             2000
                                         )
-
                                         onSNACK(binding.llMain)
-
-                                    } else {
-                                        //waiting screen
-                                        room.disconnect()
-                                        binding.rlWaiting.visibility = View.VISIBLE
-
                                     }
+                                    temp += 1
+
+                                } else {
+                                    //waiting screen
+                                    //room.disconnect()
+                                    binding.rlWaiting.visibility = View.VISIBLE
+
                                 }
-
-
                             }
 
-                            for (remoteParticipant in room.remoteParticipants) {
-                                addRemoteParticipant(remoteParticipant!!)
-                            }
-                            token()
-                            someHandler.postDelayed(this, 3000)
+
                         }
-                    }, 3000)
+
+                        for (remoteParticipant in room.remoteParticipants) {
+                            addRemoteParticipant(remoteParticipant!!)
+                        }
+                        //token()
+                        /* someHandler.postDelayed(this, 5000)
+                    }
+                }, 5000)*/
+                        if (isRunning) {
+                            handler!!.postDelayed(
+                                runnable!!,
+                                5000
+                            )
+                        }
+                    }
+                    handler!!.postDelayed(
+                        runnable!!,
+                        5000
+                    )
                     //  TODO("Not yet implemented")
                 }
 
@@ -1486,6 +1515,8 @@ class RoomActivity : BaseActivity(),
                         if (sender == "yes") {
                             room?.disconnect()
                             connect()
+                            handler!!.removeCallbacks(runnable!!)
+                            isRunning = false
                         } else if (sender == "No") {
 
                             room?.disconnect()
@@ -1494,6 +1525,8 @@ class RoomActivity : BaseActivity(),
                                 .setMessage("Your request to join the call has been denied.")
                                 .setPositiveButton(getString(android.R.string.ok), null)
                                 .show()
+                            handler!!.removeCallbacks(runnable!!)
+                            isRunning = false
                         }
 
                     }
