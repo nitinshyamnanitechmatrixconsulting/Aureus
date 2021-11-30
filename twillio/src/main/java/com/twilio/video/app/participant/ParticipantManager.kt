@@ -13,7 +13,7 @@ class ParticipantManager {
 
     private val mutableParticipants = mutableListOf<ParticipantViewState>()
     val participantThumbnails: List<ParticipantViewState> get() = mutableParticipants.toList()
-    internal var localDataTrackPublication: LocalDataTrackPublication?=null
+    internal var localDataTrackPublication: LocalDataTrackPublication? = null
 
     var primaryParticipant: ParticipantViewState
         private set
@@ -31,17 +31,20 @@ class ParticipantManager {
     }
 
     fun updateLocalParticipantVideoTrack(videoTrack: VideoTrackViewState?) =
-            mutableParticipants.find { it.isLocalParticipant }?.copy(
-                    videoTrack = videoTrack)?.let { updateLocalParticipant(it) }
+        mutableParticipants.find { it.isLocalParticipant }?.copy(
+            videoTrack = videoTrack
+        )?.let { updateLocalParticipant(it) }
 
     fun updateLocalParticipantSid(sid: String) =
-            mutableParticipants.find { it.isLocalParticipant }?.copy(
-                    sid = sid)?.let { updateLocalParticipant(it) }
+        mutableParticipants.find { it.isLocalParticipant }?.copy(
+            sid = sid
+        )?.let { updateLocalParticipant(it) }
 
-    fun updateParticipant(
+    private fun updateParticipant(
         participantViewState: ParticipantViewState,
         participantMatchPredicate: (ParticipantViewState) -> Boolean = {
-            it.sid == participantViewState.sid }
+            it.sid == participantViewState.sid
+        }
     ) {
 
         mutableParticipants.indexOfFirst(participantMatchPredicate).let { index ->
@@ -59,7 +62,8 @@ class ParticipantManager {
         updatePrimaryParticipant()
     }
 
-    fun getParticipant(sid: String): ParticipantViewState? = mutableParticipants.find { it.sid == sid }
+    fun getParticipant(sid: String): ParticipantViewState? =
+        mutableParticipants.find { it.sid == sid }
 
     fun updateNetworkQuality(sid: String, networkQualityLevel: NetworkQualityLevel) {
         getParticipant(sid)?.copy(networkQualityLevel = networkQualityLevel)?.let {
@@ -69,12 +73,14 @@ class ParticipantManager {
 
     fun updateParticipantVideoTrack(sid: String, videoTrack: VideoTrackViewState?) {
         mutableParticipants.find { it.sid == sid }?.copy(
-                videoTrack = videoTrack)?.let { updateParticipant(it) }
+            videoTrack = videoTrack
+        )?.let { updateParticipant(it) }
     }
 
     fun updateParticipantScreenTrack(sid: String, screenTrack: VideoTrackViewState?) {
         mutableParticipants.find { it.sid == sid }?.copy(
-                screenTrack = screenTrack)?.let { updateParticipant(it) }
+            screenTrack = screenTrack
+        )?.let { updateParticipant(it) }
     }
 
     fun muteParticipant(sid: String, mute: Boolean) {
@@ -85,7 +91,8 @@ class ParticipantManager {
 
     fun changePinnedParticipant(sid: String) {
         val existingPin = mutableParticipants.find { it.isPinned }?.copy(
-            isPinned = false)
+            isPinned = false
+        )
         existingPin?.let { updateParticipant(it) }
 
         getParticipant(sid)?.let { newPin ->
@@ -97,30 +104,54 @@ class ParticipantManager {
 
     fun changeDominantSpeaker(newDominantSpeakerSid: String?) {
         Timber.d("new dominant speaker with sid: %s", newDominantSpeakerSid)
+
+        /*    newDominantSpeakerSid?.let {
+                getParticipant(it)?.copy( isDominantSpeaker = true)?.let {
+                    updateParticipant(it)
+                }
+            }*/
+
+        val existingPin = mutableParticipants.find { it.isDominantSpeaker }?.copy(
+            isDominantSpeaker = false
+        )
+        existingPin?.let { updateParticipant(it) }
+
+        if (newDominantSpeakerSid != null) {
+            getParticipant(newDominantSpeakerSid)?.let { newPin ->
+                if (existingPin?.sid != newPin.sid) {
+                    updateParticipant(newPin.copy(isDominantSpeaker = true))
+                }
+            }
+        }
+
+/*
         newDominantSpeakerSid?.let { sid ->
             clearDominantSpeaker()
 
             getParticipant(newDominantSpeakerSid)?.copy(
-                    isDominantSpeaker = true)?.let { moveDominantSpeakerToTop(it) }
+                isDominantSpeaker = true
+            )?.let { moveDominantSpeakerToTop(it) }
         } ?: run {
             clearDominantSpeaker()
         }
+*/
     }
 
     internal fun updateLocalParticipant(participantViewState: ParticipantViewState) =
-            updateParticipant(participantViewState) { it.isLocalParticipant }
+        updateParticipant(participantViewState) { it.isLocalParticipant }
 
     private fun moveDominantSpeakerToTop(newDominantSpeaker: ParticipantViewState) {
         if (mutableParticipants.size > 1) {
-          // mutableParticipants.removeAll { it.sid == newDominantSpeaker.sid }
-              // mutableParticipants.add(1, newDominantSpeaker)
+             mutableParticipants.removeAll { it.sid == newDominantSpeaker.sid }
+            mutableParticipants.add(1, newDominantSpeaker)
             updatePrimaryParticipant()
         }
     }
 
     private fun clearDominantSpeaker() {
         mutableParticipants.find { it.isDominantSpeaker }?.copy(
-                isDominantSpeaker = false)?.let { updateParticipant(it) }
+            isDominantSpeaker = false
+        )?.let { updateParticipant(it) }
     }
 
     fun clearRemoteParticipants() {
@@ -135,14 +166,14 @@ class ParticipantManager {
     }
 
     private fun retrievePrimaryParticipant(): ParticipantViewState =
-            determinePrimaryParticipant().apply { setTrackPriority(this) }
+        determinePrimaryParticipant().apply { setTrackPriority(this) }
 
     private fun determinePrimaryParticipant(): ParticipantViewState {
         return mutableParticipants.find { it.isPinned }
-                ?: mutableParticipants.find { it.isScreenSharing }
-                ?: mutableParticipants.find { it.isDominantSpeaker }
-                ?: mutableParticipants.find { !it.isLocalParticipant }
-                ?: mutableParticipants[0] // local participant
+            ?: mutableParticipants.find { it.isScreenSharing }
+            ?: mutableParticipants.find { it.isDominantSpeaker }
+            ?: mutableParticipants.find { !it.isLocalParticipant }
+            ?: mutableParticipants[0] // local participant
     }
 
     private fun setTrackPriority(participant: ParticipantViewState) {
@@ -175,11 +206,11 @@ class ParticipantManager {
         if (participant.isLocalParticipant) clearOldTrackPriorities()
     }
 
-    fun sendMessage(message: String){
+    fun sendMessage(message: String) {
         localDataTrackPublication?.localDataTrack?.send(message)
     }
 
-    fun updateLocalDataTrackPublication(localDataTrackPublication: LocalDataTrackPublication){
+    fun updateLocalDataTrackPublication(localDataTrackPublication: LocalDataTrackPublication) {
         this.localDataTrackPublication = localDataTrackPublication
     }
 

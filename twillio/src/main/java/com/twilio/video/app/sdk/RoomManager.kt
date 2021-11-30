@@ -269,7 +269,6 @@ class RoomManager(
                 "DominantSpeakerChanged -> room sid: %s, remoteParticipant: %s",
                 room.sid, remoteParticipant?.sid
             )
-
             sendRoomEvent(DominantSpeakerChanged(remoteParticipant?.sid))
         }
 
@@ -299,6 +298,7 @@ class RoomManager(
                     it.setListener(RemoteParticipantListener(this@RoomManager))
                     participants.add(it)
                 }
+               // participants.sortBy{it.identity}
                 //participants.sortBy { participant -> participant.identity }
                 //var temp= participants.sortBy {it.identity }
                 sendRoomEvent(Connected(participants, room, room.name))

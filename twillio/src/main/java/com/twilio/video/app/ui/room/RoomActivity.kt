@@ -19,6 +19,7 @@ import android.Manifest
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.app.AlertDialog
@@ -45,6 +46,8 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
@@ -593,24 +596,40 @@ class RoomActivity : BaseActivity(),
             LessionInfoSheetFragment.open(this, this, roomViewModel)
     }
 
+    @SuppressLint("ResourceType")
     override fun handleOpenFiles() {
-        val instance = LessonAddFileFragment.newInstance(roomName, roomID, roomViewModel)
-        supportFragmentManager.commit {
-            setCustomAnimations(
-                R.anim.slide_in_up,
-                R.anim.slide_in_down,
-                R.anim.slide_out_down,
-                R.anim.slide_out_up
-            );
-            replace(R.id.container, instance, LessonAddFileFragment.TAG)
-            addToBackStack(null)
+        if (!isFinishing) {
+            val instance = LessonAddFileFragment.newInstance(roomName, roomID, roomViewModel)
+            this@RoomActivity.supportFragmentManager.commit {
+                setCustomAnimations(
+                    R.anim.slide_in_up,
+                    R.anim.slide_in_down,
+                    R.anim.slide_out_down,
+                    R.anim.slide_out_up
+                )
+                replace(R.id.container, instance, LessonAddFileFragment.TAG)
+                addToBackStack(null)
+            }
+
         }
+       /* val fragmentManager: FragmentManager = supportFragmentManager
+        val ft: FragmentTransaction? = fragmentManager.beginTransaction()
+        ft?.setCustomAnimations(  R.anim.slide_in_up,
+            R.anim.slide_in_down,
+            R.anim.slide_out_down,
+            R.anim.slide_out_up)
+
+        val newFragment : LessonAddFileFragment= LessonAddFileFragment.newInstance(roomName, roomID, roomViewModel)
+        ft?.replace(R.id.container, newFragment, LessonAddFileFragment.TAG)
+        ft?.commit()*/
     }
+
 
     override fun handleOpenShowParticipants() {
         if (!isFinishing) {
             ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -692,6 +711,7 @@ class RoomActivity : BaseActivity(),
             myIntent.putExtra("studentName", studentName)
             myIntent.putExtra("meetingCodeLocal", roomCode)
             myIntent.putExtra("type", type)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(myIntent)
             finish()
         } catch (e: ClassNotFoundException) {
@@ -1305,6 +1325,7 @@ class RoomActivity : BaseActivity(),
                 intent.putExtra(INTENT_EXTRA_STUDENT_NAME, studentName)
                 intent.putExtra(INTENT_EXTRA_ROOM_CODE, meetingCodeLocal)
                 intent.putExtra(TYPE, type)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
             }
         }

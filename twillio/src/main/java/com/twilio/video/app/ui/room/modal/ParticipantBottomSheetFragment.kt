@@ -1,5 +1,6 @@
 package com.twilio.video.app.ui.room.modal
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
@@ -20,6 +21,7 @@ class ParticipantBottomSheetFragment(val activity: Activity, val roomViewModel: 
     private lateinit var binding: FragmentParticipantListBinding
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private var instance: ParticipantBottomSheetFragment? = null
         const val TAG ="ParticipantBottomSheetFragment"
         @JvmStatic
