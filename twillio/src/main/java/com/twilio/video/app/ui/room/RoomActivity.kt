@@ -972,9 +972,11 @@ class RoomActivity : BaseActivity(),
         participantCount = roomViewState.participantThumbnails?.size ?: 0
         when (currentLayoutMode) {
             SPLIT -> {
+
                 binding.room.participantThumbView.visibility = View.GONE
                 if (participantCount > 1) {
-                    binding.room.participantThumbView.visibility = View.VISIBLE
+
+                  //  binding.room.participantThumbView.visibility = View.VISIBLE
                     val topTwoPartcipantList = newThumbnails?.subList(0, 2)
                     val participantView = topTwoPartcipantList?.get(1)
                     participantView?.let {

@@ -342,6 +342,7 @@ class RoomCheckActivity : BaseActivity() , MeettingOptionHandler {
         if (participantCount <= 1) return
         currentLayoutMode = option
         when (option) {
+
             LayoutOptionSheetFragment.SPLIT -> {
                 binding.room.participantView.visibility = View.VISIBLE
                 binding.room.participantThumbView.visibility = View.GONE

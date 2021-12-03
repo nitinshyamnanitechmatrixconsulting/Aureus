@@ -30,6 +30,7 @@
         <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/content_room.xml" value="0.1921875" />
         <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/item_assignment_dialog_list_layout.xml" value="0.1" />
         <entry key="..\:/Cloud Certitude/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/room_activity.xml" value="0.1921875" />
+        <entry key="..\:/Kotlin/Aureus/twillio/src/main/res/layout/content_room.xml" value="0.14791666666666667" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/badge_background.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_account.xml" value="0.20512820512820512" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/drawable/ic_account_circle_white_24dp.xml" value="0.20512820512820512" />
@@ -113,5 +114,5 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
