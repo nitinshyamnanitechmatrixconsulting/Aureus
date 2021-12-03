@@ -27,15 +27,9 @@ sealed class RoomEvent {
         data class VideoTrackUpdated(val sid: String, val videoTrack: VideoTrack?) : RemoteParticipantEvent()
         data class TrackSwitchOff(val sid: String, val videoTrack: VideoTrack, val switchOff: Boolean) : RemoteParticipantEvent()
         data class RemoteDataTrackSubscribed(val remoteParticipant: RemoteParticipant ,val remoteDataTrack: RemoteDataTrack) : RemoteParticipantEvent()
-        data class ScreenTrackUpdated(
-            val sid: String,
-            val screenTrack: VideoTrack?
-        ) : RemoteParticipantEvent()
+        data class ScreenTrackUpdated(val sid: String, val screenTrack: VideoTrack?) : RemoteParticipantEvent()
         data class MuteRemoteParticipant(val sid: String, val mute: Boolean) : RemoteParticipantEvent()
-        data class NetworkQualityLevelChange(
-            val sid: String,
-            val networkQualityLevel: NetworkQualityLevel
-        ) : RemoteParticipantEvent()
+        data class NetworkQualityLevelChange(val sid: String, val networkQualityLevel: NetworkQualityLevel) : RemoteParticipantEvent()
         data class RemoteParticipantDisconnected(val sid: String) : RemoteParticipantEvent()
     }
 

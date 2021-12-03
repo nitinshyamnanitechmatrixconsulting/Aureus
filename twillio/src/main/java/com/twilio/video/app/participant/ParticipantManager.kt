@@ -62,7 +62,7 @@ class ParticipantManager {
         updatePrimaryParticipant()
     }
 
-    fun getParticipant(sid: String): ParticipantViewState? =
+    private fun getParticipant(sid: String): ParticipantViewState? =
         mutableParticipants.find { it.sid == sid }
 
     fun updateNetworkQuality(sid: String, networkQualityLevel: NetworkQualityLevel) {

@@ -97,6 +97,7 @@ class RoomViewModel(
     internal var roomName: String? = null
     internal var roomId: String? = null
     internal var roomCode: String? = null
+    internal var sharing: String? = null
     private var permissionCheckRetry = false
     private val chatMessage: MutableLiveData<String> = MutableLiveData()
     private val chatMessageList: MutableLiveData<MutableList<ChatMessage>> = MutableLiveData()
@@ -113,7 +114,6 @@ class RoomViewModel(
     }
 
 
-
     @VisibleForTesting(otherwise = PRIVATE)
     internal var roomManagerJob: Job? = null
 
@@ -128,7 +128,8 @@ class RoomViewModel(
         }
         subscribeToRoomEvents()
     }
-    fun getAttachmentList(bookingRoomName: String){
+
+    fun getAttachmentList(bookingRoomName: String) {
         viewModelScope.launch {
             roomManager.getAttachmentList(bookingRoomName, _attachmentListResponse)
         }
@@ -278,6 +279,7 @@ class RoomViewModel(
             is ScreenTrackUpdated -> {
                 participantManager.updateParticipantScreenTrack(remoteParticipantEvent.sid,
                     remoteParticipantEvent.screenTrack?.let { VideoTrackViewState(it) })
+                sharing= remoteParticipantEvent.screenTrack?.name
                 updateParticipantViewState()
             }
             is RemoteParticipantEvent.RemoteDataTrackSubscribed -> {
@@ -322,7 +324,7 @@ class RoomViewModel(
                             val chatMessage = ChatMessage(
                                 data,
                                 System.currentTimeMillis(),
-                                ChatMessage.Type.RECEIVED,sender
+                                ChatMessage.Type.RECEIVED, sender
                             )
                             addChatMessage(chatMessage)
                         }
@@ -438,7 +440,6 @@ class RoomViewModel(
     fun getIdentity(): String? {
         return name
     }
-
 
 
     @Suppress("UNCHECKED_CAST")

@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:visibility="gone"
             app:identity="@string/you"
-            app:tviScaleType="fit" />
+            app:tviScaleType="fill" />
 
         <co.shrappz.stickydrag.StickyDragView
             android:id="@+id/defaultLayoutView"
@@ -37,12 +37,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:identity="@string/you"
-                app:tviScaleType="fit" />
+                app:tviScaleType="fill" />
 
             <FrameLayout
                 android:id="@+id/draggable_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <com.twilio.video.app.ui.room.ParticipantThumbView
                     android:id="@+id/participantThumbView"

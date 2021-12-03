@@ -49,11 +49,11 @@ import tvi.webrtc.VideoSink;
 
 abstract class ParticipantView extends FrameLayout implements VideoSink {
 
-    private static final VideoScaleType DEFAULT_VIDEO_SCALE_TYPE = VideoScaleType.ASPECT_BALANCED;
+    private static final VideoScaleType DEFAULT_VIDEO_SCALE_TYPE = VideoScaleType.ASPECT_FIT;
 
     String identity = "";
     int state = State.NO_VIDEO;
-    boolean mirror = false;
+    boolean mirror = true;
     int scaleType = DEFAULT_VIDEO_SCALE_TYPE.ordinal();
 
     VideoTrack videoTrack;
@@ -194,7 +194,7 @@ abstract class ParticipantView extends FrameLayout implements VideoSink {
                             R.styleable.ParticipantView_state, State.NO_VIDEO);
 
             // obtain mirror
-            mirror = stylables.getBoolean(R.styleable.ParticipantView_mirror, false);
+            mirror = stylables.getBoolean(R.styleable.ParticipantView_mirror, true);
 
             // obtain scale type
             scaleType =

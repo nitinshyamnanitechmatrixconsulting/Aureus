@@ -187,8 +187,8 @@ class LocalParticipantManager(
             VIDEO_CAPTURE_RESOLUTION,
             VIDEO_CAPTURE_RESOLUTION_DEFAULT
         ).toInt()
-       // val videoFormat = VideoFormat(VIDEO_DIMENSIONS[dimensionsIndex], 30)
-        val videoFormat = VideoFormat(VideoDimensions.HD_720P_VIDEO_DIMENSIONS, 30)
+       val videoFormat = VideoFormat(VIDEO_DIMENSIONS[dimensionsIndex], 30)
+
 
         cameraCapturer = CameraCapturerCompat.newInstance(context)
         cameraVideoTrack = cameraCapturer?.let { cameraCapturer ->

@@ -26,6 +26,8 @@
             android:clipChildren="true">
 
             <com.twilio.video.VideoTextureView
+                app:tviMirror="true"
+                app:tviScaleType="fit"
                 android:id="@+id/video"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

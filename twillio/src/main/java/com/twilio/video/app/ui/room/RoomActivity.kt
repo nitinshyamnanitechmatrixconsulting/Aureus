@@ -1217,7 +1217,7 @@ class RoomActivity : BaseActivity(),
                 screenTrack,
                 videoTrack,
                 isMuted,
-                isMirrored
+                if (isLocalParticipant) true else isMirrored
             )
             binding.room.primaryVideo.showIdentityBadge(!primaryParticipant.isLocalParticipant)
             binding.room.primaryVideo.setOnClickListener { onSlideViewButtonClick(binding.room.primaryVideo) }

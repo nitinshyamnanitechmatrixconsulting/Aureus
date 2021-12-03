@@ -12,12 +12,17 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
+import com.twilio.video.LocalVideoTrack
+import com.twilio.video.RemoteVideoTrack
 import com.twilio.video.app.R
 import com.twilio.video.app.databinding.FragmentParticipantListBinding
 import com.twilio.video.app.databinding.LayoutMeetingOptionBinding
+import com.twilio.video.app.participant.ParticipantViewState
 import com.twilio.video.app.ui.room.*
 import com.twilio.video.app.ui.room.ParticipantAdapter
 import kotlin.math.roundToInt
+import com.twilio.video.app.ui.room.RoomEvent.RemoteParticipantEvent.ScreenTrackUpdated
+
 
 class MeetingOptionBottomSheetFragment(
     val activity: Activity,
@@ -64,13 +69,13 @@ class MeetingOptionBottomSheetFragment(
         } else {
             binding.ivMsg.setImageResource(R.drawable.messages_active)
         }
-        if(!RoomActivity.isBordcasting){
-            binding.tvShareScreen.text="Share Screen"
-        }else{
-            binding.tvShareScreen.text="Stop Sharing"
+        if (!RoomActivity.isBordcasting) {
+            binding.tvShareScreen.text = "Share Screen"
+        } else {
+            binding.tvShareScreen.text = "Stop Sharing"
         }
         ivMsg = binding.ivMsg
-     // binding.ivScreenshare.setTag(R.id.imageTag, 1)
+        // binding.ivScreenshare.setTag(R.id.imageTag, 1)
         binding.showFiles.setOnClickListener {
             dismiss()
             meettingOptionHandler.handleOpenFiles()
@@ -90,6 +95,14 @@ class MeetingOptionBottomSheetFragment(
             dismiss()
             meettingOptionHandler.handleShowMessages()
         }
+
+
+         if(roomViewModel.sharing!=null ){
+             binding.showPresentScreen.visibility=View.GONE
+         }else{
+             binding.showPresentScreen.visibility=View.VISIBLE
+         }
+
         binding.showPresentScreen.setOnClickListener {
             dismiss()
             meettingOptionHandler.handleScreenShare(binding.ivScreenshare)
