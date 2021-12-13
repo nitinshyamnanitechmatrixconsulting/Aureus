@@ -157,6 +157,7 @@ class RoomActivity : BaseActivity(),
 
     /** Coordinates participant thumbs and primary participant rendering.  */
     private lateinit var primaryParticipantController: PrimaryParticipantController
+    private lateinit var primaryParticipantController1: PrimaryParticipantController
     private lateinit var roomViewModel: RoomViewModel
     private lateinit var recordingAnimation: ObjectAnimator
 
@@ -173,8 +174,6 @@ class RoomActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         binding = RoomActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         localDataTrack = LocalDataTrack.create(this@RoomActivity)!!
         // Start the thread where data messages are received
         dataTrackMessageThread.start();
@@ -417,6 +416,8 @@ class RoomActivity : BaseActivity(),
 
         // Setup participant controller
         primaryParticipantController = PrimaryParticipantController(binding.room.primaryVideo)
+        primaryParticipantController1 = PrimaryParticipantController(binding.room.participantView)
+
 
         setupRecordingAnimation()
         setUpThumbnail()
@@ -563,17 +564,20 @@ class RoomActivity : BaseActivity(),
     private fun openMeetingOption() {
         if (!isFinishing)
             MeetingOptionBottomSheetFragment.openMeetingOption(this, this, roomViewModel)
+            supportFragmentManager.executePendingTransactions()
     }
 
     override fun handleShowMessages() {
         if (!isFinishing)
             ChatMessageFragment.openChat(this, roomViewModel)
+            supportFragmentManager.executePendingTransactions()
     }
 
 
     override fun handleShowLayoutOption() {
         if (!isFinishing)
             LayoutOptionSheetFragment.openMeetingOption(this, this, roomViewModel)
+            supportFragmentManager.executePendingTransactions()
     }
 
     override fun switchLayout(option: Int) {
@@ -594,6 +598,8 @@ class RoomActivity : BaseActivity(),
     override fun handleShowInfo() {
         if (!isFinishing)
             LessionInfoSheetFragment.open(this, this, roomViewModel)
+            supportFragmentManager.executePendingTransactions()
+
     }
 
     @SuppressLint("ResourceType")
@@ -609,27 +615,28 @@ class RoomActivity : BaseActivity(),
                 )
                 replace(R.id.container, instance, LessonAddFileFragment.TAG)
                 addToBackStack(null)
+                supportFragmentManager.executePendingTransactions()
             }
 
         }
-       /* val fragmentManager: FragmentManager = supportFragmentManager
-        val ft: FragmentTransaction? = fragmentManager.beginTransaction()
-        ft?.setCustomAnimations(  R.anim.slide_in_up,
-            R.anim.slide_in_down,
-            R.anim.slide_out_down,
-            R.anim.slide_out_up)
+        /* val fragmentManager: FragmentManager = supportFragmentManager
+         val ft: FragmentTransaction? = fragmentManager.beginTransaction()
+         ft?.setCustomAnimations(  R.anim.slide_in_up,
+             R.anim.slide_in_down,
+             R.anim.slide_out_down,
+             R.anim.slide_out_up)
 
-        val newFragment : LessonAddFileFragment= LessonAddFileFragment.newInstance(roomName, roomID, roomViewModel)
-        ft?.replace(R.id.container, newFragment, LessonAddFileFragment.TAG)
-        ft?.commit()*/
+         val newFragment : LessonAddFileFragment= LessonAddFileFragment.newInstance(roomName, roomID, roomViewModel)
+         ft?.replace(R.id.container, newFragment, LessonAddFileFragment.TAG)
+         ft?.commit()*/
     }
 
 
     override fun handleOpenShowParticipants() {
         if (!isFinishing) {
             ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
+            supportFragmentManager.executePendingTransactions()
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -972,13 +979,11 @@ class RoomActivity : BaseActivity(),
         participantCount = roomViewState.participantThumbnails?.size ?: 0
         when (currentLayoutMode) {
             SPLIT -> {
-
                 binding.room.participantThumbView.visibility = View.GONE
                 if (participantCount > 1) {
-
-                  //  binding.room.participantThumbView.visibility = View.VISIBLE
+                    //  binding.room.participantThumbView.visibility = View.VISIBLE
                     val topTwoPartcipantList = newThumbnails?.subList(0, 2)
-                    val participantView = topTwoPartcipantList?.get(1)
+                    val participantView = topTwoPartcipantList?.get(0)
                     participantView?.let {
                         renderDominantView(it)
                     }
@@ -1221,21 +1226,23 @@ class RoomActivity : BaseActivity(),
                 isMuted,
                 if (isLocalParticipant) true else isMirrored
             )
-            binding.room.primaryVideo.showIdentityBadge(!primaryParticipant.isLocalParticipant)
+            binding.room.primaryVideo.showIdentityBadge(primaryParticipant.isLocalParticipant)
             binding.room.primaryVideo.setOnClickListener { onSlideViewButtonClick(binding.room.primaryVideo) }
         }
     }
 
     private fun renderDominantView(primaryParticipant: ParticipantViewState) {
         primaryParticipant.run {
-            primaryParticipantController.renderAsPrimary(
+            primaryParticipantController1.renderAsPrimary(
                 if (isLocalParticipant) studentName else identity,
                 screenTrack,
                 videoTrack,
                 isMuted,
-                isMirrored
+                if (isLocalParticipant) true else isMirrored
             )
             binding.room.participantView.showIdentityBadge(!primaryParticipant.isLocalParticipant)
+            binding.room.participantView.setOnClickListener { onSlideViewButtonClick(binding.room.primaryVideo) }
+
         }
     }
 

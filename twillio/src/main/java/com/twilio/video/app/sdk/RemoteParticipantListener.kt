@@ -17,6 +17,9 @@ import com.twilio.video.app.ui.room.RoomEvent.RemoteParticipantEvent.TrackSwitch
 import com.twilio.video.app.ui.room.RoomEvent.RemoteParticipantEvent.VideoTrackUpdated
 import timber.log.Timber
 
+
+
+
 class RemoteParticipantListener(private val roomManager: RoomManager) : RemoteParticipant.Listener {
 
     override fun onVideoTrackSwitchedOff(remoteParticipant: RemoteParticipant, remoteVideoTrack: RemoteVideoTrack) {
