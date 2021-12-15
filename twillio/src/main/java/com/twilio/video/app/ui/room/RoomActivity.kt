@@ -588,12 +588,16 @@ class RoomActivity : BaseActivity(),
                 binding.room.coursesspinner.visibility = View.VISIBLE
                 binding.room.participantView.visibility = View.VISIBLE
                 binding.room.participantThumbView.visibility = View.GONE
+                binding.room.downSpiner.visibility = View.VISIBLE
+
 
             }
             DEFAULT -> {
                 binding.room.participantThumbView.visibility = View.VISIBLE
                 binding.room.participantView.visibility = View.GONE
                 binding.room.coursesspinner.visibility = View.GONE
+                binding.room.downSpiner.visibility = View.GONE
+
 
             }
         }
@@ -985,7 +989,7 @@ class RoomActivity : BaseActivity(),
             SPLIT -> {
                 binding.room.participantThumbView.visibility = View.GONE
                 binding.room.coursesspinner.visibility = View.VISIBLE
-                binding.room.downSpiner.visibility = View.GONE
+                binding.room.downSpiner.visibility = View.VISIBLE
 
                 if (participantCount > 1) {
                     //  binding.room.participantThumbView.visibility = View.VISIBLE
@@ -1001,6 +1005,8 @@ class RoomActivity : BaseActivity(),
                 binding.room.coursesspinner.visibility = View.GONE
                 binding.room.downSpiner.visibility = View.GONE
                 binding.room.participantThumbView.visibility = View.VISIBLE
+                binding.room.downSpiner.visibility = View.GONE
+
 
                 renderPrimaryView(roomViewState.primaryParticipant)
                 renderThumbnails(roomViewState)
