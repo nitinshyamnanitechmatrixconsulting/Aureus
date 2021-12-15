@@ -26,7 +26,33 @@
             android:visibility="gone"
             app:identity="@string/you"
             app:tviScaleType="fill"
-            tool:visibility="visible" />
+            tool:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <!--Spinner widget-->
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/coursesspinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/rect_button"
+                    android:visibility="gone"
+                    style="@style/spinner_style"
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/settings_screen_bandwidth_profile_track_switch_modes"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </com.twilio.video.app.ui.room.ParticipantPrimaryView>
 
         <co.shrappz.stickydrag.StickyDragView
             android:id="@+id/defaultLayoutView"
@@ -34,12 +60,38 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
+
             <com.twilio.video.app.ui.room.ParticipantPrimaryView
                 android:id="@+id/primary_video"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:identity="@string/you"
-                app:tviScaleType="balanced" />
+                app:tviScaleType="balanced" >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <!--Spinner widget-->
+                    <Spinner
+                        android:id="@+id/downSpiner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:maxWidth="250dp"
+                        android:visibility="gone"
+                        android:background="@drawable/rect_button"
+                        style="@style/spinner_style"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/settings_screen_bandwidth_profile_track_switch_modes"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.twilio.video.app.ui.room.ParticipantPrimaryView>
 
             <FrameLayout
                 android:id="@+id/draggable_content"

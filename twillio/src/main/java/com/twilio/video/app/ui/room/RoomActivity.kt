@@ -581,16 +581,20 @@ class RoomActivity : BaseActivity(),
     }
 
     override fun switchLayout(option: Int) {
-        if (participantCount <= 1) return
+        if (participantCount < 1) return
         currentLayoutMode = option
         when (option) {
             SPLIT -> {
+                binding.room.coursesspinner.visibility = View.VISIBLE
                 binding.room.participantView.visibility = View.VISIBLE
                 binding.room.participantThumbView.visibility = View.GONE
+
             }
             DEFAULT -> {
                 binding.room.participantThumbView.visibility = View.VISIBLE
                 binding.room.participantView.visibility = View.GONE
+                binding.room.coursesspinner.visibility = View.GONE
+
             }
         }
     }
@@ -980,6 +984,9 @@ class RoomActivity : BaseActivity(),
         when (currentLayoutMode) {
             SPLIT -> {
                 binding.room.participantThumbView.visibility = View.GONE
+                binding.room.coursesspinner.visibility = View.VISIBLE
+                binding.room.downSpiner.visibility = View.GONE
+
                 if (participantCount > 1) {
                     //  binding.room.participantThumbView.visibility = View.VISIBLE
                     val topTwoPartcipantList = newThumbnails?.subList(0, 2)
@@ -991,12 +998,17 @@ class RoomActivity : BaseActivity(),
 
             }
             DEFAULT -> {
+                binding.room.coursesspinner.visibility = View.GONE
+                binding.room.downSpiner.visibility = View.GONE
                 binding.room.participantThumbView.visibility = View.VISIBLE
+
                 renderPrimaryView(roomViewState.primaryParticipant)
                 renderThumbnails(roomViewState)
             }
         }
     }
+
+
 
     override fun handleScreenShare(imageView: ImageView) {
         val tag = imageView.getTag(R.id.imageTag)

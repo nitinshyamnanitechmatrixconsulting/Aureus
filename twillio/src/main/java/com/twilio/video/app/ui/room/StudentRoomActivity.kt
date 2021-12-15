@@ -304,6 +304,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
         currentLayoutMode = option
         when (option) {
             SPLIT -> {
+                SPLIT
                 binding.room.participantView.visibility = View.VISIBLE
                 binding.room.participantThumbView.visibility = View.GONE
             }
@@ -555,6 +556,7 @@ class StudentRoomActivity : BaseActivity(), MeettingOptionHandler {
         when (currentLayoutMode) {
             SPLIT -> {
                 binding.room.participantThumbView.visibility = View.GONE
+                binding.room.coursesspinner.visibility = View.VISIBLE
                 if (participantCount > 1) {
                     binding.room.participantThumbView.visibility = View.VISIBLE
                     val topTwoPartcipantList = newThumbnails?.subList(0, 2)
