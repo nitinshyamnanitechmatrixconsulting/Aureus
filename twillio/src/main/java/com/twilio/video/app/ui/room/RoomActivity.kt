@@ -41,10 +41,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -170,14 +167,15 @@ class RoomActivity : BaseActivity(),
     var runnable: Runnable? = null
     private var isRunning: Boolean = true
     var temp = 0
+    val participantIdentity = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RoomActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         localDataTrack = LocalDataTrack.create(this@RoomActivity)!!
         // Start the thread where data messages are received
-        dataTrackMessageThread.start();
-        dataTrackMessageThreadHandler = Handler(dataTrackMessageThread.looper);
+        dataTrackMessageThread.start()
+        dataTrackMessageThreadHandler = Handler(dataTrackMessageThread.looper)
 
         fun token() {
             binding.connectProgress.visibility = View.VISIBLE
@@ -564,20 +562,20 @@ class RoomActivity : BaseActivity(),
     private fun openMeetingOption() {
         if (!isFinishing)
             MeetingOptionBottomSheetFragment.openMeetingOption(this, this, roomViewModel)
-            supportFragmentManager.executePendingTransactions()
+        supportFragmentManager.executePendingTransactions()
     }
 
     override fun handleShowMessages() {
         if (!isFinishing)
             ChatMessageFragment.openChat(this, roomViewModel)
-            supportFragmentManager.executePendingTransactions()
+        supportFragmentManager.executePendingTransactions()
     }
 
 
     override fun handleShowLayoutOption() {
         if (!isFinishing)
             LayoutOptionSheetFragment.openMeetingOption(this, this, roomViewModel)
-            supportFragmentManager.executePendingTransactions()
+        supportFragmentManager.executePendingTransactions()
     }
 
     override fun switchLayout(option: Int) {
@@ -606,7 +604,7 @@ class RoomActivity : BaseActivity(),
     override fun handleShowInfo() {
         if (!isFinishing)
             LessionInfoSheetFragment.open(this, this, roomViewModel)
-            supportFragmentManager.executePendingTransactions()
+        supportFragmentManager.executePendingTransactions()
 
     }
 
@@ -975,6 +973,7 @@ class RoomActivity : BaseActivity(),
         updateParticipantList(roomViewState)
         updateLayout(roomViewState)
         updateAudioDeviceIcon(roomViewState.selectedDevice)
+        getParticipantList(roomViewState)
     }
 
     private fun updateParticipantList(roomViewState: RoomViewState) {
@@ -1013,7 +1012,6 @@ class RoomActivity : BaseActivity(),
             }
         }
     }
-
 
 
     override fun handleScreenShare(imageView: ImageView) {
@@ -1598,6 +1596,81 @@ class RoomActivity : BaseActivity(),
         textView.setTextColor(Color.WHITE)
         textView.textSize = 20f
         snackbar.show()
+    }
+
+    private fun getParticipantList(roomViewState: RoomViewState) {
+        val newThumbnails = if (roomViewState.configuration is RoomViewConfiguration.Connected)
+            roomViewState.participantThumbnails else null
+        participantIdentity.clear()
+        if (roomViewState.configuration is RoomViewConfiguration.Connected) {
+            if (newThumbnails != null) {
+                for (item in newThumbnails)
+                    participantIdentity?.add(if (item.isLocalParticipant) studentName else item.identity.toString())
+            }
+
+            //   val aa = newThumbnails?.let { ArrayAdapter(this, android.R.layout.simple_spinner_item, it) }
+            val aa =
+                participantIdentity?.let {
+                    ArrayAdapter(
+                        this, android.R.layout.simple_spinner_item,
+                        it
+                    )
+                }
+            // Set layout to use when the list of choices appear
+            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Set Adapter to Spinner
+            binding.room.downSpiner.adapter = aa
+            binding.room.coursesspinner.adapter = aa
+
+
+            binding.room.downSpiner.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                    }
+
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        primaryParticipantController.renderAsPrimary(
+                            if (newThumbnails!![position].isLocalParticipant) studentName else newThumbnails[position].identity,
+                            newThumbnails[position].screenTrack,
+                            newThumbnails[position].videoTrack,
+                            newThumbnails[position].isMuted,
+                            if (newThumbnails[position].isLocalParticipant) true else newThumbnails[position].isMirrored
+                        )
+
+                    }
+
+                }
+
+            binding.room.coursesspinner.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                    }
+
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        primaryParticipantController1.renderAsPrimary(
+                            if (newThumbnails!![position].isLocalParticipant) studentName else newThumbnails[position].identity,
+                            newThumbnails[position].screenTrack,
+                            newThumbnails[position].videoTrack,
+                            newThumbnails[position].isMuted,
+                            if (newThumbnails[position].isLocalParticipant) true else newThumbnails[position].isMirrored
+                        )
+                    }
+
+                }
+
+        }
     }
 
 }
