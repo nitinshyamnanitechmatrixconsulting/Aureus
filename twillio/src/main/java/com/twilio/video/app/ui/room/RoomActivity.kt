@@ -114,8 +114,11 @@ import com.twilio.video.RemoteAudioTrack
 class RoomActivity : BaseActivity(),
     MeettingOptionHandler/*, LocalParticipant.Listener*//*,RemoteParticipant.Listener*/ {
 
+    private lateinit var aa: ArrayAdapter<String>;
     private var isConnected: Boolean = false
     private var participantCount: Int = 0
+    var bottomSelectPosition = 0
+    var bottomSelectPosition1 = 0
     private var isUp: Boolean = false
     private var roomID: String = ""
     private var type: String = ""
@@ -167,7 +170,8 @@ class RoomActivity : BaseActivity(),
     var runnable: Runnable? = null
     private var isRunning: Boolean = true
     var temp = 0
-    val participantIdentity = ArrayList<String>()
+    var participantIdentity = ArrayList<String>()
+    var newThumbnailsList: List<ParticipantViewState>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RoomActivityBinding.inflate(layoutInflater)
@@ -385,6 +389,36 @@ class RoomActivity : BaseActivity(),
             binding.rlWaiting.visibility = View.GONE
             binding.joinProgressLoader.visibility = View.GONE
         }
+        binding.room.participantView.setOnClickListener {
+            onSlideViewButtonClick(binding.room.primaryVideo)
+            if (binding.room.coursesspinner.visibility == View.VISIBLE) {
+                binding.room.coursesspinner.visibility = View.GONE
+            } else {
+                binding.room.coursesspinner.visibility = View.VISIBLE
+            }
+        }
+
+        if (binding.room.coursesspinner.visibility == View.VISIBLE) {
+            val someHandler = Handler(Looper.getMainLooper())
+            someHandler.postDelayed(object : Runnable {
+                override fun run() {
+                    binding.room.coursesspinner.visibility = View.GONE
+                    someHandler.postDelayed(this, 5000)
+
+                }
+            }, 5000)
+        }
+
+        if (binding.room.downSpiner.visibility == View.VISIBLE) {
+            val someHandler = Handler(Looper.getMainLooper())
+            someHandler.postDelayed(object : Runnable {
+                override fun run() {
+                    binding.room.downSpiner.visibility = View.GONE
+                    someHandler.postDelayed(this, 5000)
+                }
+            }, 5000)
+        }
+
         Glide.with(this).load(R.raw.loding).into(this.binding.joinProgressLoader)
         Glide.with(this).load(R.raw.loding).into(this.binding.waitingjJoinProgressLoader)
 
@@ -428,6 +462,95 @@ class RoomActivity : BaseActivity(),
         { event ->
             if (event is RoomViewEffect) bindRoomViewEffects(event)
         }
+        aa =
+            participantIdentity?.let {
+                ArrayAdapter(
+                    this, android.R.layout.simple_spinner_item,
+                    it
+                )
+            }
+        // Set layout to use when the list of choices appear
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Set Adapter to Spinner
+
+        binding.room.coursesspinner.adapter = aa
+        binding.room.downSpiner.adapter = aa
+
+        binding.room.ivSwap.setOnClickListener {
+            var temppos=binding.room.downSpiner.selectedItemPosition
+
+            primaryParticipantController.renderAsPrimary(
+                if (newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].isLocalParticipant) studentName else newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].identity,
+                newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].screenTrack,
+                newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].videoTrack,
+                newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].isMuted,
+                if (newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].isLocalParticipant) true else newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].isMirrored
+            )
+            binding.room.downSpiner.setSelection(binding.room.coursesspinner.selectedItemPosition)
+
+            primaryParticipantController1.renderAsPrimary(
+                if (newThumbnailsList!![temppos].isLocalParticipant) studentName else newThumbnailsList!![temppos].identity,
+                newThumbnailsList!![temppos].screenTrack,
+                newThumbnailsList!![temppos].videoTrack,
+                newThumbnailsList!![temppos].isMuted,
+                if (newThumbnailsList!![temppos].isLocalParticipant) true else newThumbnailsList!![temppos].isMirrored
+            )
+            binding.room.coursesspinner.setSelection(temppos)
+
+
+        }
+
+        binding.room.coursesspinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    // bottomSelectPosition1 = position
+                    primaryParticipantController1.renderAsPrimary(
+                        if (newThumbnailsList!![position].isLocalParticipant) studentName else newThumbnailsList!![position].identity,
+                        newThumbnailsList!![position].screenTrack,
+                        newThumbnailsList!![position].videoTrack,
+                        newThumbnailsList!![position].isMuted,
+                        if (newThumbnailsList!![position].isLocalParticipant) true else newThumbnailsList!![position].isMirrored
+                    )
+                }
+
+            }
+
+        binding.room.downSpiner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    // bottomSelectPosition = position
+                    if (currentLayoutMode == DEFAULT) {
+                    } else {
+                        primaryParticipantController.renderAsPrimary(
+                            if (newThumbnailsList!![position].isLocalParticipant) studentName else newThumbnailsList!![position].identity,
+                            newThumbnailsList!![position].screenTrack,
+                            newThumbnailsList!![position].videoTrack,
+                            newThumbnailsList!![position].isMuted,
+                            if (newThumbnailsList!![position].isLocalParticipant) true else newThumbnailsList!![position].isMirrored
+                        )
+
+                    }
+                }
+
+            }
     }
 
     private fun connect() {
@@ -585,18 +708,24 @@ class RoomActivity : BaseActivity(),
             SPLIT -> {
                 binding.room.coursesspinner.visibility = View.VISIBLE
                 binding.room.participantView.visibility = View.VISIBLE
+                binding.room.ivSwap.visibility = View.VISIBLE
                 binding.room.participantThumbView.visibility = View.GONE
                 binding.room.downSpiner.visibility = View.VISIBLE
-
+                binding.room.primaryVideo.setOnClickListener {
+                    if (binding.room.downSpiner.visibility == View.VISIBLE) {
+                        binding.room.downSpiner.visibility = View.GONE
+                    } else {
+                        binding.room.downSpiner.visibility = View.VISIBLE
+                    }
+                }
 
             }
             DEFAULT -> {
                 binding.room.participantThumbView.visibility = View.VISIBLE
                 binding.room.participantView.visibility = View.GONE
+                binding.room.ivSwap.visibility = View.GONE
                 binding.room.coursesspinner.visibility = View.GONE
                 binding.room.downSpiner.visibility = View.GONE
-
-
             }
         }
     }
@@ -980,22 +1109,29 @@ class RoomActivity : BaseActivity(),
         val fragment =
             supportFragmentManager.findFragmentByTag(ParticipantBottomSheetFragment.TAG) as? ParticipantBottomSheetFragment
         fragment?.renderThumbnails(roomViewState)
-        renderPrimaryView(roomViewState.primaryParticipant)
+        //   renderPrimaryView(roomViewState.primaryParticipant)
         val newThumbnails = if (roomViewState.configuration is RoomViewConfiguration.Connected)
             roomViewState.participantThumbnails else null
         participantCount = roomViewState.participantThumbnails?.size ?: 0
         when (currentLayoutMode) {
             SPLIT -> {
-                binding.room.participantThumbView.visibility = View.GONE
-                binding.room.coursesspinner.visibility = View.VISIBLE
-                binding.room.downSpiner.visibility = View.VISIBLE
-
                 if (participantCount > 1) {
                     //  binding.room.participantThumbView.visibility = View.VISIBLE
+                    binding.room.participantThumbView.visibility = View.GONE
+                    binding.room.coursesspinner.visibility = View.VISIBLE
+                    binding.room.downSpiner.visibility = View.VISIBLE
                     val topTwoPartcipantList = newThumbnails?.subList(0, 2)
                     val participantView = topTwoPartcipantList?.get(0)
                     participantView?.let {
-                        renderDominantView(it)
+                        // renderDominantView(it)
+                    }
+                    binding.room.primaryVideo.setOnClickListener {
+                        onSlideViewButtonClick(binding.room.primaryVideo)
+                        if (binding.room.downSpiner.visibility == View.VISIBLE) {
+                            binding.room.downSpiner.visibility = View.GONE
+                        } else {
+                            binding.room.downSpiner.visibility = View.VISIBLE
+                        }
                     }
                 }
 
@@ -1362,7 +1498,6 @@ class RoomActivity : BaseActivity(),
         if (imm != null && imm.isActive) {
             if (currentFocus != null)
                 imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
-
         }
     }
 
@@ -1599,78 +1734,31 @@ class RoomActivity : BaseActivity(),
     }
 
     private fun getParticipantList(roomViewState: RoomViewState) {
-        val newThumbnails = if (roomViewState.configuration is RoomViewConfiguration.Connected)
+        newThumbnailsList = if (roomViewState.configuration is RoomViewConfiguration.Connected)
             roomViewState.participantThumbnails else null
         participantIdentity.clear()
         if (roomViewState.configuration is RoomViewConfiguration.Connected) {
-            if (newThumbnails != null) {
-                for (item in newThumbnails)
-                    participantIdentity?.add(if (item.isLocalParticipant) studentName else item.identity.toString())
+
+            for (item in newThumbnailsList!!)
+                participantIdentity?.add(if (item.isLocalParticipant) studentName else item.identity.toString())
+
+            aa.notifyDataSetChanged()
+
+
+            /*if (binding.room.downSpiner.adapter.count >= bottomSelectPosition) {
+                binding.room.downSpiner.setSelection(bottomSelectPosition, false)
+            } else {
+                binding.room.downSpiner.setSelection(0, false)
+                bottomSelectPosition = 0
             }
 
-            //   val aa = newThumbnails?.let { ArrayAdapter(this, android.R.layout.simple_spinner_item, it) }
-            val aa =
-                participantIdentity?.let {
-                    ArrayAdapter(
-                        this, android.R.layout.simple_spinner_item,
-                        it
-                    )
-                }
-            // Set layout to use when the list of choices appear
-            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Set Adapter to Spinner
-            binding.room.downSpiner.adapter = aa
-            binding.room.coursesspinner.adapter = aa
-
-
-            binding.room.downSpiner.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                    }
-
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        primaryParticipantController.renderAsPrimary(
-                            if (newThumbnails!![position].isLocalParticipant) studentName else newThumbnails[position].identity,
-                            newThumbnails[position].screenTrack,
-                            newThumbnails[position].videoTrack,
-                            newThumbnails[position].isMuted,
-                            if (newThumbnails[position].isLocalParticipant) true else newThumbnails[position].isMirrored
-                        )
-
-                    }
-
-                }
-
-            binding.room.coursesspinner.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                    }
-
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        primaryParticipantController1.renderAsPrimary(
-                            if (newThumbnails!![position].isLocalParticipant) studentName else newThumbnails[position].identity,
-                            newThumbnails[position].screenTrack,
-                            newThumbnails[position].videoTrack,
-                            newThumbnails[position].isMuted,
-                            if (newThumbnails[position].isLocalParticipant) true else newThumbnails[position].isMirrored
-                        )
-                    }
-
-                }
-
+            if (binding.room.coursesspinner.adapter.count >= bottomSelectPosition1) {
+                binding.room.coursesspinner.setSelection(bottomSelectPosition1, false)
+            } else {
+                binding.room.coursesspinner.setSelection(bottomSelectPosition1, false)
+                bottomSelectPosition1 = 0
+            }*/
         }
-    }
 
+    }
 }

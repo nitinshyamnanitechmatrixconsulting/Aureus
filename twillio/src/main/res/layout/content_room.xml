@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:background="@color/white"
+    android:background="@color/participantBackground"
     android:clickable="true"
     android:focusableInTouchMode="true"
     android:keepScreenOn="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -32,18 +32,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
                 <!--Spinner widget-->
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/coursesspinner"
+                    style="@style/spinner_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:background="@drawable/rect_button"
-                    android:visibility="gone"
-                    style="@style/spinner_style"
-                    android:spinnerMode="dropdown"
                     android:entries="@array/settings_screen_bandwidth_profile_track_switch_modes"
+                    android:spinnerMode="dropdown"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -51,8 +50,17 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
         </com.twilio.video.app.ui.room.ParticipantPrimaryView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSwap"
+            android:layout_width="@dimen/margin_30"
+            android:layout_height="@dimen/margin_30"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/margin_10"
+            android:src="@drawable/swap"
+            android:visibility="gone"
+            tool:ignore="RtlHardcoded" />
 
         <co.shrappz.stickydrag.StickyDragView
             android:id="@+id/defaultLayoutView"
@@ -60,13 +68,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-
             <com.twilio.video.app.ui.room.ParticipantPrimaryView
                 android:id="@+id/primary_video"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:identity="@string/you"
-                app:tviScaleType="balanced" >
+                app:tviScaleType="balanced">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -76,18 +83,18 @@
                     <!--Spinner widget-->
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/downSpiner"
+                        style="@style/spinner_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:maxWidth="250dp"
-                        android:visibility="gone"
                         android:background="@drawable/rect_button"
-                        style="@style/spinner_style"
-                        android:spinnerMode="dropdown"
                         android:entries="@array/settings_screen_bandwidth_profile_track_switch_modes"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxWidth="250dp"
+                        android:spinnerMode="dropdown"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
