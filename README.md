@@ -1,4 +1,4 @@
-# Kotlin Clean Architecture (MVVM)
+  # Kotlin Clean Architecture (MVVM)
 
 ## Overview
 This Repository contains a Detailed Sample app that Implements MVVM clean Architecture in Kotlin using

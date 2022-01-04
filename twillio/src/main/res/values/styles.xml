@@ -96,7 +96,9 @@
 
     <style name="spinner_style">
         <item name="android:paddingLeft">0dp</item>
-        <item name="android:dropDownWidth">533dp</item>
+        <item name="android:dropDownWidth">400dp</item>
+        <item name="android:gravity">center</item>
+
         <item name="android:showDividers">none</item>
         <item name="background">@drawable/circleyellow_bg</item>
         <item name="android:dividerHeight">0dp</item>
