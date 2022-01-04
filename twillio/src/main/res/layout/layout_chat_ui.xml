@@ -47,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/ll_bottom"
                 android:textStyle="bold"
-
                 android:layout_margin="@dimen/margin_15"
                 android:textColor="@color/black" />
 
