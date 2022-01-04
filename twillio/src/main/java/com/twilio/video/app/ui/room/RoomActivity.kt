@@ -470,7 +470,7 @@ class RoomActivity : BaseActivity(),
                 )
             }
         // Set layout to use when the list of choices appear
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        aa.setDropDownViewResource(R.layout.custom_simple_spinner_dropdown)
         // Set Adapter to Spinner
 
         binding.room.coursesspinner.adapter = aa
