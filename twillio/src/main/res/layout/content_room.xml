@@ -53,7 +53,6 @@
                     <!--Spinner widget-->
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/coursesspinner"
-                        style="@style/spinner_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="24dp"
@@ -90,7 +89,6 @@
                         <!--Spinner widget-->
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/downSpiner"
-                            style="@style/spinner_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -161,7 +159,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"
             app:srcCompat="@drawable/micropfone_on" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -171,7 +169,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_10"
             app:srcCompat="@drawable/video_on" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>
