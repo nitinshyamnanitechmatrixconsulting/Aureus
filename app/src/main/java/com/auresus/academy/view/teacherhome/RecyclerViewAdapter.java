@@ -87,8 +87,27 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
                 Toast.makeText(view.getContext(), "Deleted " + viewHolder.textViewFileName.getText().toString() + "!", Toast.LENGTH_SHORT).show();*/
             }
         });
-        viewHolder.ivFileType.setImageResource(R.drawable.ic_file_present);
+
         viewHolder.ivFileType.setColorFilter(ContextCompat.getColor(mContext, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
+        if(item.getFileName().contains(".jpg")||item.getFileName().contains(".JPG"))
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.jpg);
+        else if(item.getFileName().contains(".jpeg") ||item.getFileName().contains(".JPEG"))
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.jpeg_display);
+        else if(item.getFileName().contains(".png")||item.getFileName().contains(".PNG"))
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.png_display);
+        else if(item.getFileName().contains(".pdf") ||item.getFileName().contains(".PDF"))
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.pdf_display);
+        else if(item.getFileName().contains(".doc") ||item.getFileName().contains(".DOC"))
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.doc);
+        else if(item.getFileName().contains(".docx") ||item.getFileName().contains(".DOCX"))
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.docx_display);
+        else if(item.getFileName().contains(".mp3") ||item.getFileName().contains(".MP3"))
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.mp3_display);
+        else if(item.getFileName().contains(".mp4") ||item.getFileName().contains(".MP4"))
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.mp4);
+        else
+            viewHolder.ivFileType.setImageResource(com.twilio.video.app.R.drawable.ic_file_present);
+
         viewHolder.textViewFileName.setText(item.getFileName());
         viewHolder.textViewFileSize.setText(item.getFileSize());
         mItemManger.bindView(viewHolder.itemView, position);

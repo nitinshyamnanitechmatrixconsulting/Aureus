@@ -91,8 +91,11 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/item_teacher_bookingg.xml" value="0.22" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/item_upcoming_lesson.xml" value="0.25" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/app/src/main/res/layout/toolbar_home.xml" value="0.1921875" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/back_home.xml" value="0.20833333333333334" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/badge_background.xml" value="0.20833333333333334" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/circleyellow_bg.xml" value="0.14444444444444443" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/default_screen.xml" value="0.14444444444444443" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/dialog_background.xml" value="0.20833333333333334" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/ic_mic_off_gray_24px.xml" value="0.17592592592592593" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/incoming_msg.xml" value="0.19537037037037036" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/drawable/local_thumb_view.xml" value="0.18703703703703703" />
@@ -106,6 +109,7 @@
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/alerts_two_buttons.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/assignment_dialog_list_view.xml" value="0.18923076923076923" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/content_room.xml" value="0.12129629629629629" />
+        <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/custom_simple_spinner_dropdown.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/dialog_open_file.xml" value="0.1921875" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/fragment_layout_option.xml" value="0.1537037037037037" />
         <entry key="..\:/kotlin-mvvm_design/kotlin-mvvm_design/twillio/src/main/res/layout/fragment_lession_detail_meeting.xml" value="0.1921875" />

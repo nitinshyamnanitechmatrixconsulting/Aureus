@@ -44,6 +44,7 @@
                     android:padding="4dp">
 
                     <ImageView
+                        
                         android:id="@+id/ivFileType"
                         android:layout_width="@dimen/margin_15"
                         android:layout_height="@dimen/margin_15" />

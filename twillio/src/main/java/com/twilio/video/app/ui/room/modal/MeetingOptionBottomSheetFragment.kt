@@ -33,7 +33,9 @@ class MeetingOptionBottomSheetFragment(
     private lateinit var binding: LayoutMeetingOptionBinding
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private var instance: MeetingOptionBottomSheetFragment? = null
+        @SuppressLint("StaticFieldLeak")
         var ivMsg: ImageView? = null
 
         @JvmStatic

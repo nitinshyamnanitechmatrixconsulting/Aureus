@@ -51,7 +51,7 @@
                         app:layout_constraintVertical_bias="0.498" />
 -->
                     <!--Spinner widget-->
-                    <androidx.appcompat.widget.AppCompatSpinner
+                    <com.twilio.video.app.helper.NDSpinner
                         android:id="@+id/coursesspinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                         android:layout_height="match_parent">
 
                         <!--Spinner widget-->
-                        <androidx.appcompat.widget.AppCompatSpinner
+                        <com.twilio.video.app.helper.NDSpinner
                             android:id="@+id/downSpiner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -140,7 +140,6 @@
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
