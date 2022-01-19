@@ -244,7 +244,7 @@ class RoomActivity : BaseActivity(),
                                 .setPositiveButton(getString(android.R.string.ok), null)
                                 .show()
                             room.disconnect()
-                            binding.joinProgressLoader.visibility = View.GONE
+                            binding.joinProgressLoader.visibility = View.INVISIBLE
                             handler!!.removeCallbacks(runnable!!)
                             isRunning = false
                         } else {
@@ -387,7 +387,7 @@ class RoomActivity : BaseActivity(),
         binding.room.localVideo1.setOnClickListener { toggleLocalVideo() }
         binding.ivWaitingBack.setOnClickListener {
             binding.rlWaiting.visibility = View.GONE
-            binding.joinProgressLoader.visibility = View.GONE
+            binding.joinProgressLoader.visibility = View.INVISIBLE
         }
         binding.room.participantView.setOnClickListener {
             onSlideViewButtonClick(binding.room.primaryVideo)
@@ -800,12 +800,11 @@ class RoomActivity : BaseActivity(),
             hideKeyboard()
         } else if (binding.actionLayout.visibility == View.VISIBLE && binding.rlWaiting.visibility == View.VISIBLE) {
             binding.rlWaiting.visibility = View.GONE
-            binding.joinProgressLoader.visibility = View.GONE
+            binding.joinProgressLoader.visibility = View.INVISIBLE
             // super.onBackPressed()
         } else if (binding.actionLayout.visibility == View.VISIBLE) {
-            onBackPressed()
-        } else {
-
+            room?.disconnect()
+            super.onBackPressed();
         }
     }
 

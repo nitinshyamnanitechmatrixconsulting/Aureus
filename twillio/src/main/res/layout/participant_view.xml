@@ -143,7 +143,6 @@
         android:layout_marginBottom="6dp"
         android:contentDescription="@string/room_screen_pin_icon_description"
         android:visibility="gone"
-        app:srcCompat="@drawable/pin_participant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
