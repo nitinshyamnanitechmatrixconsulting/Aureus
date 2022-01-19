@@ -477,7 +477,7 @@ class RoomActivity : BaseActivity(),
         binding.room.downSpiner.adapter = aa
 
         binding.room.ivSwap.setOnClickListener {
-            var temppos=binding.room.downSpiner.selectedItemPosition
+            var temppos = binding.room.downSpiner.selectedItemPosition
 
             primaryParticipantController.renderAsPrimary(
                 if (newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].isLocalParticipant) studentName else newThumbnailsList!![binding.room.coursesspinner.selectedItemPosition].identity,
@@ -1737,9 +1737,9 @@ class RoomActivity : BaseActivity(),
             roomViewState.participantThumbnails else null
         participantIdentity.clear()
         if (roomViewState.configuration is RoomViewConfiguration.Connected) {
-
-            for (item in newThumbnailsList!!)
-                participantIdentity?.add(if (item.isLocalParticipant) studentName else item.identity.toString())
+            if (newThumbnailsList != null)
+                for (item in newThumbnailsList!!)
+                    participantIdentity?.add(if (item.isLocalParticipant) studentName else item.identity.toString())
 
             aa.notifyDataSetChanged()
 
