@@ -174,6 +174,7 @@ class RoomActivity : BaseActivity(),
     var newThumbnailsList: List<ParticipantViewState>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity=this
         binding = RoomActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         localDataTrack = LocalDataTrack.create(this@RoomActivity)!!
@@ -684,20 +685,20 @@ class RoomActivity : BaseActivity(),
 
     private fun openMeetingOption() {
         if (!isFinishing)
-            MeetingOptionBottomSheetFragment.openMeetingOption(this, this, roomViewModel)
+            MeetingOptionBottomSheetFragment.openMeetingOption(activity, this, roomViewModel)
         supportFragmentManager.executePendingTransactions()
     }
 
     override fun handleShowMessages() {
         if (!isFinishing)
-            ChatMessageFragment.openChat(this, roomViewModel)
+            ChatMessageFragment.openChat(activity, roomViewModel)
         supportFragmentManager.executePendingTransactions()
     }
 
 
     override fun handleShowLayoutOption() {
         if (!isFinishing)
-            LayoutOptionSheetFragment.openMeetingOption(this, this, roomViewModel)
+            LayoutOptionSheetFragment.openMeetingOption(activity, this, roomViewModel)
         supportFragmentManager.executePendingTransactions()
     }
 
@@ -732,7 +733,7 @@ class RoomActivity : BaseActivity(),
 
     override fun handleShowInfo() {
         if (!isFinishing)
-            LessionInfoSheetFragment.open(this, this, roomViewModel)
+            LessionInfoSheetFragment.open(activity, this, roomViewModel)
         supportFragmentManager.executePendingTransactions()
 
     }
@@ -741,7 +742,7 @@ class RoomActivity : BaseActivity(),
     override fun handleOpenFiles() {
         if (!isFinishing) {
             val instance = LessonAddFileFragment.newInstance(roomName, roomID, roomViewModel)
-            this@RoomActivity.supportFragmentManager.commit {
+            activity.supportFragmentManager.commit {
                 setCustomAnimations(
                     R.anim.slide_in_up,
                     R.anim.slide_in_down,
@@ -769,7 +770,7 @@ class RoomActivity : BaseActivity(),
 
     override fun handleOpenShowParticipants() {
         if (!isFinishing) {
-            ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
+            ParticipantBottomSheetFragment.openParticipantList(activity, roomViewModel)
             supportFragmentManager.executePendingTransactions()
         }
     }
@@ -1462,6 +1463,7 @@ class RoomActivity : BaseActivity(),
         var isFirstTime: Boolean = true
         var isBordcasting: Boolean = false
         var isMute: Boolean = false
+        lateinit var activity:RoomActivity
 
         fun startActivity(context: Context, appLink: Uri?) {
             val intent = Intent(context, RoomActivity::class.java)
