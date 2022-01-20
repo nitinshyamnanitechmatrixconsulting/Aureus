@@ -683,29 +683,27 @@ class RoomActivity : BaseActivity(),
 
 
     private fun openMeetingOption() {
-        if (!isFinishing) {
+        if (!isFinishing)
             MeetingOptionBottomSheetFragment.openMeetingOption(this, this, roomViewModel)
             supportFragmentManager.executePendingTransactions()
-        }
+
     }
 
     override fun handleShowMessages() {
-        if (!isFinishing) {
+        if (!isFinishing)
             ChatMessageFragment.openChat(this, roomViewModel)
             supportFragmentManager.executePendingTransactions()
-        }
-    }
 
+    }
 
     override fun handleShowLayoutOption() {
 
-        if (!isFinishing) {
+        if (!isFinishing)
             LayoutOptionSheetFragment.openMeetingOption(this, this, roomViewModel)
             supportFragmentManager.executePendingTransactions()
-        }
+
 
     }
-
     override fun switchLayout(option: Int) {
         if (participantCount < 1) return
         currentLayoutMode = option
@@ -736,10 +734,10 @@ class RoomActivity : BaseActivity(),
     }
 
     override fun handleShowInfo() {
-        if (!isFinishing) {
+        if (!isFinishing)
             LessionInfoSheetFragment.open(this, this, roomViewModel)
             supportFragmentManager.executePendingTransactions()
-        }
+
 
     }
 
@@ -774,10 +772,10 @@ class RoomActivity : BaseActivity(),
 
 
     override fun handleOpenShowParticipants() {
-        if (!isFinishing) {
+        if (!isFinishing)
             ParticipantBottomSheetFragment.openParticipantList(this, roomViewModel)
             supportFragmentManager.executePendingTransactions()
-        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
