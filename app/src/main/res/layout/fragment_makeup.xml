@@ -4,105 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_F4F5F6"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/editPersonalDetails"
+            android:background="@color/color_F4F5F6"
+            android:orientation="vertical">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp16"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="@string/make_up_balance"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_18"
-                    android:textStyle="bold" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp16"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/make_up_balance"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_18"
+                android:textStyle="bold" />
 
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:padding="@dimen/dp16">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/dp16">
 
                 <ImageView
-                        android:id="@+id/clockIv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_baseline_access"
-                    app:tint="@color/colorAccent"
-                    android:contentDescription="TODO" />
+                    android:id="@+id/clockIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_baseline_access"
+                    app:tint="@color/colorAccent" />
 
                 <TextView
-                        android:id="@+id/textMin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp20"
-                        android:layout_toRightOf="@+id/clockIv"
-                        android:text="30 Minutes"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_16" />
+                    android:id="@+id/textMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:layout_toRightOf="@+id/clockIv"
+                    android:text="30 Minutes"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_16" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/textMin"
-                        android:layout_marginLeft="@dimen/dp20"
-                        android:layout_toRightOf="@+id/clockIv"
-                        android:text="Make-up Minutes Available "
-                        android:textColor="@color/colorff4e4e56"
-                        android:textSize="@dimen/text_14" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textMin"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:layout_toRightOf="@+id/clockIv"
+                    android:text="Make-up Minutes Available "
+                    android:textColor="@color/colorff4e4e56"
+                    android:textSize="@dimen/text_14" />
             </RelativeLayout>
 
             <TextView
-                    android:id="@+id/makeMinInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp16"
-                    android:layout_marginTop="@dimen/dp10"
-                    android:textColor="@color/colorff4e4e56"
-                    android:textSize="@dimen/text_14"
-                    tools:text="Make-up Credit of 45 Min expiring on 30 jun, 2021 " />
+                android:id="@+id/makeMinInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp10"
+                android:textColor="@color/colorff4e4e56"
+                android:textSize="@dimen/text_14"
+                tools:text="Make-up Credit of 45 Min expiring on 30 jun, 2021 " />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp16"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="Make-up Credits - 30 mins"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_18"
-                    android:textStyle="bold" />
+                android:id="@+id/creditTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp16"
+                android:fontFamily="@font/lato_bold"
+                android:text="Make-up Credits - 30 mins"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_18"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/makeupLisrRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white" />
+                android:id="@+id/makeupLisrRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
         </LinearLayout>
 
 
         <Button
-                android:id="@+id/editPersonalDetails"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_40"
-                android:layout_alignParentBottom="true"
-                android:background="@color/md_amber_700"
-                android:fontFamily="@font/lato_bold"
-                android:gravity="center"
-                android:text="Book a Make up Lesson"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_14" />
+            android:id="@+id/editPersonalDetails"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_40"
+            android:layout_alignParentBottom="true"
+            android:background="@color/md_amber_700"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center"
+            android:text="Book a Make up Lesson"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_14" />
 
         <include
-                android:id="@+id/progressLoader"
-                layout="@layout/progress_loader" />
+            android:id="@+id/progressLoader"
+            layout="@layout/progress_loader" />
 
     </RelativeLayout>
 

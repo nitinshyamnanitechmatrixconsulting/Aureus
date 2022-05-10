@@ -40,6 +40,9 @@ class ApiConstant {
         const val REFER_URL =  "RAFMobileBaseURL"
         const val REFER_ENROLLMENT =  "RAFMobileEnrolment"
         const val publicmeetingfeedback =  "publicmeetingfeedback"
-        const val meetingfeedback =  "meetingfeedback" }
+        const val meetingfeedback =  "meetingfeedback"
+        const val makeUpPackage =  "package"
+
+    }
 
 }

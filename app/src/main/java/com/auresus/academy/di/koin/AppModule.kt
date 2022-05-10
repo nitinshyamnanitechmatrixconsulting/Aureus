@@ -49,7 +49,7 @@ val appModule = module {
         var okHttpClient = httpClient.build()
 
         Retrofit.Builder()
-            .baseUrl(ApiConstant.DEV_URL)
+            .baseUrl(ApiConstant.PROD_URL)
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().disableHtmlEscaping().create()))

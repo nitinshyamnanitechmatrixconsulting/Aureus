@@ -1,28 +1,35 @@
 package com.auresus.academy.model.bean
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
+@Parcelize
 data class Enrollment(
-    val NextBillDate: String,
+    var date: String,
+    var time: String,
+    var NextBillDate: String,
     val bookings: List<Booking>,
     val centerId: String,
-    val duration: String,
+    var duration: String,
     val id: String,
-    val instrument: String,
+    var instrument: String,
     val lessonDay: String,
-    val lessonOnlineURL: Any,
-    val lessonPasscode: Any,
+    val lessonOnlineURL: String,
+    val lessonPasscode: String,
     val lessonType: String,
-    val lessonTypeNew: Any,
+    var lessonTypeNew: String,
     val location: String,
-    val packageId: String,
+    var packageId: String,
     val packageName: String,
     val packagePrice: String,
     val packageType: String,
     val programId: String,
+    var regularTime: String,
     val status: String,
     val studentId: String,
     val studentName: String,
-    val teacherId: String,
-    val teacherName: String
-):Serializable
+    var teacherId: String,
+    var teacherName: String,
+    var isChecked: Boolean = false
+):Serializable, Parcelable

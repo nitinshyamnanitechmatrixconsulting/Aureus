@@ -93,5 +93,10 @@ object DateTimeUtil {
             return bookingTimeParser.format(date1)
         return ""
     }
-
+    fun createMakeUpDate(date: String): String {
+        val date1 = invoiceDateTimeFormatter.parse(date)
+        if (date1 != null)
+            return schdeuleDateTimeFormatter.format(date1)
+        return ""
+    }
 }

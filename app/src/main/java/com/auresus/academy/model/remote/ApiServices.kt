@@ -166,6 +166,14 @@ interface ApiServices {
         @Query("rating") rating: String,
         @Query("person_id") person_id: String
     ): Call<Any?>
+    @GET(ApiConstant.makeUpPackage)
+    suspend fun packageMakeUp(
+        @Query("location") location: String
+    ): Response<List<PackageResponse>>
 
+    @POST(ApiConstant.makeUpPackage)
+    suspend fun createMakeUp(
+        @Body createRequest: List<MakeUpCreateRequest>
+    ): Response<ResponseBody>
 
 }

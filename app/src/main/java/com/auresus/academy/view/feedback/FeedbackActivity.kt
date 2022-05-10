@@ -446,7 +446,7 @@ class FeedbackActivity : BaseActivity() {
         person_id: String
     ) {
         val retrofit = Retrofit.Builder()
-            .baseUrl(ApiConstant.DEV_URL)
+            .baseUrl(ApiConstant.PROD_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val apiServices = retrofit.create(ApiServices::class.java)
@@ -492,7 +492,7 @@ class FeedbackActivity : BaseActivity() {
         rating: String
     ) {
         val retrofit = Retrofit.Builder()
-            .baseUrl(ApiConstant.DEV_URL)
+            .baseUrl(ApiConstant.PROD_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val apiServices = retrofit.create(ApiServices::class.java)

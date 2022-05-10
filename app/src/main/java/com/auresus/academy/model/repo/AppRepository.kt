@@ -340,4 +340,26 @@ class AppRepository(
         }.execute()
     }
 
+    fun getMakeupPackage(
+        location: String,
+        loginResponse: MutableLiveData<ApiResponse<List<PackageResponse>>>
+    ) {
+        object : DataFetchCall<List<PackageResponse>>(loginResponse) {
+            override suspend fun createCallAsync(): Response<List<PackageResponse>> {
+                return apiServices.packageMakeUp(location)
+            }
+        }.execute()
+    }
+
+    fun createMakeUpLesson(
+        request: List<MakeUpCreateRequest>,
+        loginResponse: MutableLiveData<ApiResponse<ResponseBody>>
+    ) {
+        object : DataFetchCall<ResponseBody>(loginResponse) {
+            override suspend fun createCallAsync(): Response<ResponseBody> {
+                return apiServices.createMakeUp(request)
+            }
+        }.execute()
+    }
+
 }

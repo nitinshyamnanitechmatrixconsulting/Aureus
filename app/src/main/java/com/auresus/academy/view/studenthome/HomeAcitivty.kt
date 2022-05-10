@@ -36,6 +36,7 @@ import com.auresus.academy.view.login.ProceedLoginAcitivty
 import com.auresus.academy.view.notification.NotificationFragment
 import com.auresus.academy.view.notification.NotificationViewModel
 import com.auresus.academy.view.studenthome.home.*
+import com.auresus.academy.view.studenthome.makeup.MakeUpListFragment
 import com.auresus.academy.view.studenthome.settings.*
 import com.auresus.academy.view.studenthome.ticket.TicketCreateFragment
 import com.auresus.academy.view.studenthome.ticket.TicketDetailsFragment
@@ -372,7 +373,7 @@ class HomeAcitivty : BaseActivity() {
         }
     }
 
-    fun navigateToMakeupBook(enrollment: List<Student>) {
+    fun navigateToMakeupBook(enrollment: List<Enrollment>,string: String,totalMin: String) {
         setToolbarTitleAndIcons(
             toolbarTitle = "Make-up Booking",
             showNotification = false,
@@ -383,7 +384,7 @@ class HomeAcitivty : BaseActivity() {
         supportFragmentManager.commit {
             replace(
                 R.id.container,
-                MakeupScheduleFragment.newInstance(enrollment as ArrayList<Student>),
+                MakeupScheduleFragment.newInstance(enrollment as ArrayList<Enrollment>,string,totalMin),
                 MakeupScheduleFragment.TAG
             )
             addToBackStack(null)
@@ -473,7 +474,7 @@ class HomeAcitivty : BaseActivity() {
         }
     }
 
-    fun navigateToMakeUpsStudent() {
+    fun navigateToMakeUpsStudent(totalMin:String) {
         setToolbarTitleAndIcons(
             toolbarTitle = "Make-Ups",
             showNotification = false,
@@ -484,7 +485,7 @@ class HomeAcitivty : BaseActivity() {
         supportFragmentManager.commit {
             replace(
                 R.id.container,
-                MakeupStudentListFragment.newInstance(),
+                MakeupStudentListFragment.newInstance(totalMin),
                 MakeupStudentListFragment.TAG
             )
             //addToBackStack(MakeupStudentListFragment.TAG)
@@ -640,6 +641,24 @@ class HomeAcitivty : BaseActivity() {
             //addToBackStack(StudentHomeFragment.TAG)
         }
     }
+    fun navigateToMakeupBookList(enrollment: List<Enrollment>,string: String) {
+        setToolbarTitleAndIcons(
+            toolbarTitle = "Make-up Detail",
+            showNotification = false,
+            notificationCount = false,
+            showBackButton = true,
+            showMenuButton = false
+        )
+        supportFragmentManager.commit {
+            replace(
+                R.id.container,
+                MakeUpListFragment.newInstance(enrollment as ArrayList<Enrollment>,string),
+                MakeUpListFragment.TAG
+            )
+            addToBackStack(null)
+        }
+    }
+
 
     override fun initUI(binding: ViewDataBinding?) {
         this.binding = binding as ActivityHomeBinding

@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-                name="contact"
-                type="com.auresus.academy.model.bean.Student" />
+            name="contact"
+            type="com.auresus.academy.model.bean.Enrollment" />
     </data>
 
     <LinearLayout
-            android:id="@+id/studentItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="@dimen/margin_15">
+        android:id="@+id/studentItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_15">
 
         <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <CheckBox
-                    android:id="@+id/checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true" />
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" />
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp20"
-                    android:layout_toRightOf="@id/checkbox"
-                    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_toRightOf="@id/checkbox"
+                android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text='@{ contact.firstName + " " + contact.lastName}'
-                        android:textColor="@color/colorff4e4e56"
-                        android:textSize="16sp"
-                        tools:text="Name : Sahil Arora " />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text='@{ contact.studentName}'
+                    android:textColor="@color/colorff4e4e56"
+                    android:textSize="16sp"
+                    tools:text="Name : Sahil Arora " />
+                <!--android:text='@{ contact.firstName + " " + contact.lastName}'-->
 
             </LinearLayout>
 
@@ -50,10 +51,10 @@
         </RelativeLayout>
 
         <View
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="10dp"
-                android:background="@color/black"></View>
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:background="@color/black"></View>
     </LinearLayout>
 </layout>

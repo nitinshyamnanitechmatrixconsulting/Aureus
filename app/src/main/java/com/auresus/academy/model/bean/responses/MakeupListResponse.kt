@@ -37,7 +37,9 @@ data class MakeupListResponse(
     }
     ]
 }*/
-    var cases: List<MakeupList>
+    var cases: List<MakeupList>,
+    var bookings: List<MakeupList>
+
 )
 
 data class MakeupList(
